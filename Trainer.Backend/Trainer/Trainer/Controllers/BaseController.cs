@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Trainer.Controllers
 {
-    public class BaseController : Controller
+    public class BaseController : ControllerBase
     {
         protected ILogger Logger
         {
