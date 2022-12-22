@@ -44,14 +44,9 @@ namespace Trainer.Controllers
             int? pageSize = 10)
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.ExaminationGetModels);
-            ViewData["DateSort"] = sortOrder == SortState.DateSort ? SortState.DateSortDesc : SortState.DateSort;
-            ViewData["TypeSort"] = sortOrder == SortState.TypeSort ? SortState.TypeSortDesc : SortState.TypeSort;
-            ViewData["FirstNameSort"] = sortOrder == SortState.FirstNameSort ? SortState.FirstNameSortDesc : SortState.FirstNameSort;
-            ViewData["LastNameSort"] = sortOrder == SortState.LastNameSort ? SortState.LastNameSortDesc : SortState.LastNameSort;
-            ViewData["MiddleNameSort"] = sortOrder == SortState.MiddleNameSort ? SortState.MiddleNameSortDesc : SortState.MiddleNameSort;
 
             var result = await Mediator.Send(new GetExaminationsQuery(pageIndex, pageSize, sortOrder));
-            return View(result);
+            return Ok(result);
         }
 
         [HttpGet]
@@ -60,16 +55,16 @@ namespace Trainer.Controllers
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.ExaminationGetModel);
             var result = await Mediator.Send(new GetExaminationQuery { ExaminationId = id });
-            ViewBag.Id = result.Id;
-            return View(result);
+            //ViewBag.Id = result.Id;
+            return Ok(result);
         }
 
         [HttpGet]
         [Authorize(Roles = "doctor")]
         public async Task<IActionResult> AddModel(Guid id)
         {
-            ViewBag.UserId = id;
-            return View();
+            //ViewBag.UserId = id;
+            return Ok();
         }
 
         [HttpPost]
@@ -98,8 +93,8 @@ namespace Trainer.Controllers
                 ModelState.AddModelError(string.Empty, Localizer[ex.Errors.First().ErrorMessage]);
             }
 
-            ViewBag.UserId = command.PatientId;
-            return View(command);
+            //ViewBag.UserId = command.PatientId;
+            return Ok(command);
         }
 
         [HttpGet]
@@ -107,8 +102,8 @@ namespace Trainer.Controllers
         public async Task<IActionResult> UpdateModel(Guid id)
         {
             var examination = await Mediator.Send(new GetExaminationQuery { ExaminationId = id });
-            ViewBag.Examination = examination;
-            return View();
+            //ViewBag.Examination = examination;
+            return Ok();
         }
 
         [HttpPost]
@@ -136,8 +131,8 @@ namespace Trainer.Controllers
                 }
                 ModelState.AddModelError(string.Empty, Localizer[ex.Errors.First().ErrorMessage]);
             }
-            ViewBag.Examination = command;
-            return View(command);
+            //ViewBag.Examination = command;
+            return Ok(command);
         }
 
         [Authorize(Roles = "doctor")]
@@ -158,7 +153,7 @@ namespace Trainer.Controllers
         [HttpGet]
         public async Task<IActionResult> ImportToCSV()
         {
-            return View();
+            return Ok();
         }
 
         [HttpPost]

@@ -17,18 +17,10 @@ namespace Trainer.Controllers
 {
     public class AccountController : BaseController
     {
-        private readonly IStringLocalizer<AccountController> Localizer;
-        public AccountController(ILogger<AccountController> logger, IStringLocalizer<AccountController> localizer) : base(logger)
+        public AccountController(ILogger<AccountController> logger) : base(logger)
         {
-            Localizer = localizer;
         }
-
-        [HttpGet]
-        public IActionResult Register()
-        {
-            return View();
-        }
-
+        
         [HttpPost]
         public async Task<IActionResult> Register(SignInCommand command)
         {
@@ -51,20 +43,13 @@ namespace Trainer.Controllers
                 {
                     modelValue.Errors.Clear();
                 }
-                ModelState.AddModelError(string.Empty, Localizer[ex.Errors.First().ErrorMessage]);
+                ModelState.AddModelError(string.Empty, ex.Errors.First().ErrorMessage);
             }
 
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult Login()
-        {
-            return View();
+            return Ok();
         }
 
         [HttpPost]
-
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             try
@@ -84,15 +69,15 @@ namespace Trainer.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", Localizer["Error login/password"]);
+                    ModelState.AddModelError("", "Error login/password");
                 }
             }
             catch (NotFoundException ex)
             {
-                ModelState.AddModelError("", Localizer["Error login/password"]);
+                ModelState.AddModelError("", "Error login/password");
             }
 
-            return View(model);
+            return Ok(model);
         }
 
         [HttpGet]
@@ -110,16 +95,8 @@ namespace Trainer.Controllers
 
             await HttpContext.SignInAsync(new ClaimsPrincipal(claimsIdentity));
 
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return Ok();
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Logout()
-        {
-            await HttpContext.SignOutAsync();
-
-            return RedirectToAction(nameof(HomeController.Index), "Home");
-        }
+        
     }
 }

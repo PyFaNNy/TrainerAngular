@@ -40,18 +40,8 @@ public class PatientController : BaseController
     {
         _metrics.Measure.Counter.Increment(BusinessMetrics.PatientGetModels);
         
-        ViewData["FirstNameSort"] =
-            sortOrder == SortState.FirstNameSort ? SortState.FirstNameSortDesc : SortState.FirstNameSort;
-        ViewData["LastNameSort"] =
-            sortOrder == SortState.LastNameSort ? SortState.LastNameSortDesc : SortState.LastNameSort;
-        ViewData["MiddleNameSort"] = sortOrder == SortState.MiddleNameSort
-            ? SortState.MiddleNameSortDesc
-            : SortState.MiddleNameSort;
-        ViewData["AgeSort"] = sortOrder == SortState.AgeSort ? SortState.AgeSortDesc : SortState.AgeSort;
-        ViewData["SexSort"] = sortOrder == SortState.SexSort ? SortState.SexSortDesc : SortState.SexSort;
-
         var results = await Mediator.Send(new GetPatientsQuery(pageIndex, pageSize, sortOrder));
-        return View(results);
+        return Ok(results);
     }
 
     [HttpGet]
@@ -60,16 +50,9 @@ public class PatientController : BaseController
     {
         _metrics.Measure.Counter.Increment(BusinessMetrics.PatientGetModel);
         var patient = await Mediator.Send(new GetPatientQuery {PatientId = id});
-        return View(patient);
+        return Ok(patient);
     }
-
-    [HttpGet]
-    [Authorize(Roles = "admin, manager")]
-    public IActionResult AddModel()
-    {
-        return View();
-    }
-
+    
     [HttpPost]
     [Authorize(Roles = "admin, manager")]
     public async Task<IActionResult> AddModel(CreatePatientCommand command)
@@ -90,7 +73,7 @@ public class PatientController : BaseController
             foreach (var er in ex.Errors) ModelState.AddModelError(string.Empty, Localizer[er.ErrorMessage]);
         }
 
-        return View(command);
+        return Ok(command);
     }
 
     [HttpGet]
@@ -98,8 +81,8 @@ public class PatientController : BaseController
     public async Task<IActionResult> UpdateModel(Guid id)
     {
         var patient = await Mediator.Send(new GetPatientQuery {PatientId = id});
-        ViewBag.Patient = patient;
-        return View();
+        //ViewBag.Patient = patient;
+        return Ok();
     }
 
     [HttpPost]
@@ -123,8 +106,8 @@ public class PatientController : BaseController
             foreach (var er in ex.Errors) ModelState.AddModelError(string.Empty, Localizer[er.ErrorMessage]);
         }
 
-        ViewBag.Patient = command;
-        return View(command);
+        //ViewBag.Patient = command;
+        return Ok(command);
     }
 
     [Authorize(Roles = "admin, manager")]
@@ -146,7 +129,7 @@ public class PatientController : BaseController
     [HttpGet]
     public async Task<IActionResult> ImportToCSV()
     {
-        return View();
+        return Ok();
     }
 
     [HttpPost]
