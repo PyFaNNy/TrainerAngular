@@ -4,9 +4,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import {HeaderComponent} from "./Header/header.component";
-import {FooterComponent} from "./Footer/footer.component";
-import {BodyComponent} from "./Body/body.component";
+import {HeaderComponent} from "./components/Header/header.component";
+import {FooterComponent} from "./components/Footer/footer.component";
+import {BodyComponent} from "./components/Body/body.component";
 
 @NgModule({
   declarations: [
