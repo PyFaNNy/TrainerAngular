@@ -17,12 +17,6 @@ namespace Trainer.Controllers
             Localizer = localizer;
         }
 
-        [HttpGet]
-        public IActionResult ResetPasswordSendEmail()
-        {
-            return View();
-        }
-
         [HttpPost]
         public async Task<IActionResult> ResetPasswordSendEmail(RequestPasswordCommand command)
         {
@@ -45,15 +39,15 @@ namespace Trainer.Controllers
                 ModelState.AddModelError(string.Empty, Localizer[ex.Errors.First().ErrorMessage]);
             }
 
-            return View(command);
+            return Ok(command);
         }
 
         [HttpGet]
         public IActionResult VerifyCode(string email, OTPAction otpAction)
         {
-            ViewBag.Email = email;
-            ViewBag.Action = otpAction;
-            return View();
+            //ViewBag.Email = email;
+            //ViewBag.Action = otpAction;
+            return Ok();
         }
 
         [HttpPost]
@@ -87,9 +81,9 @@ namespace Trainer.Controllers
                 ModelState.AddModelError("All", Localizer["IncorrectCode"]);
             }
 
-            ViewBag.Email = email;
-            ViewBag.Action = OTPaction;
-            return View();
+            //ViewBag.Email = email;
+            //ViewBag.Action = OTPaction;
+            return Ok();
         }
     }
 }

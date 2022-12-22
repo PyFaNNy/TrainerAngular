@@ -38,22 +38,8 @@ namespace Trainer.Controllers
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.BaseUserGetModels);
             
-            ViewData["EmailSort"] = sortOrder == SortState.EmailSort ? SortState.EmailSortDesc : SortState.EmailSort;
-            ViewData["FirstNameSort"] = sortOrder == SortState.FirstNameSort
-                ? SortState.FirstNameSortDesc
-                : SortState.FirstNameSort;
-            ViewData["LastNameSort"] = sortOrder == SortState.LastNameSort
-                ? SortState.LastNameSortDesc
-                : SortState.LastNameSort;
-            ViewData["MiddleNameSort"] = sortOrder == SortState.MiddleNameSort
-                ? SortState.MiddleNameSortDesc
-                : SortState.MiddleNameSort;
-            ViewData["RoleSort"] = sortOrder == SortState.RoleSort ? SortState.RoleSortDesc : SortState.RoleSort;
-            ViewData["StatusSort"] =
-                sortOrder == SortState.StatusSort ? SortState.StatusSortDesc : SortState.StatusSort;
-
             var users = await Mediator.Send(new GetBaseUsersQuery(pageIndex, pageSize, sortOrder));
-            return View(users);
+            return Ok(users);
         }
 
         [Authorize(Roles = "admin")]
@@ -104,22 +90,22 @@ namespace Trainer.Controllers
         [HttpGet]
         public IActionResult ResetPassword(string email)
         {
-            ViewBag.Email = email;
-            return View();
+            //ViewBag.Email = email;
+            return Ok();
         }
 
         [HttpPost]
         public async Task<IActionResult> ResetPassword(ResetPasswordUserCommand command)
         {
             await Mediator.Send(command);
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return Ok();
         }
 
         [HttpGet]
         public async Task<IActionResult> ConfirmEmail([FromQuery] string email)
         {
             await Mediator.Send(new ConfirmEmailCommand {Email = email});
-            return RedirectToAction("Index", "Home");
+            return Ok();
         }
 
     }
