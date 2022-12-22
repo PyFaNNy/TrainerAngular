@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import {HeaderComponent} from "./components/Header/header.component";
 import {FooterComponent} from "./components/Footer/footer.component";
 import {BodyComponent} from "./components/Body/body.component";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import {BodyComponent} from "./components/Body/body.component";
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
