@@ -387,6 +387,8 @@
     <_ContentIncludedByDefault Remove="wwwroot\src\scss\free\_utilities.scss" />
     <_ContentIncludedByDefault Remove="wwwroot\src\scss\free\_variables.scss" />
     <_ContentIncludedByDefault Remove="wwwroot\src\scss\mdb.free.scss" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\all.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\site.css" />
   </ItemGroup>
 
   <ItemGroup>
