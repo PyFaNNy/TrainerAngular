@@ -1,0 +1,165 @@
+<div class="row my-2">
+  <div class="col-lg-8 order-lg-2">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profil</a>
+      </li>
+      <li class="nav-item">
+        <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Info</a>
+      </li>
+    </ul>
+    <div class="tab-content py-4">
+      <div class="tab-pane active" id="profile">
+        <h5 class="mb-3">LastName FirstName MiddleName, Age </h5>
+        <div class="row">
+          <div class="col-md-6">
+            <h6>About Me</h6>
+            <p>
+              About
+            </p>
+            <h6>Hobby</h6>
+            <p>
+              Hobbies
+            </p>
+          </div>
+          <div class="col-md-12">
+            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span>Recent Examination</h5>
+
+            <table class="table table table-hover table-striped">
+                <thead>
+                <th>TypePhysicalActive</th>
+                <th>Date</th>
+                <th>Dia</th>
+                <th>Sis</th>
+                <th>Oxigen</th>
+                <th>Temperature</th>
+                <th>HeartRate</th>
+                </thead>
+                <tbody>
+            <tr>
+              <td>@active.TypePhysicalActive</td>
+              <td>@active.Date.ToString()</td>
+              <td>@active.AverageDia</td>
+              <td>@active.AverageSis</td>
+              <td>@active.AverageOxigen</td>
+              <td>@Math.Round(active.AverageTemperature, 2)</td>
+              <td>@active.AverageHeartRate</td>
+            </tr>
+            }
+            </tbody>
+        </table>
+            }
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="edit">
+        <form method="post">
+          <div class="form-group row">
+            <label class="col-lg-3 col-form-label form-control-label">LastName</label>
+            <div class="col-lg-9">
+<!--              @if (User.IsInRole("Admin, Manager"))-->
+<!--              {-->
+<!--              <input asp-for="LastName" class="form-control" type="text" value="@Model.LastName">-->
+<!--              }-->
+<!--              else-->
+<!--              {-->
+<!--              <input asp-for="LastName" class="form-control" type="text" value="@Model.LastName" readonly>-->
+<!--              }-->
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-lg-3 col-form-label form-control-label">FirstName</label>
+            <div class="col-lg-9">
+<!--              @if (User.IsInRole("manager"))-->
+<!--              {-->
+<!--              <input asp-for="FirstName" class="form-control" type="text" value="@Model.FirstName">-->
+<!--              }-->
+<!--              else-->
+<!--              {-->
+<!--              <input asp-for="FirstName" class="form-control" type="text" value="@Model.FirstName" readonly>-->
+<!--              }-->
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-lg-3 col-form-label form-control-label">MiddleName</label>
+            <div class="col-lg-9">
+<!--              @if (User.IsInRole("manager"))-->
+<!--              {-->
+<!--              <input asp-for="MiddleName" class="form-control" type="text" value="@Model.MiddleName">-->
+<!--              }-->
+<!--              else-->
+<!--              {-->
+<!--              <input asp-for="MiddleName" class="form-control" type="text" value="@Model.MiddleName" readonly>-->
+<!--              }-->
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-lg-3 col-form-label form-control-label">Email</label>
+            <div class="col-lg-9">
+<!--              @if (User.IsInRole("manager"))-->
+<!--              {-->
+<!--              <input asp-for="Email" class="form-control" type="text" value="@Model.Email">-->
+<!--              }-->
+<!--              else-->
+<!--              {-->
+<!--              <input asp-for="Email" class="form-control" type="text" value="@Model.Email" readonly>-->
+<!--              }-->
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-lg-3 col-form-label form-control-label">Age</label>
+            <div class="col-lg-9">
+<!--              @if (User.IsInRole("manager"))-->
+<!--              {-->
+<!--              <input asp-for="Age" class="form-control" value="@Model.Age">-->
+<!--              }-->
+<!--              else-->
+<!--              {-->
+<!--              <input asp-for="Age" class="form-control" value="@Model.Age" readonly>-->
+<!--              }-->
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-lg-3 col-form-label form-control-label">AboutMe</label>
+            <div class="col-lg-9">
+<!--              @if (User.IsInRole("manager"))-->
+<!--              {-->
+<!--              <input asp-for="About" class="form-control" type="text" value="@Model.About">-->
+<!--              }-->
+<!--              else-->
+<!--              {-->
+<!--              <input asp-for="About" class="form-control" type="text" value="@Model.About" readonly>-->
+<!--              }-->
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-lg-3 col-form-label form-control-label">Hobby</label>
+            <div class="col-lg-9">
+<!--              @if (User.IsInRole("manager"))-->
+<!--              {-->
+<!--              <input asp-for="Hobbies" class="form-control" type="text" value="@Model.Hobbies">-->
+<!--              }-->
+<!--              else-->
+<!--              {-->
+<!--              <input asp-for="Hobbies" class="form-control" type="text" value="@Model.Hobbies" readonly>-->
+<!--              }-->
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-lg-3 col-form-label form-control-label"></label>
+            <div class="col-lg-9">
+<!--              @if (User.IsInRole("manager"))-->
+<!--              {-->
+<!--              <button type="submit" class="btn btn-primary">@Localizer["Change"]</button>-->
+<!--              }-->
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4 order-lg-1 text-center">
+<!--    <img src ="" identicon-value="@Model.Id" identicon-format="Png" width="256" height="256" alt="Identicon" class="mx-auto" />-->
+  </div>
+</div>
+
