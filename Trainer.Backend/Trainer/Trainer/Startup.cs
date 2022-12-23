@@ -28,20 +28,6 @@ namespace Trainer
             services.AddEmailService(Configuration);
             services.AddCSVParserService(Configuration);
             services.AddSignalR();
-            services.AddLocalization(options => options.ResourcesPath = "Resources");
-
-            services.Configure<RequestLocalizationOptions>(options =>
-            {
-                var supportedCultures = new[]
-                {
-                    new CultureInfo("en"),
-                    new CultureInfo("ru")
-                };
-
-                options.DefaultRequestCulture = new RequestCulture("en");
-                options.SupportedCultures = supportedCultures;
-                options.SupportedUICultures = supportedCultures;
-            });
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
@@ -51,10 +37,7 @@ namespace Trainer
                 });
 
             services.AddMvc()
-                .AddFluentValidation()
-                .AddDataAnnotationsLocalization()
-                .AddViewLocalization()
-                .AddRazorRuntimeCompilation();
+                .AddFluentValidation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,18 +49,15 @@ namespace Trainer
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
             app.UseJdenticon();
-            app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseRequestLocalization();
 
             app.UseEndpoints(endpoints =>
             {
