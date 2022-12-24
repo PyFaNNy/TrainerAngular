@@ -8,22 +8,37 @@ import {HttpClientModule} from "@angular/common/http";
 
 import {HeaderComponent} from "./components/Header/header.component";
 import {FooterComponent} from "./components/Footer/footer.component";
-import {BodyComponent} from "./components/Body/body.component";
 import {AddPatientComponent} from "./components/Patients/AddPatient/addPatient.component";
 import {GetPatientComponent} from "./components/Patients/GetPatient/getPatient.component";
 import {GetPatientsComponent} from "./components/Patients/GetPatients/getPatients.component";
 import {UpdatePatientComponent} from "./components/Patients/UpdatePatient/updatePatient.component";
+import {GetExaminationsComponent} from "./components/Examinations/GetExaminations/getExaminations.component";
+import {AddExaminationComponent} from "./components/Examinations/AddExamination/addExamination.component";
+import {Routes} from "@angular/router";
+import { HomeComponent } from './components/Home/home.component';
+import {AdminPanelComponent} from "./components/AdminPanel/admin-panel.component";
+
+const appRoute: Routes  = [
+  {path: 'home', component: HomeComponent},
+  {path: 'patient', component: GetPatientsComponent},
+  {path: 'examination', component: GetExaminationsComponent},
+  {path: 'admin', component: GetExaminationsComponent}
+]
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    BodyComponent,
     AddPatientComponent,
     GetPatientComponent,
     GetPatientsComponent,
-    UpdatePatientComponent
+    UpdatePatientComponent,
+    GetExaminationsComponent,
+    GetExaminationsComponent,
+    AddExaminationComponent,
+    HomeComponent,
+    AdminPanelComponent
   ],
   imports: [
     BrowserModule,
