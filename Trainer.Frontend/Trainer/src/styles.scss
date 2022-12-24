@@ -3,9 +3,6 @@
 /* Importing Bootstrap SCSS file. */
 @import 'node_modules/bootstrap/scss/bootstrap';
 
-/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
 a.navbar-brand {
   white-space: normal;
   text-align: center;
@@ -77,3 +74,33 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+//.human {
+//  background-image: url(../picture/Human.png);
+//  background-repeat: no-repeat;
+//  background-size: contain;
+//}
+//
+//.tonometr {
+//  background-image: url(../picture/tonometr.png);
+//  background-repeat: no-repeat;
+//  background-size: contain;
+//}
+//
+//.termometr {
+//  background-image: url(../picture/termometr.png);
+//  background-repeat: no-repeat;
+//  background-size: contain;
+//}
+//
+//.heartrate {
+//  background-image: url(../picture/heartrate.png);
+//  background-repeat: no-repeat;
+//  background-size: contain;
+//}
+//
+//.oximetr {
+//  background-image: url(../picture/oximetr.png);
+//  background-repeat: no-repeat;
+//  background-size: contain;
+//}

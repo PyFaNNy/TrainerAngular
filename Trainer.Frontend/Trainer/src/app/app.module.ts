@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {HttpClientModule} from "@angular/common/http";
+import {RouterModule, Routes} from "@angular/router";
 
 import {HeaderComponent} from "./components/Header/header.component";
 import {FooterComponent} from "./components/Footer/footer.component";
@@ -14,15 +15,17 @@ import {GetPatientsComponent} from "./components/Patients/GetPatients/getPatient
 import {UpdatePatientComponent} from "./components/Patients/UpdatePatient/updatePatient.component";
 import {GetExaminationsComponent} from "./components/Examinations/GetExaminations/getExaminations.component";
 import {AddExaminationComponent} from "./components/Examinations/AddExamination/addExamination.component";
-import {Routes} from "@angular/router";
 import { HomeComponent } from './components/Home/home.component';
 import {AdminPanelComponent} from "./components/AdminPanel/admin-panel.component";
+import { ErrorComponent } from './components/error/error.component';
 
 const appRoute: Routes  = [
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
-  {path: 'patient', component: GetPatientsComponent},
-  {path: 'examination', component: GetExaminationsComponent},
-  {path: 'admin', component: GetExaminationsComponent}
+  {path: 'patients', component: GetPatientsComponent},
+  {path: 'examinations', component: GetExaminationsComponent},
+  {path: 'admin', component: GetExaminationsComponent},
+  {path: '**', component: ErrorComponent},
 ]
 
 @NgModule({
@@ -38,13 +41,15 @@ const appRoute: Routes  = [
     GetExaminationsComponent,
     AddExaminationComponent,
     HomeComponent,
-    AdminPanelComponent
+    AdminPanelComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot(appRoute)
   ],
   providers: [],
   bootstrap: [AppComponent]
