@@ -1,10 +1,9 @@
   <h4>Patients</h4>
   <form id='patients' method="post">
     <button type="submit" class="btn btn-primary m-1" >Delete</button>
-    <a class="btn btn-primary m-1" >Create"</a>
+    <a class="btn btn-primary m-1" >Create</a>
     <a class="btn btn-primary m-1" >Export</a>
     <a class="btn btn-primary m-1" >Import</a>
-
     <table class="table table-striped table-hover">
       <tr>
         <th><a>LastName</a></th>
@@ -17,17 +16,15 @@
       </tr>
 <!--      <tr onclick="window.location.href='/Patient/GetModel?id=@user.Id';">-->
       <tr >
-        <td>@user.LastName</td>
-        <td>@user.FirstName</td>
-        <td>@user.MiddleName</td>
-        <td>@user.Age</td>
-        <td>@user.Sex</td>
+        <td>user.LastName</td>
+        <td>user.FirstName</td>
+        <td>user.MiddleName</td>
+        <td>user.Age</td>
+        <td>user.Sex</td>
         <td><a class="btn btn-primary">Update</a></td>
         <td><input type="checkbox" class="patient" name="selectedPatients" value="@user.Id"/></td>
         <td><a class="btn btn-primary">Set Examination</a></td>
       </tr>
-      }
-      }
     </table>
     <nav aria-label="Page navigation example">
         <ul class="pagination">
@@ -53,5 +50,4 @@
 <!--    }-->
     </ul>
 </nav>
-    }
   </form>

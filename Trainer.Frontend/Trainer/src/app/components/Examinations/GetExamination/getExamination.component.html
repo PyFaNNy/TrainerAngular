@@ -59,17 +59,16 @@
         <div class="col tonometr"></div>
         <div class="col">
           <button type="button" id="testTonometr" class="btn btn-primary mt-1">Test</button>
-
           <div class="form-check">
             <input class="form-check-input" value="1" type="radio" name="tonometr" id="tonometrON" onclick="tonometrClick(this);">
             <label class="form-check-label" for="tonometrON">
-              @Localizer["On"]
+              On
             </label>
           </div>
           <div class="form-check">
             <input class="form-check-input" value="0" type="radio" name="tonometr" id="tonometrOFF" onclick="tonometrClick(this);" checked>
             <label class="form-check-label" for="tonometrOFF">
-              @Localizer["Off"]
+              Off
             </label>
           </div>
         </div>
@@ -77,10 +76,10 @@
       <div class="row h-50 mb-5">
         <div class="card">
           <h4 class="card-header">
-            @Localizer["MeasureDiaSis"]
+            MeasureDiaSis
           </h4>
           <div class="card-body">
-            <canvas id="myChart" height="300" width="500">@Localizer["ChartLoad"]</canvas>
+            <canvas id="myChart" height="300" width="500">ChartLoad</canvas>
           </div>
         </div>
       </div>
@@ -91,13 +90,13 @@
           <div class="form-check">
             <input class="form-check-input" value="1" type="radio" name="termometr" id="termometrON" onclick="termometrClick(this);">
             <label class="form-check-label" for="termometrON">
-              @Localizer["On"]
+              On
             </label>
           </div>
           <div class="form-check">
             <input class="form-check-input" value="0" type="radio" name="termometr" id="termometrOFF" onclick="termometrClick(this);" checked>
             <label class="form-check-label" for="termometrOFF">
-              @Localizer["Off"]
+              Off
             </label>
           </div>
         </div>
@@ -105,7 +104,7 @@
       <div class="row h-50 mb-5">
         <div class="card">
           <h4 class="card-header">
-            @Localizer["MeasureTemp"]
+            MeasureTemp
           </h4>
           <div class="card-body">
             <canvas id="myChart1" width="500" height="300">Load</canvas>
@@ -133,7 +132,7 @@
       <div class="row h-50 mb-5">
         <div class="card">
           <h4 class="card-header">
-            @Localizer["MeasureHeart"]
+            MeasureHeart
           </h4>
           <div class="card-body">
             <canvas id="myChart2" width="500" height="300">Load</canvas>
@@ -161,7 +160,7 @@
       <div class="row h-50 mb-5">
         <div class="card">
           <h4 class="card-header">
-            @Localizer["MeasureSpO2"]
+            MeasureSpO2
           </h4>
           <div class="card-body">
             <canvas id="myChart3" width="500" height="300">Load</canvas>
@@ -176,26 +175,26 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">@Localizer["Info"]</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Info</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="row">
-          <span>Patient: @Model.Patient.LastName @Model.Patient.FirstName @Model.Patient.MiddleName</span>
+          <span>Patient: LastName FirstName MiddleName</span>
         </div>
         <div class="row">
-          <span>Age: @Model.Patient.Age</span>
+          <span>Age: Age</span>
         </div>
         <div class="row">
-          <span>Sex: @Model.Patient.Sex</span>
+          <span>Sex: Sex</span>
         </div>
         <div class="row">
-          <span>Date: @Model.Date</span>
+          <span>Date: Date</span>
         </div>
         <div class="row">
-          <span>TypePhysicalActive: @Model.TypePhysicalActive</span>
+          <span>TypePhysicalActive: TypePhysicalActive</span>
         </div>
         <div class="row">
           <span>Measure:</span>
@@ -213,6 +212,5 @@
   </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="~/js/signalr/dist/browser/signalr.min.js"></script>
 
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>-->
