@@ -15,13 +15,14 @@ using Trainer.Models;
 
 namespace Trainer.Controllers
 {
+    [ApiController]
     public class AccountController : BaseController
     {
         public AccountController(ILogger<AccountController> logger) : base(logger)
         {
         }
         
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<IActionResult> Register(SignInCommand command)
         {
             try
@@ -49,7 +50,7 @@ namespace Trainer.Controllers
             return Ok();
         }
 
-        [HttpPost]
+        [HttpPost("login")]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             try
@@ -80,7 +81,7 @@ namespace Trainer.Controllers
             return Ok(model);
         }
 
-        [HttpGet]
+        [HttpGet("claim")]
         public async Task<IActionResult> ReturnClaim(string Email)
         {
             var user = await Mediator.Send(new GetBaseUserQuery(Email));

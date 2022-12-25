@@ -8,16 +8,20 @@ using Trainer.Models;
 
 namespace Trainer.Controllers
 {
+    [ApiController]
+    [Route("otp")]
     public class OTPController : BaseController
     {
-        private readonly IStringLocalizer<OTPController> Localizer;
-
-        public OTPController(ILogger<OTPController> logger, IStringLocalizer<OTPController> localizer) : base(logger)
+        public OTPController(ILogger<OTPController> logger) : base(logger)
         {
-            Localizer = localizer;
         }
 
-        [HttpPost]
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        [HttpPost("reset")]
         public async Task<IActionResult> ResetPasswordSendEmail(RequestPasswordCommand command)
         {
             try
@@ -28,7 +32,7 @@ namespace Trainer.Controllers
             }
             catch (ValidationException ex)
             {
-                ModelState.AddModelError(string.Empty, Localizer[ex.Errors.FirstOrDefault().Key]);
+                // ModelState.AddModelError(string.Empty, Localizer[ex.Errors.FirstOrDefault().Key]);
             }
             catch (FluentValidation.ValidationException ex)
             {
@@ -36,21 +40,20 @@ namespace Trainer.Controllers
                 {
                     modelValue.Errors.Clear();
                 }
-                ModelState.AddModelError(string.Empty, Localizer[ex.Errors.First().ErrorMessage]);
+                // ModelState.AddModelError(string.Empty, Localizer[ex.Errors.First().ErrorMessage]);
             }
 
             return Ok(command);
         }
-
-        [HttpGet]
-        public IActionResult VerifyCode(string email, OTPAction otpAction)
-        {
-            //ViewBag.Email = email;
-            //ViewBag.Action = otpAction;
-            return Ok();
-        }
-
-        [HttpPost]
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="code"></param>
+        /// <param name="email"></param>
+        /// <param name="OTPaction"></param>
+        /// <returns></returns>
+        [HttpPost("verify")]
         public async Task<IActionResult> VerifyCode(ValidateSmsCode code, string email, OTPAction OTPaction)
         {
             var result = await Mediator.Send(new ValidateSmsCodeQuery
@@ -78,7 +81,7 @@ namespace Trainer.Controllers
             }
             else
             {
-                ModelState.AddModelError("All", Localizer["IncorrectCode"]);
+                // ModelState.AddModelError("All", Localizer["IncorrectCode"]);
             }
 
             //ViewBag.Email = email;

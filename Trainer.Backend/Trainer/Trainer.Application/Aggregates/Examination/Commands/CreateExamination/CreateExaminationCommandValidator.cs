@@ -5,7 +5,7 @@ namespace Trainer.Application.Aggregates.Examination.Commands.CreateExamination
 {
     public class CreateExaminationCommandValidator : AbstractValidator<CreateExaminationCommand>
     {
-        public CreateExaminationCommandValidator(IStringLocalizer<CreateExaminationCommandValidator> localizer)
+        public CreateExaminationCommandValidator()
         {
             RuleFor(x => x.Date)
                 .Must(ValidateDate)
