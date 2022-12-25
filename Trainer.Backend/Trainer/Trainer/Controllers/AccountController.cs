@@ -36,7 +36,6 @@ namespace Trainer.Controllers
 
                 return RedirectToAction("VerifyCode", "OTP",
                     new { otpAction = OTPAction.Registration, email = command.Email });
-
             }
             catch (FluentValidation.ValidationException ex)
             {
@@ -98,6 +97,5 @@ namespace Trainer.Controllers
 
             return Ok();
         }
-        
     }
 }

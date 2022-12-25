@@ -37,7 +37,7 @@ namespace Trainer.Controllers
         /// <param name="pageSize"></param>
         /// <returns></returns>
         [Authorize(Roles = "admin")]
-        [HttpGet ("baseUser")]
+        [HttpGet]
         public async Task<IActionResult> GetModels(
             SortState sortOrder = SortState.FirstNameSort,
             int? pageIndex = 1,
@@ -55,7 +55,7 @@ namespace Trainer.Controllers
         /// <param name="selectedUsers"></param>
         /// <returns></returns>
         [Authorize(Roles = "admin")]
-        [HttpPost("block/{selectedUsers}")]
+        [HttpGet("block/{selectedUsers}")]
         public async Task<IActionResult> BlockUser(Guid[] selectedUsers)
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.BaseUserBlockUser);
@@ -69,7 +69,7 @@ namespace Trainer.Controllers
         /// <param name="selectedUsers"></param>
         /// <returns></returns>
         [Authorize(Roles = "admin")]
-        [HttpPost("unBlock/{selectedUsers}")]
+        [HttpGet("unBlock/{selectedUsers}")]
         public async Task<IActionResult> UnBlockUser(Guid[] selectedUsers)
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.BaseUserUnBlockUser);
