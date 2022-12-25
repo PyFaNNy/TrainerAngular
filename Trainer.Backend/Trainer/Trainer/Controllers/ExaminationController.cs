@@ -21,21 +21,26 @@ using Trainer.Models;
 
 namespace Trainer.Controllers
 {
-
+    [ApiController]
+    [Route("examination")]
     public class ExaminationController : BaseController
     {
-        private readonly IStringLocalizer<ExaminationController> Localizer;
         private readonly IMetrics _metrics;
 
         public ExaminationController(ILogger<ExaminationController> logger,
-            IStringLocalizer<ExaminationController> localizer,
             IMetrics metrics)
             : base(logger)
         {
-            Localizer = localizer;
             _metrics = metrics;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sortOrder"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
         [HttpGet]
         [Authorize(Roles = "admin, doctor, manager")]
         public async Task<IActionResult> GetModels(
@@ -49,7 +54,12 @@ namespace Trainer.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}")]
         [Authorize(Roles = "admin, doctor, manager")]
         public async Task<IActionResult> GetModel(Guid id)
         {
@@ -58,15 +68,12 @@ namespace Trainer.Controllers
             //ViewBag.Id = result.Id;
             return Ok(result);
         }
-
-        [HttpGet]
-        [Authorize(Roles = "doctor")]
-        public async Task<IActionResult> AddModel(Guid id)
-        {
-            //ViewBag.UserId = id;
-            return Ok();
-        }
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         [HttpPost]
         [Authorize(Roles = "doctor")]
         public async Task<IActionResult> AddModel(CreateExaminationCommand command)
@@ -82,7 +89,7 @@ namespace Trainer.Controllers
             }
             catch (ValidationException ex)
             {
-                ModelState.AddModelError(string.Empty, Localizer[ex.Errors.FirstOrDefault().Key]);
+                // ModelState.AddModelError(string.Empty, Localizer[ex.Errors.FirstOrDefault().Key]);
             }
             catch (FluentValidation.ValidationException ex)
             {
@@ -90,23 +97,14 @@ namespace Trainer.Controllers
                 {
                     modelValue.Errors.Clear();
                 }
-                ModelState.AddModelError(string.Empty, Localizer[ex.Errors.First().ErrorMessage]);
+                // ModelState.AddModelError(string.Empty, Localizer[ex.Errors.First().ErrorMessage]);
             }
 
             //ViewBag.UserId = command.PatientId;
             return Ok(command);
         }
-
-        [HttpGet]
-        [Authorize(Roles = "doctor")]
-        public async Task<IActionResult> UpdateModel(Guid id)
-        {
-            var examination = await Mediator.Send(new GetExaminationQuery { ExaminationId = id });
-            //ViewBag.Examination = examination;
-            return Ok();
-        }
-
-        [HttpPost]
+        
+        [HttpPut]
         [Authorize(Roles = "doctor")]
         public async Task<IActionResult> UpdateModel(UpdateExaminationCommand command)
         {
@@ -121,7 +119,7 @@ namespace Trainer.Controllers
             }
             catch (ValidationException ex)
             {
-                ModelState.AddModelError(string.Empty, Localizer[ex.Errors.FirstOrDefault().Key]);
+                // ModelState.AddModelError(string.Empty, Localizer[ex.Errors.FirstOrDefault().Key]);
             }
             catch (FluentValidation.ValidationException ex)
             {
@@ -129,34 +127,30 @@ namespace Trainer.Controllers
                 {
                     modelValue.Errors.Clear();
                 }
-                ModelState.AddModelError(string.Empty, Localizer[ex.Errors.First().ErrorMessage]);
+                // ModelState.AddModelError(string.Empty, Localizer[ex.Errors.First().ErrorMessage]);
             }
             //ViewBag.Examination = command;
             return Ok(command);
         }
 
         [Authorize(Roles = "doctor")]
-        public async Task<RedirectToActionResult> DeleteModel(Guid[] selectedExamination)
+        [HttpDelete("{selectedExamination}")]
+        public async Task<IActionResult> DeleteModel(Guid[] selectedExamination)
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.ExaminationDeleteModel);
             await Mediator.Send(new DeleteExaminationsCommand { ExaminationsId = selectedExamination });
-            return RedirectToAction("GetModels");
+            return Ok();
         }
 
         [Authorize(Roles = "admin, manager")]
+        [HttpGet("export")]
         public async Task<IActionResult> ExportToCSV()
         {
             var fileInfo =await Mediator.Send(new ExaminationsToCSVQuery());
             return File(fileInfo.Content, fileInfo.Type.ToName(), fileInfo.FileName);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> ImportToCSV()
-        {
-            return Ok();
-        }
-
-        [HttpPost]
+        [HttpPost("import")]
         [Authorize(Roles = "admin, manager")]
         public async Task<IActionResult> ImportToCSV(CSV source)
         {

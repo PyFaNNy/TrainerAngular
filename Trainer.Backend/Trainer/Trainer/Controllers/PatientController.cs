@@ -17,17 +17,16 @@ using Trainer.Models;
 
 namespace Trainer.Controllers;
 
+[ApiController]
+[Route("patient")]
 public class PatientController : BaseController
 {
-    private readonly IStringLocalizer<PatientController> Localizer;
     private readonly IMetrics _metrics;
     
     public PatientController(ILogger<PatientController> logger,
-        IStringLocalizer<PatientController> localizer,
         IMetrics metrics)
         : base(logger)
     {
-        Localizer = localizer;
         _metrics = metrics;
     }
 
@@ -44,7 +43,7 @@ public class PatientController : BaseController
         return Ok(results);
     }
 
-    [HttpGet]
+    [HttpGet("{id}")]
     [Authorize(Roles = "admin, doctor, manager")]
     public async Task<IActionResult> GetModel(Guid id)
     {
@@ -70,22 +69,13 @@ public class PatientController : BaseController
         catch (FluentValidation.ValidationException ex)
         {
             foreach (var modelValue in ModelState.Values) modelValue.Errors.Clear();
-            foreach (var er in ex.Errors) ModelState.AddModelError(string.Empty, Localizer[er.ErrorMessage]);
+            // foreach (var er in ex.Errors) ModelState.AddModelError(string.Empty, Localizer[er.ErrorMessage]);
         }
 
         return Ok(command);
     }
-
-    [HttpGet]
-    [Authorize(Roles = "admin, manager")]
-    public async Task<IActionResult> UpdateModel(Guid id)
-    {
-        var patient = await Mediator.Send(new GetPatientQuery {PatientId = id});
-        //ViewBag.Patient = patient;
-        return Ok();
-    }
-
-    [HttpPost]
+    
+    [HttpPut]
     [Authorize(Roles = "admin, manager")]
     public async Task<IActionResult> UpdateModel(UpdatePatientCommand command)
     {
@@ -102,8 +92,7 @@ public class PatientController : BaseController
         catch (FluentValidation.ValidationException ex)
         {
             foreach (var modelValue in ModelState.Values) modelValue.Errors.Clear();
-
-            foreach (var er in ex.Errors) ModelState.AddModelError(string.Empty, Localizer[er.ErrorMessage]);
+            // foreach (var er in ex.Errors) ModelState.AddModelError(string.Empty, Localizer[er.ErrorMessage]);
         }
 
         //ViewBag.Patient = command;
@@ -111,28 +100,23 @@ public class PatientController : BaseController
     }
 
     [Authorize(Roles = "admin, manager")]
-    public async Task<RedirectToActionResult> DeleteModelAsync(Guid[] selectedPatient)
+    [HttpDelete("{selectedPatient}")]
+    public async Task<IActionResult> DeleteModelAsync(Guid[] selectedPatient)
     {
         _metrics.Measure.Counter.Increment(BusinessMetrics.PatientDeleteModel);
         await Mediator.Send(new DeletePatientsCommand {PatientsId = selectedPatient});
-        return RedirectToAction("GetModels");
+        return Ok();
     }
 
-    [HttpGet]
+    [HttpGet("exportcsv")]
     [Authorize(Roles = "admin, manager")]
     public async Task<IActionResult> ExportToCSV()
     {
         var fileInfo = await Mediator.Send(new PatientsToCSVQuery());
         return File(fileInfo.Content, fileInfo.Type.ToName(), fileInfo.FileName);
     }
-
-    [HttpGet]
-    public async Task<IActionResult> ImportToCSV()
-    {
-        return Ok();
-    }
-
-    [HttpPost]
+    
+    [HttpPost("import0csv")]
     [Authorize(Roles = "admin, manager")]
     public async Task<IActionResult> ImportToCSV(CSV source)
     {

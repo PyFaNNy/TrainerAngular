@@ -17,20 +17,20 @@ using Trainer.Metrics;
 
 namespace Trainer.Controllers
 {
+    [ApiController]
+    [Route("baseUser")]
     public class BaseUserController : BaseController
     {
-        private readonly IStringLocalizer<BaseUserController> Localizer;
         private readonly IMetrics _metrics;
         
-        public BaseUserController(ILogger<BaseUserController> logger, IStringLocalizer<BaseUserController> lcalizer, IMetrics metrics)
+        public BaseUserController(ILogger<BaseUserController> logger, IMetrics metrics)
             : base(logger)
         {
-            Localizer = lcalizer;
             _metrics = metrics;
         }
 
         [Authorize(Roles = "admin")]
-        [HttpGet]
+        [HttpGet ("baseUser")]
         public async Task<IActionResult> GetModels(
             SortState sortOrder = SortState.FirstNameSort,
             int? pageIndex = 1,
@@ -43,7 +43,7 @@ namespace Trainer.Controllers
         }
 
         [Authorize(Roles = "admin")]
-        [HttpPost]
+        [HttpPost("block")]
         public async Task<IActionResult> BlockUser(Guid[] selectedUsers)
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.BaseUserBlockUser);
@@ -52,7 +52,7 @@ namespace Trainer.Controllers
         }
 
         [Authorize(Roles = "admin")]
-        [HttpPost]
+        [HttpPost("unBlock")]
         public async Task<IActionResult> UnBlockUser(Guid[] selectedUsers)
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.BaseUserUnBlockUser);
@@ -61,7 +61,7 @@ namespace Trainer.Controllers
         }
 
         [Authorize(Roles = "admin")]
-        [HttpPost]
+        [HttpDelete ("{selectedUsers}")]
         public async Task<IActionResult> DeleteUser(Guid[] selectedUsers)
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.BaseUserDeleteUser);
@@ -70,7 +70,7 @@ namespace Trainer.Controllers
         }
 
         [Authorize(Roles = "admin")]
-        [HttpGet]
+        [HttpGet("approve")]
         public async Task<IActionResult> ApproveUser(string userId)
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.BaseUserApproveUser);
@@ -79,29 +79,22 @@ namespace Trainer.Controllers
         }
 
         [Authorize(Roles = "admin")]
-        [HttpGet]
+        [HttpGet("decline")]
         public async Task<IActionResult> DeclineUser(Guid userId)
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.BaseUserDeclineUser);
             await Mediator.Send(new DeclineUserCommand {UserId = userId});
             return RedirectToAction("GetModels");
         }
-
-        [HttpGet]
-        public IActionResult ResetPassword(string email)
-        {
-            //ViewBag.Email = email;
-            return Ok();
-        }
-
-        [HttpPost]
+        
+        [HttpPost("reset")]
         public async Task<IActionResult> ResetPassword(ResetPasswordUserCommand command)
         {
             await Mediator.Send(command);
             return Ok();
         }
 
-        [HttpGet]
+        [HttpGet("confirm")]
         public async Task<IActionResult> ConfirmEmail([FromQuery] string email)
         {
             await Mediator.Send(new ConfirmEmailCommand {Email = email});
