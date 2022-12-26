@@ -18,13 +18,19 @@ import {AddExaminationComponent} from "./components/Examinations/AddExamination/
 import { HomeComponent } from './components/Home/home.component';
 import {AdminPanelComponent} from "./components/AdminPanel/admin-panel.component";
 import { ErrorComponent } from './components/error/error.component';
+import {RegisterComponent} from "./components/Register/register.component";
+import {LoginComponent} from "./components/Login/login.component";
+import {ResetPasswordComponent} from "./components/ResetPassword/reset-password.component";
 
 const appRoute: Routes  = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
+  {path: 'reset', component: ResetPasswordComponent},
   {path: 'patients', component: GetPatientsComponent},
   {path: 'examinations', component: GetExaminationsComponent},
-  {path: 'admin', component: GetExaminationsComponent},
+  {path: 'admin', component: AdminPanelComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
   {path: '**', component: ErrorComponent},
 ]
 
@@ -42,7 +48,10 @@ const appRoute: Routes  = [
     AddExaminationComponent,
     HomeComponent,
     AdminPanelComponent,
-    ErrorComponent
+    ErrorComponent,
+    RegisterComponent,
+    LoginComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,
