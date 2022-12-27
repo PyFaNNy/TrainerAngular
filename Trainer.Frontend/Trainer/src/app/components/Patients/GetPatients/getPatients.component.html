@@ -16,11 +16,11 @@
       </tr>
 <!--      <tr onclick="window.location.href='/Patient/GetModel?id=@user.Id';">-->
       <tr *ngFor="let patient of patients">
-        <td>{{patient.lastName}}</td>
-        <td>{{patient.fisrtName}}</td>
-        <td>{{patient.middleName}}</td>
-        <td>{{patient.age}}</td>
-        <td>{{patient.sex}}</td>
+        <td>{{patient.LastName}}</td>
+        <td>{{patient.FirstName}}</td>
+        <td>{{patient.MiddleName}}</td>
+        <td>{{patient.Age}}</td>
+        <td>{{patient.Sex}}</td>
         <td><a class="btn btn-primary">Update</a></td>
         <td><input type="checkbox" class="patient" name="selectedPatients" value="@user.Id"/></td>
         <td><a class="btn btn-primary">Set Examination</a></td>

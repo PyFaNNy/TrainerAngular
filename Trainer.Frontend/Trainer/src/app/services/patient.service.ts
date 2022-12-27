@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class PatientService {
-  private url = 'Patient';
+  private url = 'patient';
 
   constructor(private http: HttpClient) {}
 
@@ -32,7 +32,7 @@ export class PatientService {
 
   public deletePatient(patient: Patient): Observable<Patient[]> {
     return this.http.delete<Patient[]>(
-      `${environment.apiUrl}/${this.url}/${patient.id}`
+      `${environment.apiUrl}/${this.url}/${patient.Id}`
     );
   }
 }

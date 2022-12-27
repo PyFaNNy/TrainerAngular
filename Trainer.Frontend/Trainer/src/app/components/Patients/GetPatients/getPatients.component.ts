@@ -11,12 +11,12 @@ export class GetPatientsComponent implements OnInit {
   patients: Patient[] = [];
   patientToEdit?: Patient;
 
-  constructor(private superHeroService: PatientService) {}
+  constructor(private patientService: PatientService) {}
 
   ngOnInit(): void {
-    this.superHeroService
+    this.patientService
       .getPatients()
-      .subscribe((result: Patient[]) => (this.patients = result));
+      .subscribe((result: any) => ( this.patients = result.Items));
   }
 
   // updateHeroList(heroes: SuperHero[]) {
