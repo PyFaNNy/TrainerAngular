@@ -7,20 +7,13 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
-export class PatientService {
+export class UserService {
   private url = 'Patient';
 
   constructor(private http: HttpClient) {}
 
-  public getPatients(): Observable<Patient[]> {
+  public getUsers(): Observable<Patient[]> {
     return this.http.get<Patient[]>(`${environment.apiUrl}/${this.url}`);
-  }
-
-  public updatePatient(patient: Patient): Observable<Patient[]> {
-    return this.http.put<Patient[]>(
-      `${environment.apiUrl}/${this.url}`,
-      patient
-    );
   }
 
   public createPatient(patient: Patient): Observable<Patient[]> {
