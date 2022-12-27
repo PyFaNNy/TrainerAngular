@@ -14,12 +14,12 @@
         <th></th>
         <th><input type="checkbox" name="cb_all"></th>
       </tr>
-      <tr>
-        <td>TypePhysicalActive</td>
-        <td>LastName</td>
-        <td>FirstName</td>
-        <td>MiddleName</td>
-        <td>@examination.Date.ToString("d")</td>
+      <tr *ngFor="let examination of examinations">
+        <td>{{examination.TypePhysicalActive}}</td>
+        <td>{{examination.Patient?.LastName}}</td>
+        <td>{{examination.Patient?.FirstName}}</td>
+        <td>{{examination.Patient?.MiddleName}}</td>
+        <td>{{examination.Date}}</td>
         <td>
             <a class="btn btn-success btn-sm">Start</a>
             <a class="btn btn-primary btn-sm">Edit</a>

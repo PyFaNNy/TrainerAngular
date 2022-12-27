@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class ExaminationService {
-  private url = 'Examination';
+  private url = 'examination';
 
   constructor(private http: HttpClient) {}
 
@@ -32,7 +32,7 @@ export class ExaminationService {
 
   public deleteExamination(examination: Examination): Observable<Examination[]> {
     return this.http.delete<Examination[]>(
-      `${environment.apiUrl}/${this.url}/${examination.id}`
+      `${environment.apiUrl}/${this.url}/${examination.Id}`
     );
   }
 }
