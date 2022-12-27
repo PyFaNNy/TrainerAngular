@@ -38,7 +38,7 @@ public class PatientController : BaseController
     /// <param name="pageSize"></param>
     /// <returns></returns>
     [HttpGet]
-    [Authorize(Roles = "admin, doctor, manager")]
+    // [Authorize(Roles = "admin, doctor, manager")]
     public async Task<IActionResult> GetModels(
         SortState sortOrder = SortState.FirstNameSort,
         int? pageIndex = 1,
@@ -56,7 +56,7 @@ public class PatientController : BaseController
     /// <param name="id"></param>
     /// <returns></returns>
     [HttpGet("{id}")]
-    [Authorize(Roles = "admin, doctor, manager")]
+    // [Authorize(Roles = "admin, doctor, manager")]
     public async Task<IActionResult> GetModel(Guid id)
     {
         _metrics.Measure.Counter.Increment(BusinessMetrics.PatientGetModel);
@@ -70,7 +70,7 @@ public class PatientController : BaseController
     /// <param name="command"></param>
     /// <returns></returns>
     [HttpPost]
-    [Authorize(Roles = "admin, manager")]
+    // [Authorize(Roles = "admin, manager")]
     public async Task<IActionResult> AddModel(CreatePatientCommand command)
     {
         _metrics.Measure.Counter.Increment(BusinessMetrics.PatientAddModel);
@@ -98,7 +98,7 @@ public class PatientController : BaseController
     /// <param name="command"></param>
     /// <returns></returns>
     [HttpPut]
-    [Authorize(Roles = "admin, manager")]
+    // [Authorize(Roles = "admin, manager")]
     public async Task<IActionResult> UpdateModel(UpdatePatientCommand command)
     {
         _metrics.Measure.Counter.Increment(BusinessMetrics.PatientUpdateModel);
@@ -126,7 +126,7 @@ public class PatientController : BaseController
     /// </summary>
     /// <param name="selectedPatient"></param>
     /// <returns></returns>
-    [Authorize(Roles = "admin, manager")]
+    // [Authorize(Roles = "admin, manager")]
     [HttpDelete("{selectedPatient}")]
     public async Task<IActionResult> DeleteModelAsync(Guid[] selectedPatient)
     {
@@ -140,7 +140,7 @@ public class PatientController : BaseController
     /// </summary>
     /// <returns></returns>
     [HttpGet("exportcsv")]
-    [Authorize(Roles = "admin, manager")]
+    // [Authorize(Roles = "admin, manager")]
     public async Task<IActionResult> ExportToCSV()
     {
         var fileInfo = await Mediator.Send(new PatientsToCSVQuery());
@@ -153,7 +153,7 @@ public class PatientController : BaseController
     /// <param name="source"></param>
     /// <returns></returns>
     [HttpPost("import0csv")]
-    [Authorize(Roles = "admin, manager")]
+    // [Authorize(Roles = "admin, manager")]
     public async Task<IActionResult> ImportToCSV(CSV source)
     {
         await Mediator.Send(new CSVToPatientsCommand {CSVFile = source.File});

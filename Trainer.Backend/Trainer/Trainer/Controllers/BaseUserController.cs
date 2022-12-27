@@ -36,7 +36,7 @@ namespace Trainer.Controllers
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        [Authorize(Roles = "admin")]
+        // [Authorize(Roles = "admin")]
         [HttpGet]
         public async Task<IActionResult> GetModels(
             SortState sortOrder = SortState.FirstNameSort,
@@ -54,7 +54,7 @@ namespace Trainer.Controllers
         /// </summary>
         /// <param name="selectedUsers"></param>
         /// <returns></returns>
-        [Authorize(Roles = "admin")]
+        // [Authorize(Roles = "admin")]
         [HttpGet("block/{selectedUsers}")]
         public async Task<IActionResult> BlockUser(Guid[] selectedUsers)
         {
@@ -68,7 +68,7 @@ namespace Trainer.Controllers
         /// </summary>
         /// <param name="selectedUsers"></param>
         /// <returns></returns>
-        [Authorize(Roles = "admin")]
+        // [Authorize(Roles = "admin")]
         [HttpGet("unBlock/{selectedUsers}")]
         public async Task<IActionResult> UnBlockUser(Guid[] selectedUsers)
         {
@@ -82,7 +82,7 @@ namespace Trainer.Controllers
         /// </summary>
         /// <param name="selectedUsers"></param>
         /// <returns></returns>
-        [Authorize(Roles = "admin")]
+        // [Authorize(Roles = "admin")]
         [HttpDelete ("{selectedUsers}")]
         public async Task<IActionResult> DeleteUser(Guid[] selectedUsers)
         {
@@ -96,7 +96,7 @@ namespace Trainer.Controllers
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        [Authorize(Roles = "admin")]
+        // [Authorize(Roles = "admin")]
         [HttpGet("approve/{userId}")]
         public async Task<IActionResult> ApproveUser(Guid userId)
         {
@@ -110,7 +110,7 @@ namespace Trainer.Controllers
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        [Authorize(Roles = "admin")]
+        // [Authorize(Roles = "admin")]
         [HttpGet("decline/{userId}")]
         public async Task<IActionResult> DeclineUser(Guid userId)
         {

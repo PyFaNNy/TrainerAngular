@@ -42,7 +42,7 @@ namespace Trainer.Controllers
         /// <param name="pageSize"></param>
         /// <returns></returns>
         [HttpGet]
-        [Authorize(Roles = "admin, doctor, manager")]
+        // [Authorize(Roles = "admin, doctor, manager")]
         public async Task<IActionResult> GetModels(
             SortState sortOrder = SortState.FirstNameSort,
             int? pageIndex = 1,
@@ -60,7 +60,7 @@ namespace Trainer.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        [Authorize(Roles = "admin, doctor, manager")]
+        // [Authorize(Roles = "admin, doctor, manager")]
         public async Task<IActionResult> GetModel(Guid id)
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.ExaminationGetModel);
@@ -75,7 +75,7 @@ namespace Trainer.Controllers
         /// <param name="command"></param>
         /// <returns></returns>
         [HttpPost]
-        [Authorize(Roles = "doctor")]
+        // [Authorize(Roles = "doctor")]
         public async Task<IActionResult> AddModel(CreateExaminationCommand command)
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.ExaminationAddModel);
@@ -110,7 +110,7 @@ namespace Trainer.Controllers
         /// <param name="command"></param>
         /// <returns></returns>
         [HttpPut]
-        [Authorize(Roles = "doctor")]
+        // [Authorize(Roles = "doctor")]
         public async Task<IActionResult> UpdateModel(UpdateExaminationCommand command)
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.ExaminationUpdateModel);
@@ -143,7 +143,7 @@ namespace Trainer.Controllers
         /// </summary>
         /// <param name="selectedExamination"></param>
         /// <returns></returns>
-        [Authorize(Roles = "doctor")]
+        // [Authorize(Roles = "doctor")]
         [HttpDelete("{selectedExamination}")]
         public async Task<IActionResult> DeleteModel(Guid[] selectedExamination)
         {
@@ -156,7 +156,7 @@ namespace Trainer.Controllers
         /// Export examination to csv
         /// </summary>
         /// <returns></returns>
-        [Authorize(Roles = "admin, manager")]
+        // [Authorize(Roles = "admin, manager")]
         [HttpGet("export")]
         public async Task<IActionResult> ExportToCSV()
         {
@@ -170,7 +170,7 @@ namespace Trainer.Controllers
         /// <param name="source"></param>
         /// <returns></returns>
         [HttpPost("import")]
-        [Authorize(Roles = "admin, manager")]
+        // [Authorize(Roles = "admin, manager")]
         public async Task<IActionResult> ImportToCSV(CSV source)
         {
             await Mediator.Send(new CSVToExaminationsCommand { CSVFile = source.File });

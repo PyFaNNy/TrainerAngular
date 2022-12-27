@@ -50,4 +50,8 @@
     <ProjectReference Include="..\Trainer.Persistence\Trainer.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot" />
+  </ItemGroup>
+
 </Project>
