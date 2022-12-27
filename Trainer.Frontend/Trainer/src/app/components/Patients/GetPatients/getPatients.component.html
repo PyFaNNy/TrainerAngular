@@ -15,12 +15,12 @@
         <th><input type="checkbox" name="cb_all"></th>
       </tr>
 <!--      <tr onclick="window.location.href='/Patient/GetModel?id=@user.Id';">-->
-      <tr >
-        <td>user.LastName</td>
-        <td>user.FirstName</td>
-        <td>user.MiddleName</td>
-        <td>user.Age</td>
-        <td>user.Sex</td>
+      <tr *ngFor="let patient of patients">
+        <td>{{patient.lastName}}</td>
+        <td>{{patient.fisrtName}}</td>
+        <td>{{patient.middleName}}</td>
+        <td>{{patient.age}}</td>
+        <td>{{patient.sex}}</td>
         <td><a class="btn btn-primary">Update</a></td>
         <td><input type="checkbox" class="patient" name="selectedPatients" value="@user.Id"/></td>
         <td><a class="btn btn-primary">Set Examination</a></td>

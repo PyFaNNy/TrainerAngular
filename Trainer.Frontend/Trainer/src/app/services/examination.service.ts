@@ -7,30 +7,30 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
-export class SuperHeroService {
+export class ExaminationService {
   private url = 'Examination';
 
   constructor(private http: HttpClient) {}
 
-  public getSuperHeroes(): Observable<Examination[]> {
+  public getExaminations(): Observable<Examination[]> {
     return this.http.get<Examination[]>(`${environment.apiUrl}/${this.url}`);
   }
 
-  public updatePatient(examination: Examination): Observable<Examination[]> {
+  public updateExamination(examination: Examination): Observable<Examination[]> {
     return this.http.put<Examination[]>(
       `${environment.apiUrl}/${this.url}`,
       examination
     );
   }
 
-  public createPatient(examination: Examination): Observable<Examination[]> {
+  public createExamination(examination: Examination): Observable<Examination[]> {
     return this.http.post<Examination[]>(
       `${environment.apiUrl}/${this.url}`,
       examination
     );
   }
 
-  public deletePatient(examination: Examination): Observable<Examination[]> {
+  public deleteExamination(examination: Examination): Observable<Examination[]> {
     return this.http.delete<Examination[]>(
       `${environment.apiUrl}/${this.url}/${examination.id}`
     );
