@@ -1,9 +1,9 @@
 export class User  {
-  id?: string;
-  fisrtName = "";
-  lastName = "";
-  middleName = "";
-  email = "";
-  role = "";
-  status = "";
+  Id?: string;
+  FirstName = "";
+  LastName = "";
+  MiddleName = "";
+  Email = "";
+  Role = "";
+  Status = "";
 }

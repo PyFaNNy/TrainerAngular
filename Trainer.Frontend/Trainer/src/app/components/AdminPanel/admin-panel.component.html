@@ -15,18 +15,17 @@
         <th></th>
         <th><input type="checkbox" name="cb_all"></th>
       </tr>
-      <tr>
-          <td>@user.Email</td>
-          <td>@user?.LastName</td>
-          <td>@user?.FirstName</td>
-          <td>@user?.MiddleName</td>
-          <td>user.Role.ToString()</td>
-          <td>user.Status.ToString()</td>
+      <tr *ngFor="let user of users">
+          <td>{{user.Email}}</td>
+          <td>{{user.LastName}}</td>
+          <td>{{user.FirstName}}</td>
+          <td>{{user.MiddleName}}</td>
+          <td>{{user.Role}}</td>
+          <td>{{user.Status}}</td>
       <td>
-        <a class="btn btn-success btn-sm">Approve</a>
+        <label  class="btn btn-success">Approve</label>
         <a class="btn btn-danger btn-sm">Decline</a>
       </td>
-
       <td></td>
       <td><input type="checkbox" class="user" name="selectedUsers" value="@user.Id" /></td>
       </tr>
@@ -46,5 +45,4 @@
 <!--    </li>-->
     </ul>
 </nav>
-    }
   </form>

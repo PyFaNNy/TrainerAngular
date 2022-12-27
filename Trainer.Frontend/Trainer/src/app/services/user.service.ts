@@ -1,31 +1,31 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { Patient } from '../models/patient';
 import { environment } from 'src/environments/environment';
+import {User} from "../models/user";
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  private url = 'Patient';
+  private url = 'baseUser';
 
   constructor(private http: HttpClient) {}
 
-  public getUsers(): Observable<Patient[]> {
-    return this.http.get<Patient[]>(`${environment.apiUrl}/${this.url}`);
+  public getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${environment.apiUrl}/${this.url}`);
   }
 
-  public createPatient(patient: Patient): Observable<Patient[]> {
-    return this.http.post<Patient[]>(
+  public createUser(user: User): Observable<User[]> {
+    return this.http.post<User[]>(
       `${environment.apiUrl}/${this.url}`,
-      patient
+      user
     );
   }
 
-  public deletePatient(patient: Patient): Observable<Patient[]> {
-    return this.http.delete<Patient[]>(
-      `${environment.apiUrl}/${this.url}/${patient.id}`
+  public deleteUser(user: User): Observable<User[]> {
+    return this.http.delete<User[]>(
+      `${environment.apiUrl}/${this.url}/${user.Id}`
     );
   }
 }
