@@ -29,8 +29,15 @@ namespace Trainer.Controllers
             _metrics = metrics;
         }
 
+        /// <summary>
+        /// Get all users
+        /// </summary>
+        /// <param name="sortOrder"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
         [Authorize(Roles = "admin")]
-        [HttpGet ("baseUser")]
+        [HttpGet]
         public async Task<IActionResult> GetModels(
             SortState sortOrder = SortState.FirstNameSort,
             int? pageIndex = 1,
@@ -42,8 +49,13 @@ namespace Trainer.Controllers
             return Ok(users);
         }
 
+        /// <summary>
+        /// Block users
+        /// </summary>
+        /// <param name="selectedUsers"></param>
+        /// <returns></returns>
         [Authorize(Roles = "admin")]
-        [HttpPost("block")]
+        [HttpGet("block/{selectedUsers}")]
         public async Task<IActionResult> BlockUser(Guid[] selectedUsers)
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.BaseUserBlockUser);
@@ -51,8 +63,13 @@ namespace Trainer.Controllers
             return RedirectToAction("GetModels");
         }
 
+        /// <summary>
+        /// Unblock users
+        /// </summary>
+        /// <param name="selectedUsers"></param>
+        /// <returns></returns>
         [Authorize(Roles = "admin")]
-        [HttpPost("unBlock")]
+        [HttpGet("unBlock/{selectedUsers}")]
         public async Task<IActionResult> UnBlockUser(Guid[] selectedUsers)
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.BaseUserUnBlockUser);
@@ -60,6 +77,11 @@ namespace Trainer.Controllers
             return RedirectToAction("GetModels");
         }
 
+        /// <summary>
+        /// Delete users
+        /// </summary>
+        /// <param name="selectedUsers"></param>
+        /// <returns></returns>
         [Authorize(Roles = "admin")]
         [HttpDelete ("{selectedUsers}")]
         public async Task<IActionResult> DeleteUser(Guid[] selectedUsers)
@@ -69,17 +91,27 @@ namespace Trainer.Controllers
             return RedirectToAction("GetModels");
         }
 
+        /// <summary>
+        /// Approve user
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         [Authorize(Roles = "admin")]
-        [HttpGet("approve")]
-        public async Task<IActionResult> ApproveUser(string userId)
+        [HttpGet("approve/{userId}")]
+        public async Task<IActionResult> ApproveUser(Guid userId)
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.BaseUserApproveUser);
-            await Mediator.Send(new ApproveUserCommand {UserId = new Guid(userId)});
+            await Mediator.Send(new ApproveUserCommand {UserId = userId});
             return RedirectToAction("GetModels");
         }
 
+        /// <summary>
+        /// Decline user
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         [Authorize(Roles = "admin")]
-        [HttpGet("decline")]
+        [HttpGet("decline/{userId}")]
         public async Task<IActionResult> DeclineUser(Guid userId)
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.BaseUserDeclineUser);
@@ -87,6 +119,11 @@ namespace Trainer.Controllers
             return RedirectToAction("GetModels");
         }
         
+        /// <summary>
+        /// Reset password
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         [HttpPost("reset")]
         public async Task<IActionResult> ResetPassword(ResetPasswordUserCommand command)
         {
@@ -94,6 +131,11 @@ namespace Trainer.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Confirm email
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         [HttpGet("confirm")]
         public async Task<IActionResult> ConfirmEmail([FromQuery] string email)
         {

@@ -30,6 +30,13 @@ public class PatientController : BaseController
         _metrics = metrics;
     }
 
+    /// <summary>
+    ///  Get all patients
+    /// </summary>
+    /// <param name="sortOrder"></param>
+    /// <param name="pageIndex"></param>
+    /// <param name="pageSize"></param>
+    /// <returns></returns>
     [HttpGet]
     [Authorize(Roles = "admin, doctor, manager")]
     public async Task<IActionResult> GetModels(
@@ -43,6 +50,11 @@ public class PatientController : BaseController
         return Ok(results);
     }
 
+    /// <summary>
+    /// Get patient
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     [HttpGet("{id}")]
     [Authorize(Roles = "admin, doctor, manager")]
     public async Task<IActionResult> GetModel(Guid id)
@@ -52,6 +64,11 @@ public class PatientController : BaseController
         return Ok(patient);
     }
     
+    /// <summary>
+    /// Create patient
+    /// </summary>
+    /// <param name="command"></param>
+    /// <returns></returns>
     [HttpPost]
     [Authorize(Roles = "admin, manager")]
     public async Task<IActionResult> AddModel(CreatePatientCommand command)
@@ -75,6 +92,11 @@ public class PatientController : BaseController
         return Ok(command);
     }
     
+    /// <summary>
+    /// Update patient
+    /// </summary>
+    /// <param name="command"></param>
+    /// <returns></returns>
     [HttpPut]
     [Authorize(Roles = "admin, manager")]
     public async Task<IActionResult> UpdateModel(UpdatePatientCommand command)
@@ -99,6 +121,11 @@ public class PatientController : BaseController
         return Ok(command);
     }
 
+    /// <summary>
+    /// Delete patients
+    /// </summary>
+    /// <param name="selectedPatient"></param>
+    /// <returns></returns>
     [Authorize(Roles = "admin, manager")]
     [HttpDelete("{selectedPatient}")]
     public async Task<IActionResult> DeleteModelAsync(Guid[] selectedPatient)
@@ -108,6 +135,10 @@ public class PatientController : BaseController
         return Ok();
     }
 
+    /// <summary>
+    /// Export patient to csv
+    /// </summary>
+    /// <returns></returns>
     [HttpGet("exportcsv")]
     [Authorize(Roles = "admin, manager")]
     public async Task<IActionResult> ExportToCSV()
@@ -116,6 +147,11 @@ public class PatientController : BaseController
         return File(fileInfo.Content, fileInfo.Type.ToName(), fileInfo.FileName);
     }
     
+    /// <summary>
+    /// Import patient csv to dataBase
+    /// </summary>
+    /// <param name="source"></param>
+    /// <returns></returns>
     [HttpPost("import0csv")]
     [Authorize(Roles = "admin, manager")]
     public async Task<IActionResult> ImportToCSV(CSV source)

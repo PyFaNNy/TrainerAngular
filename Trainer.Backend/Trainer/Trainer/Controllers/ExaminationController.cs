@@ -35,7 +35,7 @@ namespace Trainer.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Get Examinations
         /// </summary>
         /// <param name="sortOrder"></param>
         /// <param name="pageIndex"></param>
@@ -55,7 +55,7 @@ namespace Trainer.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Get Examination
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -70,7 +70,7 @@ namespace Trainer.Controllers
         }
         
         /// <summary>
-        /// 
+        /// Create Examination
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
@@ -104,6 +104,11 @@ namespace Trainer.Controllers
             return Ok(command);
         }
         
+        /// <summary>
+        /// Update Examination
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         [HttpPut]
         [Authorize(Roles = "doctor")]
         public async Task<IActionResult> UpdateModel(UpdateExaminationCommand command)
@@ -133,6 +138,11 @@ namespace Trainer.Controllers
             return Ok(command);
         }
 
+        /// <summary>
+        /// Delete Examinations
+        /// </summary>
+        /// <param name="selectedExamination"></param>
+        /// <returns></returns>
         [Authorize(Roles = "doctor")]
         [HttpDelete("{selectedExamination}")]
         public async Task<IActionResult> DeleteModel(Guid[] selectedExamination)
@@ -142,6 +152,10 @@ namespace Trainer.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Export examination to csv
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = "admin, manager")]
         [HttpGet("export")]
         public async Task<IActionResult> ExportToCSV()
@@ -150,6 +164,11 @@ namespace Trainer.Controllers
             return File(fileInfo.Content, fileInfo.Type.ToName(), fileInfo.FileName);
         }
 
+        /// <summary>
+        /// Import examination csv to DataBase
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
         [HttpPost("import")]
         [Authorize(Roles = "admin, manager")]
         public async Task<IActionResult> ImportToCSV(CSV source)

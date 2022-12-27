@@ -1,4 +1,5 @@
-﻿using FluentValidation.AspNetCore;
+﻿using System.Reflection;
+using FluentValidation.AspNetCore;
 using Jdenticon.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.OpenApi.Models;
@@ -55,18 +56,14 @@ namespace Trainer
                     Version = "v1",
                     Title = "Trainer API",
                     Description = "An ASP.NET Core Web API for my Project",
-                    TermsOfService = new Uri("https://example.com/terms"),
                     Contact = new OpenApiContact
                     {
-                        Name = "Example Contact",
-                        Url = new Uri("https://example.com/contact")
-                    },
-                    License = new OpenApiLicense
-                    {
-                        Name = "Example License",
-                        Url = new Uri("https://example.com/license")
+                        Name = "GitHub Account",
+                        Url = new Uri("https://github.com/PyFaNNy")
                     }
                 });
+                var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
             });
         }
 
