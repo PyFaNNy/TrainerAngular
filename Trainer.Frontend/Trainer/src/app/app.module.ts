@@ -27,6 +27,7 @@ const appRoute: Routes  = [
   {path: 'home', component: HomeComponent},
   {path: 'reset', component: ResetPasswordComponent},
   {path: 'patients', component: GetPatientsComponent},
+  {path: 'addPatient', component: AddPatientComponent},
   {path: 'examinations', component: GetExaminationsComponent},
   {path: 'admin', component: AdminPanelComponent},
   {path: 'login', component: LoginComponent},
