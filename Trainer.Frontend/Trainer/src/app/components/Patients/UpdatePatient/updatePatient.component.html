@@ -1,25 +1,25 @@
-<h2>UpdatePatient</h2>
+<h2>Update Patient</h2>
 <form method="post" enctype="multipart/form-data">
   <div class="col-md-4">
     <div class="form-group">
       <label>FirstName</label><br />
-      <input value="@ViewBag.Patient.FirstName" class="form-control" />
+      <input  [(ngModel)]='patient.FirstName' [ngModelOptions]="{standalone: true}" class="form-control" />
     </div>
     <div class="form-group">
       <label>MiddleName</label><br />
-      <input  value="@ViewBag.Patient.MiddleName" class="form-control" />
+      <input  [(ngModel)]='patient.MiddleName' [ngModelOptions]="{standalone: true}" class="form-control" />
     </div>
     <div class="form-group">
       <label >LastName</label><br />
-      <input value="@ViewBag.Patient.LastName" class="form-control" />
+      <input [(ngModel)]='patient.LastName' [ngModelOptions]="{standalone: true}" class="form-control" />
     </div>
     <div class="form-group">
       <label>Email</label><br />
-      <input value="@ViewBag.Patient.Email" class="form-control" />
+      <input [(ngModel)]='patient.Email' [ngModelOptions]="{standalone: true}" class="form-control" />
     </div>
     <div class="form-group">
       <label >Age</label><br />
-      <input value="@ViewBag.Patient.Age" class="form-control" />
+      <input [(ngModel)]='patient.Age' [ngModelOptions]="{standalone: true}"  class="form-control" />
     </div>
     <div class="form-group">
       <label>Sex</label><br />

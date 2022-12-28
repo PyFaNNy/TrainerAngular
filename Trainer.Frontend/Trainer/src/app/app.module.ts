@@ -21,6 +21,7 @@ import { ErrorComponent } from './components/error/error.component';
 import {RegisterComponent} from "./components/Register/register.component";
 import {LoginComponent} from "./components/Login/login.component";
 import {ResetPasswordComponent} from "./components/ResetPassword/reset-password.component";
+import {FormsModule} from "@angular/forms";
 
 const appRoute: Routes  = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -28,6 +29,7 @@ const appRoute: Routes  = [
   {path: 'reset', component: ResetPasswordComponent},
   {path: 'patients', component: GetPatientsComponent},
   {path: 'addPatient', component: AddPatientComponent},
+  {path: 'updatePatient/:id', component: UpdatePatientComponent},
   {path: 'examinations', component: GetExaminationsComponent},
   {path: 'admin', component: AdminPanelComponent},
   {path: 'login', component: LoginComponent},
@@ -59,7 +61,8 @@ const appRoute: Routes  = [
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoute)
+    RouterModule.forRoot(appRoute),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

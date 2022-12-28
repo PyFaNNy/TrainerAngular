@@ -20,7 +20,7 @@
       <td>{{patient.MiddleName}}</td>
       <td>{{patient.Age}}</td>
       <td>{{patient.Sex}}</td>
-      <td><a class="btn btn-primary">Update</a></td>
+      <td><a routerLink="/updatePatient/{{patient.Id}}" class="btn btn-primary">Update</a></td>
       <td><input type="checkbox" class="patient" name="selectedPatients" value="@user.Id"/></td>
       <td><a class="btn btn-primary">Set Examination</a></td>
     </tr>

@@ -9,7 +9,6 @@ import {PatientService} from "../../../services/patient.service";
 
 export class GetPatientsComponent implements OnInit {
   patients: Patient[] = [];
-  patientToEdit?: Patient;
 
   constructor(private patientService: PatientService) {}
 

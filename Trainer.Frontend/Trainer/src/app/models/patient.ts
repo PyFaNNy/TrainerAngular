@@ -3,7 +3,7 @@ export class Patient  {
   FirstName = "";
   LastName = "";
   MiddleName = "";
-  email = "";
+  Email = "";
   Age?: number;
   Sex?: number;
   About = "";
