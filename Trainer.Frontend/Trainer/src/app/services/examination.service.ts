@@ -32,7 +32,7 @@ export class ExaminationService {
 
   public deleteExamination(examination: Examination): Observable<Examination[]> {
     return this.http.delete<Examination[]>(
-      `${environment.apiUrl}/${this.url}/${examination.Id}`
+      `${environment.apiUrl}/${this.url}/${examination.id}`
     );
   }
 

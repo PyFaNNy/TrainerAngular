@@ -15,11 +15,11 @@
         <th><input type="checkbox" name="cb_all"></th>
       </tr>
       <tr *ngFor="let examination of examinations">
-        <td>{{examination.TypePhysicalActive}}</td>
-        <td>{{examination.Patient?.lastName}}</td>
-        <td>{{examination.Patient?.firstName}}</td>
-        <td>{{examination.Patient?.middleName}}</td>
-        <td>{{examination.Date}}</td>
+        <td>{{examination.typePhysicalActive}}</td>
+        <td>{{examination.patient?.lastName}}</td>
+        <td>{{examination.patient?.firstName}}</td>
+        <td>{{examination.patient?.middleName}}</td>
+        <td>{{examination.date}}</td>
         <td>
             <a class="btn btn-success btn-sm">Start</a>
             <a class="btn btn-primary btn-sm">Edit</a>

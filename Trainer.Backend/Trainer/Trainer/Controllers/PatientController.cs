@@ -139,7 +139,7 @@ public class PatientController : BaseController
     /// Export patient to csv
     /// </summary>
     /// <returns></returns>
-    [HttpGet("exportcsv")]
+    [HttpGet("export")]
     // [Authorize(Roles = "admin, manager")]
     public async Task<IActionResult> ExportToCSV()
     {
@@ -152,7 +152,7 @@ public class PatientController : BaseController
     /// </summary>
     /// <param name="source"></param>
     /// <returns></returns>
-    [HttpPost("import0csv")]
+    [HttpPost("import")]
     // [Authorize(Roles = "admin, manager")]
     public async Task<IActionResult> ImportToCSV(CSV source)
     {

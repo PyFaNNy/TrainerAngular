@@ -16,7 +16,6 @@ export class AdminPanelComponent  implements OnInit {
   ngOnInit(): void {
     this.userService
       .getUsers()
-      .subscribe((result: any) => ( this.users = result.Items));
+      .subscribe((result: any) => ( this.users = result.items));
   }
-
 }

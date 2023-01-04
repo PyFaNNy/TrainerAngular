@@ -25,7 +25,7 @@ export class UserService {
 
   public deleteUser(user: User): Observable<User[]> {
     return this.http.delete<User[]>(
-      `${environment.apiUrl}/${this.url}/${user.Id}`
+      `${environment.apiUrl}/${this.url}/${user.id}`
     );
   }
 }
