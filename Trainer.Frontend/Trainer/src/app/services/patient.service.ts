@@ -42,7 +42,7 @@ export class PatientService {
 
   public donwload() {
     return this.http.get(
-      `${environment.apiUrl}/${this.url}/exportcsv`,
+      `${environment.apiUrl}/${this.url}/export`,
       {observe: 'response', responseType: 'blob'}
     );
   }

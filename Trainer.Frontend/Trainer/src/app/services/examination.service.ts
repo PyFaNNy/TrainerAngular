@@ -35,4 +35,11 @@ export class ExaminationService {
       `${environment.apiUrl}/${this.url}/${examination.Id}`
     );
   }
+
+  public donwload() {
+    return this.http.get(
+      `${environment.apiUrl}/${this.url}/export`,
+      {observe: 'response', responseType: 'blob'}
+    );
+  }
 }

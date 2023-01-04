@@ -1,6 +1,4 @@
 import {Component, OnInit} from "@angular/core";
-import {Patient} from "../../../models/patient";
-import {PatientService} from "../../../services/patient.service";
 import {Examination} from "../../../models/examination";
 import {ExaminationService} from "../../../services/examination.service";
 
@@ -11,7 +9,6 @@ import {ExaminationService} from "../../../services/examination.service";
 
 export class GetExaminationsComponent implements OnInit {
   examinations: Examination[] = [];
-  examinationToEdit?: Examination;
 
   constructor(private examinationService: ExaminationService) {}
 
@@ -19,5 +16,18 @@ export class GetExaminationsComponent implements OnInit {
     this.examinationService
       .getExaminations()
       .subscribe((result: any) => ( this.examinations = result.items));
+  }
+
+  public downloadFile(): void {
+    this.examinationService
+      .donwload()
+      .subscribe(response => {
+        let fileName = 'examination';
+        let blob: Blob = response.body as Blob;
+        let a = document.createElement('a');
+        a.download = fileName;
+        a.href = window.URL.createObjectURL(blob);
+        a.click();
+      });
   }
 }
