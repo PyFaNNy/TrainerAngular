@@ -18,15 +18,16 @@ export class GetPatientsComponent implements OnInit {
       .subscribe((result: any) => ( this.patients = result.items));
   }
 
-  // updateHeroList(heroes: SuperHero[]) {
-  //   this.heroes = heroes;
-  // }
-  //
-  // initNewHero() {
-  //   this.heroToEdit = new SuperHero();
-  // }
-  //
-  // editHero(hero: SuperHero) {
-  //   this.heroToEdit = hero;
-  // }
+  public downloadFile(): void {
+    this.patientService
+      .donwload()
+      .subscribe(response => {
+        let fileName = 'patients';
+        let blob: Blob = response.body as Blob;
+        let a = document.createElement('a');
+        a.download = fileName;
+        a.href = window.URL.createObjectURL(blob);
+        a.click();
+      });
+  }
 }

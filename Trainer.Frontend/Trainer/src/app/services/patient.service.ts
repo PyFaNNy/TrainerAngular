@@ -39,4 +39,11 @@ export class PatientService {
       `${environment.apiUrl}/${this.url}/${patient.id}`
     );
   }
+
+  public donwload() {
+    return this.http.get(
+      `${environment.apiUrl}/${this.url}/exportcsv`,
+      {observe: 'response', responseType: 'blob'}
+    );
+  }
 }
