@@ -1,11 +1,11 @@
 export class Patient  {
-  Id?: string;
-  FirstName = "";
-  LastName = "";
-  MiddleName = "";
-  Email = "";
-  Age?: number;
-  Sex?: number;
-  About = "";
-  Hobbies = "";
+  id?: string;
+  firstName = "";
+  lastName = "";
+  middleName = "";
+  email = "";
+  age?: number;
+  sex?: number;
+  about = "";
+  hobbies = "";
 }

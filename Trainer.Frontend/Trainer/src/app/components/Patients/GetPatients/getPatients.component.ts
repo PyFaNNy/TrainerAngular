@@ -15,7 +15,7 @@ export class GetPatientsComponent implements OnInit {
   ngOnInit(): void {
     this.patientService
       .getPatients()
-      .subscribe((result: any) => ( this.patients = result.Items));
+      .subscribe((result: any) => ( this.patients = result.items));
   }
 
   // updateHeroList(heroes: SuperHero[]) {

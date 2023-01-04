@@ -27,8 +27,8 @@ export class PatientService {
     );
   }
 
-  public createPatient(patient: Patient): Observable<Patient[]> {
-    return this.http.post<Patient[]>(
+  public createPatient(patient: Patient): Observable<Patient> {
+    return this.http.post<Patient>(
       `${environment.apiUrl}/${this.url}`,
       patient
     );
@@ -36,7 +36,7 @@ export class PatientService {
 
   public deletePatient(patient: Patient): Observable<Patient[]> {
     return this.http.delete<Patient[]>(
-      `${environment.apiUrl}/${this.url}/${patient.Id}`
+      `${environment.apiUrl}/${this.url}/${patient.id}`
     );
   }
 }

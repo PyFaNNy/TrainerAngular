@@ -18,6 +18,6 @@ export class GetExaminationsComponent implements OnInit {
   ngOnInit(): void {
     this.examinationService
       .getExaminations()
-      .subscribe((result: any) => ( this.examinations = result.Items));
+      .subscribe((result: any) => ( this.examinations = result.items));
   }
 }
