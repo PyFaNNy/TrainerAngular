@@ -22,7 +22,7 @@ namespace Trainer.Application.Aggregates.CSV.Queries.ExaminationsToCSV
 
         public async Task<FileInfo> Handle(ExaminationsToCSVQuery request, CancellationToken cancellationToken)
         {
-            var examinations = await DbContext.Examinations.ToListAsync(cancellationToken);
+            var examinations = await DbContext.Examinations.Include(x => x.Patient).ToListAsync(cancellationToken);
 
             return new FileInfo
             {

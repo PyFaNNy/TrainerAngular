@@ -8,13 +8,14 @@ namespace Trainer.CSVParserService.Infrastructure
         public PatientMap()
         {
             Map(m => m.Id).Name("Id");
-            Map(m => m.LastName).Name("LastName");
             Map(m => m.FirstName).Name("FirstName");
             Map(m => m.MiddleName).Name("MiddleName");
-            Map(m => m.RemovedAt).Name("RemovedAt");
+            Map(m => m.LastName).Name("LastName");
+            Map(m => m.Email).Name("Email");
+            Map(m => m.EmailConfirmed).Name("EmailConfirmed");
             Map(m => m.Age).Name("Age");
             Map(m => m.Sex).Name("Sex");
-            Map(m => m.Email).Name("Email");
+            Map(m => m.RemovedAt).Name("RemovedAt");
             Map(m => m.About).Name("About").Convert(m =>
             {
                 return m.Value.About != null ? $"{m.Value.About}" : String.Empty;
