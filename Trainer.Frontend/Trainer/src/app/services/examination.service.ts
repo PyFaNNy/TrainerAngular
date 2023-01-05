@@ -42,4 +42,11 @@ export class ExaminationService {
       {observe: 'response', responseType: 'blob'}
     );
   }
+
+  public load(formData:FormData): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/${this.url}/import`,
+      formData
+    );
+  }
 }

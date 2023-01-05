@@ -1,0 +1,10 @@
+<h2>Import Patients</h2>
+<div class="col-md-4">
+  <div class="form-group">
+    <label class="form-label">Choose file</label>
+    <input type="file" (change)="getFile($event)" class="form-control"/>
+  </div>
+  <div>
+    <button type="submit" (click)="submitData()" class="btn btn-primary mt-1">Import</button>
+  </div>
+</div>

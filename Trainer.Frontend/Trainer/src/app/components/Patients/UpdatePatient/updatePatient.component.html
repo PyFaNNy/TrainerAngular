@@ -28,8 +28,8 @@
     <div class="form-group">
       <label>Sex</label><br />
       <select [(ngModel)]='patient.sex' [ngModelOptions]="{standalone: true}"  class="form-control" id="select">
-        <option value="0">Female</option>
-        <option value="1">Male</option>
+        <option value="Female" [selected]="patient.sex == 'Female'" >Female</option>
+        <option value="Male" [selected]="patient.sex == 'Male'" >Male</option>
       </select>
     </div>
     <div>

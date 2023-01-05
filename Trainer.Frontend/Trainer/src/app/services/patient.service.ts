@@ -40,10 +40,17 @@ export class PatientService {
     );
   }
 
-  public donwload() {
+  public donwload(): Observable<any> {
     return this.http.get(
       `${environment.apiUrl}/${this.url}/export`,
       {observe: 'response', responseType: 'blob'}
+    );
+  }
+
+  public load(formData:FormData): Observable<any> {
+    return this.http.post(
+      `${environment.apiUrl}/${this.url}/import`,
+      formData
     );
   }
 }

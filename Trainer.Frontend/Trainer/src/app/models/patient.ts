@@ -5,7 +5,7 @@ export class Patient  {
   middleName = "";
   email = "";
   age?: number;
-  sex?: number;
+  sex?: string;
   about = "";
   hobbies = "";
 }
