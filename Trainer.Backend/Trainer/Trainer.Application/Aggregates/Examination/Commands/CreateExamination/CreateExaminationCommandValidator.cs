@@ -10,6 +10,9 @@ namespace Trainer.Application.Aggregates.Examination.Commands.CreateExamination
             RuleFor(x => x.Date)
                 .Must(ValidateDate)
                 .WithMessage("Wrong date");
+            RuleFor(x => x.Indicators)
+                .GreaterThan(0)
+                .WithMessage("You must select at least one sensor");
         }
 
         private bool ValidateDate(DateTime date)

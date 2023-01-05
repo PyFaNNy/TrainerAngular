@@ -33,14 +33,8 @@ namespace Trainer.Application.Aggregates.Examination.Commands.CreateExamination
         {
             if (ExaminationErrorSettings.CreateExaminationEnable)
             {
-                CountIndicators(request);
                 var examination = this.Mapper.Map<Domain.Entities.Examination.Examination>(request);
-
-                if (examination.Indicators == 0)
-                {
-                    throw new ValidationException("Indicators","You must select at least one sensor");
-                }
-
+                
                 await this.DbContext.Examinations.AddAsync(examination, cancellationToken);
                 await this.DbContext.SaveChangesAsync(cancellationToken);
 
@@ -71,27 +65,6 @@ namespace Trainer.Application.Aggregates.Examination.Commands.CreateExamination
                 }
             }
             return Unit.Value;
-        }
-
-        private void CountIndicators(CreateExaminationCommand model)
-        {
-            model.Indicators = 0;
-            if (model.Indicator1)
-            {
-                model.Indicators += 1;
-            }
-            if (model.Indicator2)
-            {
-                model.Indicators += 2;
-            }
-            if (model.Indicator3)
-            {
-                model.Indicators += 4;
-            }
-            if (model.Indicator4)
-            {
-                model.Indicators += 8;
-            }
         }
     }
 }

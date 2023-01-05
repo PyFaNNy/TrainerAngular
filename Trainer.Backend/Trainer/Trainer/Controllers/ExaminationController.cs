@@ -64,11 +64,11 @@ namespace Trainer.Controllers
         public async Task<IActionResult> GetModel(Guid id)
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.ExaminationGetModel);
-            var result = await Mediator.Send(new GetExaminationQuery { ExaminationId = id });
+            var result = await Mediator.Send(new GetExaminationQuery {ExaminationId = id});
             //ViewBag.Id = result.Id;
             return Ok(result);
         }
-        
+
         /// <summary>
         /// Create Examination
         /// </summary>
@@ -79,31 +79,13 @@ namespace Trainer.Controllers
         public async Task<IActionResult> AddModel(CreateExaminationCommand command)
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.ExaminationAddModel);
-            try
-            {
-                var doctorId = this.HttpContext.User.GetUserId();
-                command.DoctorId = doctorId.Value;
-                await Mediator.Send(command);
+            // var doctorId = this.HttpContext.User.GetUserId();
+            // command.DoctorId = doctorId.Value;
+            await Mediator.Send(command);
 
-                return RedirectToAction("GetModels");
-            }
-            catch (ValidationException ex)
-            {
-                // ModelState.AddModelError(string.Empty, Localizer[ex.Errors.FirstOrDefault().Key]);
-            }
-            catch (FluentValidation.ValidationException ex)
-            {
-                foreach (var modelValue in ModelState.Values)
-                {
-                    modelValue.Errors.Clear();
-                }
-                // ModelState.AddModelError(string.Empty, Localizer[ex.Errors.First().ErrorMessage]);
-            }
-
-            //ViewBag.UserId = command.PatientId;
-            return Ok(command);
+            return Ok();
         }
-        
+
         /// <summary>
         /// Update Examination
         /// </summary>
@@ -114,28 +96,10 @@ namespace Trainer.Controllers
         public async Task<IActionResult> UpdateModel(UpdateExaminationCommand command)
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.ExaminationUpdateModel);
-            try
-            {
-                var doctorId = this.HttpContext.User.GetUserId();
-                command.DoctorId = doctorId.Value;
-                await Mediator.Send(command);
-
-                return RedirectToAction("GetModels");
-            }
-            catch (ValidationException ex)
-            {
-                // ModelState.AddModelError(string.Empty, Localizer[ex.Errors.FirstOrDefault().Key]);
-            }
-            catch (FluentValidation.ValidationException ex)
-            {
-                foreach (var modelValue in ModelState.Values)
-                {
-                    modelValue.Errors.Clear();
-                }
-                // ModelState.AddModelError(string.Empty, Localizer[ex.Errors.First().ErrorMessage]);
-            }
-            //ViewBag.Examination = command;
-            return Ok(command);
+            // var doctorId = this.HttpContext.User.GetUserId();
+            // command.DoctorId = doctorId.Value;
+            await Mediator.Send(command);
+            return Ok();
         }
 
         /// <summary>
@@ -148,7 +112,7 @@ namespace Trainer.Controllers
         public async Task<IActionResult> DeleteModel(Guid[] selectedExamination)
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.ExaminationDeleteModel);
-            await Mediator.Send(new DeleteExaminationsCommand { ExaminationsId = selectedExamination });
+            await Mediator.Send(new DeleteExaminationsCommand {ExaminationsId = selectedExamination});
             return Ok();
         }
 
@@ -160,7 +124,7 @@ namespace Trainer.Controllers
         [HttpGet("export")]
         public async Task<IActionResult> ExportToCSV()
         {
-            var fileInfo =await Mediator.Send(new ExaminationsToCSVQuery());
+            var fileInfo = await Mediator.Send(new ExaminationsToCSVQuery());
             return File(fileInfo.Content, fileInfo.Type.ToName(), fileInfo.FileName);
         }
 
@@ -173,7 +137,7 @@ namespace Trainer.Controllers
         // [Authorize(Roles = "admin, manager")]
         public async Task<IActionResult> ImportToCSV(CSV source)
         {
-            await Mediator.Send(new CSVToExaminationsCommand { CSVFile = source.File });
+            await Mediator.Send(new CSVToExaminationsCommand {CSVFile = source.File});
             return RedirectToAction("GetModels");
         }
     }

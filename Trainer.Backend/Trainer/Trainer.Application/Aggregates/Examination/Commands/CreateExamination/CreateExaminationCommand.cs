@@ -30,31 +30,7 @@ namespace Trainer.Application.Aggregates.Examination.Commands.CreateExamination
             get;
             set;
         }
-
-        public bool Indicator1
-        {
-            get;
-            set;
-        }
-
-        public bool Indicator2
-        {
-            get;
-            set;
-        }
-
-        public bool Indicator3
-        {
-            get;
-            set;
-        }
-
-        public bool Indicator4
-        {
-            get;
-            set;
-        }
-
+        
         public int Indicators
         {
             get;
