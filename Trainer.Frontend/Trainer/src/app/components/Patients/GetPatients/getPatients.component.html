@@ -22,7 +22,7 @@
       <td>{{patient.sex}}</td>
       <td><a routerLink="/updatePatient/{{patient.id}}" class="btn btn-primary">Update</a></td>
       <td><input type="checkbox" class="patient" name="selectedPatients" value="@user.Id"/></td>
-      <td><a class="btn btn-primary">Set Examination</a></td>
+      <td><a routerLink="/addExamination/{{patient.id}}" class="btn btn-primary">Set Examination</a></td>
     </tr>
   </table>
   <nav aria-label="Page navigation example">

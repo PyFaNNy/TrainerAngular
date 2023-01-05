@@ -5,7 +5,7 @@ export class Examination {
   patientId? : string;
   typePhysicalActive?: number;
   date: Date = new Date();
-  indicators?: number;
+  indicators: number = 0;
   status? : number;
   patient?: Patient;
 }

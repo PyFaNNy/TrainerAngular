@@ -31,6 +31,7 @@ const appRoute: Routes  = [
   {path: 'addPatient', component: AddPatientComponent},
   {path: 'updatePatient/:id', component: UpdatePatientComponent},
   {path: 'examinations', component: GetExaminationsComponent},
+  {path: 'addExamination/:id', component: AddExaminationComponent},
   {path: 'admin', component: AdminPanelComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},

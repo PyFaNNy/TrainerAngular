@@ -1,10 +1,8 @@
 <h2>Set Examination</h2>
-<form method="post" enctype="multipart/form-data">
-  <div class="text-danger"></div>
   <div class="col-md-4">
     <div class="form-group">
       <label>TypePhysicalActive</label><br />
-      <select class="form-control">
+      <select [(ngModel)]='examination.typePhysicalActive' class="form-control">
         <option value="0">Run</option>
         <option value="1">Walk</option>
         <option value="2">Bike</option>
@@ -14,29 +12,30 @@
     </div>
     <div class="form-group">
       <label>Sensors</label><br />
+      <span *ngFor="let item of errors?.indicators" class="text-danger">{{item}}</span>
       <div class="form-check">
-        <input type="checkbox" class="form-check-input" />
+        <input [(ngModel)]='diaSis' type="checkbox" class="form-check-input" />
         <label class="form-check-label">DiaSis</label>
       </div>
       <div class="form-check">
-        <input type="checkbox" class="form-check-input" />
+        <input [(ngModel)]='tempareture' type="checkbox" class="form-check-input" />
         <label class="form-check-label">Tempareture</label>
       </div>
       <div class="form-check">
-        <input type="checkbox" class="form-check-input" />
+        <input [(ngModel)]='heartRate' type="checkbox" class="form-check-input" />
         <label class="form-check-label">HeartRate</label>
       </div>
       <div class="form-check">
-        <input type="checkbox" class="form-check-input" />
+        <input [(ngModel)]='spO2' type="checkbox" class="form-check-input" />
         <label class="form-check-label">SpO2</label>
       </div>
     </div>
     <div class="form-group">
       <label>DateExamination</label><br />
-      <input class="form-control" type="date" />
+      <input [(ngModel)]='examination.date' class="form-control" type="date" />
+      <span *ngFor="let item of errors?.date" class="text-danger">{{item}}</span>
     </div>
     <div>
-      <button type="submit" class="btn btn-primary mt-1">Set</button>
+      <button (click)="createExamination()" class="btn btn-primary mt-1">Set</button>
     </div>
   </div>
-</form>

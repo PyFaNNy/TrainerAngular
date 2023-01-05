@@ -28,7 +28,6 @@ export class UpdatePatientComponent {
   updatePatient() {
     this.subscriptions.add(this.patientService
       .updatePatient(this.patient)
-      .pipe(take(1))
       .subscribe(
         result  => {
           this.router.navigate(['/patients'])
