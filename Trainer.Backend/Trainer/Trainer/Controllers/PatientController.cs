@@ -105,7 +105,7 @@ public class PatientController : BaseController
         try
         {
             await Mediator.Send(command);
-            return RedirectToAction("GetModels");
+            return Ok();
         }
         catch (ValidationException ex)
         {
@@ -116,9 +116,7 @@ public class PatientController : BaseController
             foreach (var modelValue in ModelState.Values) modelValue.Errors.Clear();
             // foreach (var er in ex.Errors) ModelState.AddModelError(string.Empty, Localizer[er.ErrorMessage]);
         }
-
-        //ViewBag.Patient = command;
-        return Ok(command);
+        return BadRequest();
     }
 
     /// <summary>
