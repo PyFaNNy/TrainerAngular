@@ -1,25 +1,29 @@
 <h2>Update Patient</h2>
-<form method="post" enctype="multipart/form-data">
   <div class="col-md-4">
     <div class="form-group">
       <label>FirstName</label><br />
       <input  [(ngModel)]='patient.firstName' [ngModelOptions]="{standalone: true}" class="form-control" />
+      <span *ngFor="let item of errors?.firstName" class="text-danger">{{item}}</span>
     </div>
     <div class="form-group">
       <label>MiddleName</label><br />
       <input  [(ngModel)]='patient.middleName' [ngModelOptions]="{standalone: true}" class="form-control" />
+      <span *ngFor="let item of errors?.middleName" class="text-danger">{{item}}</span>
     </div>
     <div class="form-group">
       <label >LastName</label><br />
       <input [(ngModel)]='patient.lastName' [ngModelOptions]="{standalone: true}" class="form-control" />
+      <span *ngFor="let item of errors?.lastName" class="text-danger">{{item}}</span>
     </div>
     <div class="form-group">
       <label>Email</label><br />
       <input [(ngModel)]='patient.email' [ngModelOptions]="{standalone: true}" class="form-control" />
+      <span *ngFor="let item of errors?.email" class="text-danger">{{item}}</span>
     </div>
     <div class="form-group">
       <label >Age</label><br />
       <input [(ngModel)]='patient.age' [ngModelOptions]="{standalone: true}"  class="form-control" />
+      <span *ngFor="let item of errors?.age" class="text-danger">{{item}}</span>
     </div>
     <div class="form-group">
       <label>Sex</label><br />
@@ -29,7 +33,6 @@
       </select>
     </div>
     <div>
-      <button type="submit" class="btn btn-primary mt-1">Update</button>
+      <button (click)="updatePatient()" type="submit" class="btn btn-primary mt-1">Update</button>
     </div>
   </div>
-</form>

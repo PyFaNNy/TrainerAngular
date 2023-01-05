@@ -28,12 +28,12 @@ namespace Trainer.Application.Aggregates.Patient.Commands.UpdatePatient
             if (PatientErrorSettings.UpdatePatientEnable)
             {
                 var patient = await this.DbContext.Patients
-                .Where(x => x.Id == request.PatientId)
+                .Where(x => x.Id == request.Id)
                 .FirstOrDefaultAsync(cancellationToken);
 
                 if (patient == null)
                 {
-                    throw new NotFoundException(nameof(Domain.Entities.Patient.Patient), request.PatientId);
+                    throw new NotFoundException(nameof(Domain.Entities.Patient.Patient), request.Id);
                 }
 
                 this.Mapper.Map(request, patient);

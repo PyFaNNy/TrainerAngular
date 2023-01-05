@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
-import {ActivatedRoute} from "@angular/router";
-import {Subscription} from "rxjs";
+import {ActivatedRoute, Router} from "@angular/router";
+import {Subscription, take} from "rxjs";
 import {PatientService} from "../../../services/patient.service";
 import {Patient} from "../../../models/patient";
 
@@ -12,15 +12,34 @@ import {Patient} from "../../../models/patient";
 export class UpdatePatientComponent {
   id: string ="";
   patient: Patient =new Patient;
-  private routeSubscription: Subscription;
+  errors: any = null;
+  subscriptions: Subscription = new Subscription();
 
-  constructor(private route: ActivatedRoute, private patientService: PatientService){
-    this.routeSubscription = route.params.subscribe(params=>this.id=params['id']);
+  constructor(private route: ActivatedRoute, private patientService: PatientService,private router: Router){
+    this.subscriptions.add(route.params.subscribe(params=>this.id=params['id']));
   }
 
   ngOnInit(): void {
-    this.patientService
+    this.subscriptions.add(this.patientService
       .getPatient(this.id)
-      .subscribe((result: any) => ( this.patient = result));
+      .subscribe((result: any) => { this.patient = result}));
+  }
+
+  updatePatient() {
+    this.subscriptions.add(this.patientService
+      .updatePatient(this.patient)
+      .pipe(take(1))
+      .subscribe(
+        result  => {
+          this.router.navigate(['/patients'])
+        },
+        error => {
+          this.errors = error.error.errors
+        }));
+    };
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 }
+

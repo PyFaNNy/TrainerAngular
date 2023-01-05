@@ -7,7 +7,7 @@ namespace Trainer.Application.Aggregates.Patient.Commands.UpdatePatient
 {
     public class UpdatePatientCommand : IRequest<Unit>, IMapTo<Domain.Entities.Patient.Patient>
     {
-        public Guid PatientId
+        public Guid Id
         {
             get;
             set;
