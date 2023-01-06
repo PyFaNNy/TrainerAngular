@@ -125,7 +125,7 @@ public class PatientController : BaseController
     /// <param name="selectedPatient"></param>
     /// <returns></returns>
     // [Authorize(Roles = "admin, manager")]
-    [HttpDelete("{selectedPatient}")]
+    [HttpDelete]
     public async Task<IActionResult> DeleteModelAsync(Guid[] selectedPatient)
     {
         _metrics.Measure.Counter.Increment(BusinessMetrics.PatientDeleteModel);

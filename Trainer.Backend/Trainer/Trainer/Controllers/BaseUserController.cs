@@ -83,7 +83,7 @@ namespace Trainer.Controllers
         /// <param name="selectedUsers"></param>
         /// <returns></returns>
         // [Authorize(Roles = "admin")]
-        [HttpDelete ("{selectedUsers}")]
+        [HttpDelete]
         public async Task<IActionResult> DeleteUser(Guid[] selectedUsers)
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.BaseUserDeleteUser);

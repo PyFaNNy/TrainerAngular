@@ -108,7 +108,7 @@ namespace Trainer.Controllers
         /// <param name="selectedExamination"></param>
         /// <returns></returns>
         // [Authorize(Roles = "doctor")]
-        [HttpDelete("{selectedExamination}")]
+        [HttpDelete]
         public async Task<IActionResult> DeleteModel(Guid[] selectedExamination)
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.ExaminationDeleteModel);
