@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Patient } from '../models/patient';
@@ -34,10 +34,15 @@ export class PatientService {
     );
   }
 
-  public deletePatient(patient: Patient): Observable<Patient[]> {
-    return this.http.delete<Patient[]>(
-      `${environment.apiUrl}/${this.url}/${patient.id}`
-    );
+  public deletePatient(ids: string[]) {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify(ids)
+    };
+    return this.http.delete(
+      `${environment.apiUrl}/${this.url}`,options)
   }
 
   public donwload(): Observable<any> {

@@ -1,5 +1,5 @@
 <h4>Patients</h4>
-  <button type="submit" class="btn btn-primary m-1" >Delete</button>
+  <button (click)="delete()" class="btn btn-primary m-1" >Delete</button>
   <a routerLink="/addPatient" class="btn btn-primary m-1" >Create</a>
   <a (click)="downloadFile()"  class="btn btn-primary m-1" >Export</a>
   <a routerLink="/importPatients" class="btn btn-primary m-1" >Import</a>
@@ -11,7 +11,7 @@
       <th><a>Age</a></th>
       <th><a>Sex</a></th>
       <th></th>
-      <th><input type="checkbox" name="cb_all"></th>
+      <th><input type="checkbox" [(ngModel)]="isMasterSel" (change)="checkUncheckAll()"></th>
     </tr>
     <!--      <tr onclick="window.location.href='/Patient/GetModel?id=@user.Id';">-->
     <tr *ngFor="let patient of patients">
@@ -21,7 +21,7 @@
       <td>{{patient.age}}</td>
       <td>{{patient.sex}}</td>
       <td><a routerLink="/updatePatient/{{patient.id}}" class="btn btn-primary">Update</a></td>
-      <td><input type="checkbox" class="patient" name="selectedPatients" value="@user.Id"/></td>
+      <td><input type="checkbox" [(ngModel)]="patient.isSelected" (change)="isAllSelected()"/></td>
       <td><a routerLink="/addExamination/{{patient.id}}" class="btn btn-primary">Set Examination</a></td>
     </tr>
   </table>

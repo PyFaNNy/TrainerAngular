@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {HttpClientModule} from "@angular/common/http";
 import {RouterModule, Routes} from "@angular/router";
+import {FormsModule} from "@angular/forms";
 
 import {HeaderComponent} from "./components/Header/header.component";
 import {FooterComponent} from "./components/Footer/footer.component";
@@ -21,7 +22,6 @@ import { ErrorComponent } from './components/error/error.component';
 import {RegisterComponent} from "./components/Register/register.component";
 import {LoginComponent} from "./components/Login/login.component";
 import {ResetPasswordComponent} from "./components/ResetPassword/reset-password.component";
-import {FormsModule} from "@angular/forms";
 import {ImportExaminationsComponent} from "./components/Examinations/ImportExaminations/importExaminations.component";
 import {ImportPatientsComponent} from "./components/Patients/ImportPatient/importPatients.component";
 
