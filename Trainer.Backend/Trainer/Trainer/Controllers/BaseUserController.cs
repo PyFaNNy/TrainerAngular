@@ -55,12 +55,12 @@ namespace Trainer.Controllers
         /// <param name="selectedUsers"></param>
         /// <returns></returns>
         // [Authorize(Roles = "admin")]
-        [HttpGet("block/{selectedUsers}")]
+        [HttpPut("block")]
         public async Task<IActionResult> BlockUser(Guid[] selectedUsers)
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.BaseUserBlockUser);
             await Mediator.Send(new BlockUsersCommand {UserIds = selectedUsers});
-            return RedirectToAction("GetModels");
+            return Ok();
         }
 
         /// <summary>
@@ -69,12 +69,12 @@ namespace Trainer.Controllers
         /// <param name="selectedUsers"></param>
         /// <returns></returns>
         // [Authorize(Roles = "admin")]
-        [HttpGet("unBlock/{selectedUsers}")]
+        [HttpPut("unBlock")]
         public async Task<IActionResult> UnBlockUser(Guid[] selectedUsers)
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.BaseUserUnBlockUser);
             await Mediator.Send(new UnBlockUsersCommand {UserIds = selectedUsers});
-            return RedirectToAction("GetModels");
+            return Ok();
         }
 
         /// <summary>
