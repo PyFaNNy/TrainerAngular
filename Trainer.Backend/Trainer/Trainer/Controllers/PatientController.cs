@@ -130,7 +130,7 @@ public class PatientController : BaseController
     {
         _metrics.Measure.Counter.Increment(BusinessMetrics.PatientDeleteModel);
         await Mediator.Send(new DeletePatientsCommand {PatientsId = selectedPatient});
-        return Ok();
+        return NoContent();
     }
 
     /// <summary>
@@ -155,6 +155,6 @@ public class PatientController : BaseController
     public async Task<IActionResult> ImportToCSV(CSV source)
     {
         await Mediator.Send(new CSVToPatientsCommand {CSVFile = source.File});
-        return RedirectToAction("GetModels");
+        return Ok();
     }
 }

@@ -88,7 +88,7 @@ namespace Trainer.Controllers
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.BaseUserDeleteUser);
             await Mediator.Send(new DeleteUsersCommand {UserIds = selectedUsers});
-            return RedirectToAction("GetModels");
+            return NoContent();
         }
 
         /// <summary>
