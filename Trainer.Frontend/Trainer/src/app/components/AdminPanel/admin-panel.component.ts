@@ -28,6 +28,23 @@ export class AdminPanelComponent implements OnInit {
       );
   }
 
+  block(): void {
+    console.log(this.selectedUsers);
+    this.userService
+      .blockUsers(this.selectedUsers)
+      .subscribe(result =>
+        this.ngOnInit()
+      );
+  }
+
+  unblock(): void {
+    this.userService
+      .unblockUsers(this.selectedUsers)
+      .subscribe(result =>
+        this.ngOnInit()
+      );
+  }
+
   checkUncheckAll() {
     for (var i = 0; i < this.users.length; i++) {
       this.users[i].isSelected = this.isMasterSel;

@@ -34,4 +34,22 @@ export class UserService {
     return this.http.delete(
       `${environment.apiUrl}/${this.url}`,options)
   }
+
+  public unblockUsers(ids: string[]) {
+    const options = {
+      headers: new HttpHeaders({
+        'content-type' : 'application/json'
+      })};
+    return this.http.put(
+      `${environment.apiUrl}/${this.url}/unblock`,ids,options)
+  }
+
+  public blockUsers(ids: string[]) {
+    const options = {
+      headers: new HttpHeaders({
+        'content-type' : 'application/json'
+      })};
+    return this.http.put(
+      `${environment.apiUrl}/${this.url}/block`,ids,options)
+  }
 }
