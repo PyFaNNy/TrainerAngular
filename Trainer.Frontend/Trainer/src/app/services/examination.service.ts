@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Examination } from '../models/examination';
@@ -30,9 +30,16 @@ export class ExaminationService {
     );
   }
 
-  public deleteExamination(examination: Examination): Observable<Examination[]> {
-    return this.http.delete<Examination[]>(
-      `${environment.apiUrl}/${this.url}/${examination.id}`
+  public deleteExamination(ids: string[]) {
+    const options = {
+      headers: new HttpHeaders({
+        'accept': '*/*',
+        'content-type' : 'application/json-patch+json'
+      }),
+      body: ids
+    };
+    return this.http.delete(
+      `${environment.apiUrl}/${this.url}`,options
     );
   }
 

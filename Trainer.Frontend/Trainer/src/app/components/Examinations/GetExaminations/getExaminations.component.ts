@@ -8,17 +8,19 @@ import {ExaminationService} from "../../../services/examination.service";
 })
 
 export class GetExaminationsComponent implements OnInit {
-  examinations: Examination[] = [];
+  examinations: any[] = [];
+  selectedExaminations: any;
+  isMasterSel: boolean = false;
 
-  constructor(private examinationService: ExaminationService) {}
-
-  ngOnInit(): void {
-    this.examinationService
-      .getExaminations()
-      .subscribe((result: any) => ( this.examinations = result.items));
+  constructor(private examinationService: ExaminationService) {
   }
 
-  public downloadFile(): void {
+  ngOnInit(): void {
+    this.loadExamination();
+    this.isMasterSel = false;
+  }
+
+  downloadFile(): void {
     this.examinationService
       .donwload()
       .subscribe(response => {
@@ -28,6 +30,59 @@ export class GetExaminationsComponent implements OnInit {
         a.download = fileName;
         a.href = window.URL.createObjectURL(blob);
         a.click();
+      });
+  }
+
+  delete(): void {
+    console.log(this.selectedExaminations)
+    this.examinationService
+      .deleteExamination(this.selectedExaminations)
+      .subscribe(result =>
+        this.ngOnInit()
+      );
+  }
+
+  checkUncheckAll() {
+    for (var i = 0; i < this.examinations.length; i++) {
+      this.examinations[i].isSelected = this.isMasterSel;
+    }
+    this.getCheckedItemList();
+  }
+
+  isAllSelected() {
+    this.isMasterSel = this.examinations.every(function (item: any) {
+      return item.isSelected == true;
+    })
+    this.getCheckedItemList();
+  }
+
+  getCheckedItemList() {
+    this.selectedExaminations = [];
+    for (var i = 0; i < this.examinations.length; i++) {
+      if (this.examinations[i].isSelected)
+        this.selectedExaminations.push(this.examinations[i].id);
+    }
+    this.selectedExaminations = JSON.stringify(this.selectedExaminations);
+  }
+
+  private loadExamination()
+  {
+    this.examinationService
+      .getExaminations()
+      .subscribe((result: any) => {
+        this.examinations = result.items;
+        this.examinations = this.examinations.map(x => (
+          {
+            id: x.id,
+            isSelected: false,
+            patient: {
+              firstName: x.patient.firstName,
+              lastName: x.patient.lastName,
+              middleName: x.patient.middleName,
+            },
+            typePhysicalActive: x.typePhysicalActive,
+            date: x.date
+          }))
       });
   }
 }
