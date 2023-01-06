@@ -30,7 +30,7 @@ export class ExaminationService {
     );
   }
 
-  public deleteExamination(ids: string[]) {
+  public deleteExaminations(ids: string[]) {
     const options = {
       headers: new HttpHeaders({
         'accept': '*/*',

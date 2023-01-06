@@ -34,12 +34,13 @@ export class PatientService {
     );
   }
 
-  public deletePatient(ids: string[]) {
+  public deletePatients(ids: string[]) {
     const options = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
+        'accept': '*/*',
+        'content-type' : 'application/json-patch+json'
       }),
-      body: JSON.stringify(ids)
+      body: ids
     };
     return this.http.delete(
       `${environment.apiUrl}/${this.url}`,options)

@@ -113,7 +113,7 @@ namespace Trainer.Controllers
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.ExaminationDeleteModel);
             await Mediator.Send(new DeleteExaminationsCommand {ExaminationsId = selectedExamination});
-            return Ok();
+            return NoContent();
         }
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace Trainer.Controllers
         public async Task<IActionResult> ImportToCSV(CSV source)
         {
             await Mediator.Send(new CSVToExaminationsCommand {CSVFile = source.File});
-            return RedirectToAction("GetModels");
+            return Ok();
         }
     }
 }

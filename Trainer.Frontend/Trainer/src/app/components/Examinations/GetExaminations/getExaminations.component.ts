@@ -34,9 +34,8 @@ export class GetExaminationsComponent implements OnInit {
   }
 
   delete(): void {
-    console.log(this.selectedExaminations)
     this.examinationService
-      .deleteExamination(this.selectedExaminations)
+      .deleteExaminations(this.selectedExaminations)
       .subscribe(result =>
         this.ngOnInit()
       );

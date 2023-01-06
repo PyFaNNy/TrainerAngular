@@ -34,7 +34,7 @@ export class GetPatientsComponent implements OnInit {
   delete(): void
   {
     this.patientService
-      .deletePatient(this.selectedPatient)
+      .deletePatients(this.selectedPatient)
       .subscribe();
   }
 
