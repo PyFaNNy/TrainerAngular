@@ -1,9 +1,7 @@
 import {Component} from "@angular/core";
 import {Examination} from "../../../models/examination";
 import {ActivatedRoute, Router} from "@angular/router";
-import {PatientService} from "../../../services/patient.service";
 import {Subscription} from "rxjs";
-import {Patient} from "../../../models/patient";
 import {ExaminationService} from "../../../services/examination.service";
 
 @Component({
@@ -22,6 +20,7 @@ export class AddExaminationComponent {
   subscriptions: Subscription = new Subscription();
   constructor(private route: ActivatedRoute, private examinationService: ExaminationService,private router: Router){
     this.subscriptions.add(route.params.subscribe(params=>this.examination.patientId=params['id']));
+    this.examination.date = new Date();
   }
 
   createExamination() {
@@ -33,10 +32,10 @@ export class AddExaminationComponent {
     }
     if (this.heartRate) {
       this.examination.indicators += 4;
-    };
+    }
     if (this.spO2) {
       this.examination.indicators += 8;
-    };
+    }
 
     this.examinationService
       .createExamination(this.examination)

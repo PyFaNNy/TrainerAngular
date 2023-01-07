@@ -1,32 +1,34 @@
 <div class="row">
   <div class="col-md-4">
     <section>
-      <form method="post">
-        <h3>Login</h3>
-        <hr />
-        <div class="form-group">
-          <label >Login</label>
-          <input class="form-control" />
+      <h3>Login</h3>
+      <hr/>
+      <div>
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Login</mat-label>
+          <input matInput/>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>Password</mat-label>
+          <input matInput type="password"/>
+        </mat-form-field>
+      </div>
+      <div>
+        <div>
+          <a href="reset">Forgot Password?</a>
         </div>
-        <div class="form-group">
-          <label>Password</label>
-          <input class="form-control" type="password" />
-        </div>
-        <div class="form-group">
-          <div>
-            <a href="reset">Forgot Password?</a>
-          </div>
-        </div>
-        <div class="form-group">
-          <button type="submit" class="btn btn-primary mt-1">Login</button>
-        </div>
-      </form>
+      </div>
+      <div>
+        <button mat-raised-button color="primary" class="w-100">Login</button>
+      </div>
     </section>
   </div>
   <div class="col-md-6 col-md-offset-2">
     <section>
       <h3>External login</h3>
-      <hr />
+      <hr/>
       <div>
         <span>No implementation</span>
       </div>
