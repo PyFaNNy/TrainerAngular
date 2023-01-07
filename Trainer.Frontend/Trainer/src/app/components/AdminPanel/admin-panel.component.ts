@@ -1,13 +1,14 @@
 import {Component, OnInit} from "@angular/core";
-import {User} from "../../models/user";
 import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'app-adminPanel',
-  templateUrl: './admin-panel.component.html'
+  templateUrl: './admin-panel.component.html',
+  styleUrls: ['./admin-panel.component.scss'],
 })
 
 export class AdminPanelComponent implements OnInit {
+  displayedColumns?: string[];
   users: any[] = [];
   selectedUsers: any;
   isMasterSel: boolean = false;
@@ -18,12 +19,13 @@ export class AdminPanelComponent implements OnInit {
   ngOnInit(): void {
     this.loadUsers();
     this.isMasterSel = false;
+    this.displayedColumns = ['email','lastName', 'firstName', 'middleName', 'roles','status','isSelected', 'btns'];
   }
 
   delete(): void {
     this.userService
       .deleteUsers(this.selectedUsers)
-      .subscribe(result =>
+      .subscribe(() =>
         this.ngOnInit()
       );
   }
@@ -32,7 +34,7 @@ export class AdminPanelComponent implements OnInit {
     console.log(this.selectedUsers);
     this.userService
       .blockUsers(this.selectedUsers)
-      .subscribe(result =>
+      .subscribe(() =>
         this.ngOnInit()
       );
   }
@@ -40,7 +42,7 @@ export class AdminPanelComponent implements OnInit {
   unblock(): void {
     this.userService
       .unblockUsers(this.selectedUsers)
-      .subscribe(result =>
+      .subscribe(() =>
         this.ngOnInit()
       );
   }
@@ -48,7 +50,7 @@ export class AdminPanelComponent implements OnInit {
   approve(id:string): void {
     this.userService
       .approveUser(id)
-      .subscribe(result =>
+      .subscribe(() =>
         this.ngOnInit()
       );
   }
@@ -56,7 +58,7 @@ export class AdminPanelComponent implements OnInit {
   decline(id:string): void {
     this.userService
       .declineUser(id)
-      .subscribe(result =>
+      .subscribe(() =>
         this.ngOnInit()
       );
   }

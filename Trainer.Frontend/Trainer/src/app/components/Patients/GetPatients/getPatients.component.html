@@ -40,10 +40,10 @@
     <!-- Check Column -->
     <ng-container matColumnDef="isSelected">
       <th mat-header-cell *matHeaderCellDef>
-        <input type="checkbox" [(ngModel)]="isMasterSel" (change)="checkUncheckAll()">
+        <mat-checkbox [(ngModel)]="isMasterSel" color="primary"  (change)="checkUncheckAll()"></mat-checkbox>
       </th>
       <td mat-cell *matCellDef="let element">
-        <input type="checkbox" [(ngModel)]="element.isSelected" (change)="isAllSelected()"/>
+        <mat-checkbox [(ngModel)]="element.isSelected" color="primary"  (change)="isAllSelected()"></mat-checkbox>
       </td>
     </ng-container>
 

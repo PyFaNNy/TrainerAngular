@@ -1,10 +1,10 @@
 import {Component, OnInit} from "@angular/core";
-import {Examination} from "../../../models/examination";
 import {ExaminationService} from "../../../services/examination.service";
 
 @Component({
   selector: 'app-getExaminations',
-  templateUrl: './getExaminations.component.html'
+  templateUrl: './getExaminations.component.html',
+  styleUrls: ['./getExaminations.component.scss'],
 })
 
 export class GetExaminationsComponent implements OnInit {
@@ -38,7 +38,7 @@ export class GetExaminationsComponent implements OnInit {
   delete(): void {
     this.examinationService
       .deleteExaminations(this.selectedExaminations)
-      .subscribe(result =>
+      .subscribe(() =>
         this.ngOnInit()
       );
   }

@@ -1,5 +1,4 @@
 import {Component, OnInit} from "@angular/core";
-import {Patient} from "../../../models/patient";
 import {PatientService} from "../../../services/patient.service";
 
 @Component({
@@ -11,7 +10,7 @@ import {PatientService} from "../../../services/patient.service";
 
 export class GetPatientsComponent implements OnInit {
   displayedColumns?: string[];
-  patients: Patient[] = [];
+  patients: any[] = [];
   selectedPatient:any;
   isMasterSel:boolean = false;
   constructor(private patientService: PatientService) {}
@@ -70,7 +69,16 @@ export class GetPatientsComponent implements OnInit {
       .getPatients()
       .subscribe((result: any) => {
         this.patients = result.items;
-        this.patients.map(x => x.isSelected =false);
+        this.patients = this.patients.map(x => (
+          {
+            id: x.id,
+            isSelected: false,
+            firstName: x.firstName,
+            lastName: x.lastName,
+            middleName: x.middleName,
+            age: x.age,
+            sex: x.sex
+          }))
       });
   }
 }
