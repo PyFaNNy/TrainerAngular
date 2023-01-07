@@ -8,4 +8,5 @@ export class Patient  {
   sex?: string;
   about = "";
   hobbies = "";
+  isSelected?:boolean;
 }

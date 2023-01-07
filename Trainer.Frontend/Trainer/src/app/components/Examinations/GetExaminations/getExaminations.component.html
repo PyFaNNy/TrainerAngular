@@ -25,25 +25,7 @@
         <td><input type="checkbox" [(ngModel)]="examination.isSelected" (change)="isAllSelected()"/></td>
       </tr>
     </table>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-<!--    <li class="page-item">-->
-<!--      <a class="page-link" asp-controller="Examination" asp-action="GetModels" asp-route-pageIndex=@(@Model.PageIndex-1)>Previous</a>-->
-<!--    </li>-->
-<!--    }-->
-
-<!--    @for (int i = Model.PageIndex; i <= Model.PageIndex + 5 && i <= Model.TotalPages; i++)-->
-<!--    {-->
-<!--    <li class="page-item">-->
-<!--      <a class="page-link" asp-controller="Examination" asp-action="GetModels" asp-route-pageIndex=@i>@i</a>-->
-<!--    </li>-->
-<!--    }-->
-
-<!--    @if (Model.PageIndex < Model.TotalPages)-->
-<!--    {-->
-<!--    <li class="page-item">-->
-<!--      <a class="page-link" asp-controller="Examination" asp-action="GetModels" asp-route-pageIndex=@(@Model.PageIndex+1)>Next</a>-->
-<!--    </li>-->
-<!--    }-->
-    </ul>
-</nav>
+<mat-paginator [pageSizeOptions]="[5, 10, 20]"
+               showFirstLastButtons
+               aria-label="Select page of periodic elements">
+</mat-paginator>

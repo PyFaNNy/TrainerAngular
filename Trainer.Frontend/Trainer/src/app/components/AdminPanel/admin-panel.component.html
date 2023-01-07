@@ -23,24 +23,13 @@
     <td>{{user.status}}</td>
     <td>
       <button (click)="approve(user.id)" class="btn btn-success">Approve</button>
-      <button (click)="decline(user.id)" class="btn btn-danger btn-sm">Decline</button>
+      <button (click)="decline(user.id)" class="btn btn-danger">Decline</button>
     </td>
     <td></td>
     <td><input type="checkbox" [(ngModel)]="user.isSelected" (change)="isAllSelected()"/></td>
   </tr>
 </table>
-<nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <!--    <li class="page-item">-->
-    <!--      <a class="page-link" asp-controller="BaseUser" asp-action="GetModels" asp-route-pageIndex=@(@Model.PageIndex-1)>Previous</a>-->
-    <!--    </li>-->
-
-    <!--    <li class="page-item">-->
-    <!--      <a class="page-link" asp-controller="BaseUser" asp-action="GetModels" asp-route-pageIndex=@i>@i</a>-->
-    <!--    </li>-->
-
-    <!--    <li class="page-item">-->
-    <!--      <a class="page-link" asp-controller="BaseUser" asp-action="GetModels" asp-route-pageIndex=@(@Model.PageIndex+1)>Next</a>-->
-    <!--    </li>-->
-  </ul>
-</nav>
+<mat-paginator [pageSizeOptions]="[5, 10, 20]"
+               showFirstLastButtons
+               aria-label="Select page of periodic elements">
+</mat-paginator>

@@ -4,18 +4,22 @@ import {PatientService} from "../../../services/patient.service";
 
 @Component({
   selector: 'app-getPatients',
+  styleUrls: ['./getPatients.component.scss'],
   templateUrl: './getPatients.component.html'
+
 })
 
 export class GetPatientsComponent implements OnInit {
-  patients: any[] = [];
+  displayedColumns?: string[];
+  patients: Patient[] = [];
   selectedPatient:any;
   isMasterSel:boolean = false;
+  pageSizeOptions?:number;
   constructor(private patientService: PatientService) {}
-
   ngOnInit(): void {
     this.loadPatients();
     this.isMasterSel = false;
+    this.displayedColumns = ['lastName', 'firstName', 'middleName', 'age', 'sex', 'isSelected', 'update', 'setExamination'];
   }
 
   downloadFile(): void {
@@ -67,16 +71,7 @@ export class GetPatientsComponent implements OnInit {
       .getPatients()
       .subscribe((result: any) => {
         this.patients = result.items;
-        this.patients = this.patients.map(x => (
-          {
-            id: x.id,
-            isSelected: false,
-            firstName: x.firstName,
-            lastName: x.lastName,
-            middleName: x.middleName,
-            age: x.age,
-            sex: x.sex
-          }))
+        this.patients.map(x => x.isSelected =false);
       });
   }
 }
