@@ -45,6 +45,22 @@ export class AdminPanelComponent implements OnInit {
       );
   }
 
+  approve(id:string): void {
+    this.userService
+      .approveUser(id)
+      .subscribe(result =>
+        this.ngOnInit()
+      );
+  }
+
+  decline(id:string): void {
+    this.userService
+      .declineUser(id)
+      .subscribe(result =>
+        this.ngOnInit()
+      );
+  }
+
   checkUncheckAll() {
     for (var i = 0; i < this.users.length; i++) {
       this.users[i].isSelected = this.isMasterSel;

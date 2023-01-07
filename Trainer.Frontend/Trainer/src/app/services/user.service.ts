@@ -52,4 +52,14 @@ export class UserService {
     return this.http.put(
       `${environment.apiUrl}/${this.url}/block`,ids,options)
   }
+
+  public approveUser(id: string) {
+    return this.http.get(
+      `${environment.apiUrl}/${this.url}/approve/${id}`)
+  }
+
+  public declineUser(id: string) {
+    return this.http.get(
+      `${environment.apiUrl}/${this.url}/decline/${id}`)
+  }
 }

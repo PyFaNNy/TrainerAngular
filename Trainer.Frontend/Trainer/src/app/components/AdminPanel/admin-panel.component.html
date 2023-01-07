@@ -22,8 +22,8 @@
     <td>{{user.role}}</td>
     <td>{{user.status}}</td>
     <td>
-      <label class="btn btn-success">Approve</label>
-      <a class="btn btn-danger btn-sm">Decline</a>
+      <button (click)="approve(user.id)" class="btn btn-success">Approve</button>
+      <button (click)="decline(user.id)" class="btn btn-danger btn-sm">Decline</button>
     </td>
     <td></td>
     <td><input type="checkbox" [(ngModel)]="user.isSelected" (change)="isAllSelected()"/></td>
