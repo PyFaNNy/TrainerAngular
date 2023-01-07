@@ -4,7 +4,7 @@
     {
         Running = 0,
         Walking = 1,
-        Сycling = 2,
+        Cycling = 2,
         Swimming = 3,
         StrengthExercises = 4
     }

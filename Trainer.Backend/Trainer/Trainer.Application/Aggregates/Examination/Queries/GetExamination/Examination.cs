@@ -24,25 +24,25 @@ namespace Trainer.Application.Aggregates.Examination.Queries.GetExamination
             set;
         }
 
-        public bool Indicator1
+        public bool DiaSis
         {
             get;
             set;
         }
 
-        public bool Indicator2
+        public bool Tempareture
         {
             get;
             set;
         }
 
-        public bool Indicator3
+        public bool HeartRate
         {
             get;
             set;
         }
 
-        public bool Indicator4
+        public bool SpO2
         {
             get;
             set;

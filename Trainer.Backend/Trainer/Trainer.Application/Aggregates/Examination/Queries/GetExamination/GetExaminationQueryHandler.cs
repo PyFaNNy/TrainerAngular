@@ -57,22 +57,22 @@ namespace Trainer.Application.Aggregates.Examination.Queries.GetExamination
             if (temp - 8 >= 0)
             {
                 temp -= 8;
-                model.Indicator4 = true;
+                model.SpO2 = true;
             }
             if (temp - 4 >= 0)
             {
                 temp -= 4;
-                model.Indicator3 = true;
+                model.HeartRate = true;
             }
             if (temp - 2 >= 0)
             {
                 temp -= 2;
-                model.Indicator2 = true;
+                model.Tempareture = true;
             }
             if (temp - 1 >= 0)
             {
                 temp -= 1;
-                model.Indicator1 = true;
+                model.DiaSis = true;
             }
         }
     }

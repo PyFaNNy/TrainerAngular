@@ -86,19 +86,19 @@ namespace Trainer.Application.Aggregates.Examination.Commands.UpdateExamination
         private void CountIndicators(UpdateExaminationCommand model)
         {
             model.Indicators = 0;
-            if (model.Indicator1)
+            if (model.DiaSis)
             {
                 model.Indicators += 1;
             }
-            if (model.Indicator2)
+            if (model.Tempareture)
             {
                 model.Indicators += 2;
             }
-            if (model.Indicator3)
+            if (model.HeartRate)
             {
                 model.Indicators += 4;
             }
-            if (model.Indicator4)
+            if (model.SpO2)
             {
                 model.Indicators += 8;
             }

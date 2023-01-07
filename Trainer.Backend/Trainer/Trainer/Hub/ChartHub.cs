@@ -23,22 +23,22 @@ namespace Trainer.Chart
             var examination = await _mediator.Send(new GetExaminationQuery { ExaminationId = id});
             CountIndicators(examination);
 
-            if (examination.Indicator1 && (select1 != "1" || tonometrValue != "1" || statTonometr != "0"))
+            if (examination.DiaSis && (select1 != "1" || tonometrValue != "1" || statTonometr != "0"))
             {
                 await this.Clients.Caller.SendAsync("error", "Не правильно подключен тонометр");
                 flag = false;
             }
-            if (examination.Indicator2 && (select2 != "2" || termometrValue != "1" || statTermometr != "0"))
+            if (examination.Tempareture && (select2 != "2" || termometrValue != "1" || statTermometr != "0"))
             {
                 await this.Clients.Caller.SendAsync("error", "Не правильно подключен термометр");
                 flag = false;
             }
-            if (examination.Indicator3 && (select3 != "3" || heartrateValue != "1" || statHeartrate != "0"))
+            if (examination.HeartRate && (select3 != "3" || heartrateValue != "1" || statHeartrate != "0"))
             {
                 await this.Clients.Caller.SendAsync("error", "Не правильно подключен пульсометр");
                 flag = false;
             }
-            if (examination.Indicator4 && (select4 != "4" || oximetrValue != "1" || statOximetr != "0"))
+            if (examination.SpO2 && (select4 != "4" || oximetrValue != "1" || statOximetr != "0"))
             {
                 await this.Clients.Caller.SendAsync("error", "Не правильно подключен оксиметр");
                 flag = false;
@@ -55,24 +55,24 @@ namespace Trainer.Chart
 
                 while (time <= 60)
                 {
-                    if (examination.Indicator1)
+                    if (examination.DiaSis)
                     {
                         sis -= _rnd.Next(0, 3);
                         dia -= _rnd.Next(0, 2);
                         await this.Clients.Caller.SendAsync("newTonom", time, dia, sis);
                     }
-                    if (examination.Indicator2)
+                    if (examination.Tempareture)
                     {
                         temperature += _rnd.Next(0, 20) / 100.0;
                         await this.Clients.Caller.SendAsync("newTermom", time, temperature);
                     }
-                    if (examination.Indicator3)
+                    if (examination.HeartRate)
                     {
                         heartRate = _rnd.Next(90, 160);
                         averageHeartRate += heartRate;
                         await this.Clients.Caller.SendAsync("newHearRate", time, heartRate);
                     }
-                    if (examination.Indicator4)
+                    if (examination.SpO2)
                     {
                         sep = _rnd.Next(90, 99);
                         avarageSep += sep;
@@ -179,22 +179,22 @@ namespace Trainer.Chart
             if (temp - 8 >= 0)
             {
                 temp -= 8;
-                model.Indicator4 = true;
+                model.SpO2 = true;
             }
             if (temp - 4 >= 0)
             {
                 temp -= 4;
-                model.Indicator3 = true;
+                model.HeartRate = true;
             }
             if (temp - 2 >= 0)
             {
                 temp -= 2;
-                model.Indicator2 = true;
+                model.Tempareture = true;
             }
             if (temp - 1 >= 0)
             {
                 temp -= 1;
-                model.Indicator1 = true;
+                model.DiaSis = true;
             }
         }
     }
