@@ -3,34 +3,34 @@
 <button mat-raised-button color="primary" (click)="downloadFile()" class="m-1 mb-3"><mat-icon>file_download</mat-icon>Export</button>
 <button mat-raised-button color="primary" routerLink="/importExaminations" class="m-1 mb-3"><mat-icon>file_upload</mat-icon>Import</button>
 <div class="mat-elevation-z8">
-  <table mat-table [dataSource]="examinations">
+  <table mat-table [dataSource]="examinations" matSort>
     <!-- TypePhysicalActive Column -->
     <ng-container matColumnDef="typePhysicalActive">
-      <th mat-header-cell *matHeaderCellDef>TypePhysicalActive</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by typePhysicalActive">TypePhysicalActive</th>
       <td mat-cell *matCellDef="let element">{{element?.typePhysicalActive}}</td>
     </ng-container>
 
     <!-- LastName Column -->
     <ng-container matColumnDef="lastName">
-      <th mat-header-cell *matHeaderCellDef>LastName</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by lastName">LastName</th>
       <td mat-cell *matCellDef="let element">{{element?.patient.lastName}}</td>
     </ng-container>
 
     <!-- FirstName Column -->
     <ng-container matColumnDef="firstName">
-      <th mat-header-cell *matHeaderCellDef>FirstName</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by firstName">FirstName</th>
       <td mat-cell *matCellDef="let element">{{element?.patient.firstName}}</td>
     </ng-container>
 
     <!-- MiddleName Column -->
     <ng-container matColumnDef="middleName">
-      <th mat-header-cell *matHeaderCellDef>MiddleName</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by middleName">MiddleName</th>
       <td mat-cell *matCellDef="let element">{{element?.patient.middleName}}</td>
     </ng-container>
 
     <!-- Date Column -->
     <ng-container matColumnDef="date">
-      <th mat-header-cell *matHeaderCellDef>Date</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by middleName">Date</th>
       <td mat-cell *matCellDef="let element">{{element?.date}}</td>
     </ng-container>
 

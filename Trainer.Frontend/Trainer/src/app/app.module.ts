@@ -1,3 +1,4 @@
+import { TuiRootModule, TuiDialogModule, TuiAlertModule } from "@taiga-ui/core";
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -58,8 +59,11 @@ import {GetExaminationComponent} from "./components/Examinations/GetExamination/
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    MaterialModule
-  ],
+    MaterialModule,
+      TuiRootModule,
+      TuiDialogModule,
+      TuiAlertModule
+],
   providers: [],
   bootstrap: [AppComponent]
 })

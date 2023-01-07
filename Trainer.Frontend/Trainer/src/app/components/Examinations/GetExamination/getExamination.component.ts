@@ -6,5 +6,8 @@ import {Component} from "@angular/core";
 })
 
 export class GetExaminationComponent {
-
+  sensor1: number =0;
+  sensor2: number =0;
+  sensor3: number =0;
+  sensor4: number =0;
 }

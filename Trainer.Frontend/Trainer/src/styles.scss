@@ -3,6 +3,11 @@
 /* Importing Bootstrap SCSS file. */
 @import 'node_modules/bootstrap/scss/bootstrap';
 
+.mat-success {
+  background-color: green;
+  color: #fff;
+}
+
 a.navbar-brand {
   white-space: normal;
   text-align: center;
@@ -28,16 +33,6 @@ a {
 
 /* Sticky footer styles
 -------------------------------------------------- */
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
 .border-top {
   border-top: 1px solid #e5e5e5;
 }
@@ -75,35 +70,35 @@ body {
   line-height: 60px; /* Vertically center the text there */
 }
 
-//.human {
-//  background-image: url(../picture/Human.png);
-//  background-repeat: no-repeat;
-//  background-size: contain;
-//}
-//
-//.tonometr {
-//  background-image: url(../picture/tonometr.png);
-//  background-repeat: no-repeat;
-//  background-size: contain;
-//}
-//
-//.termometr {
-//  background-image: url(../picture/termometr.png);
-//  background-repeat: no-repeat;
-//  background-size: contain;
-//}
-//
-//.heartrate {
-//  background-image: url(../picture/heartrate.png);
-//  background-repeat: no-repeat;
-//  background-size: contain;
-//}
-//
-//.oximetr {
-//  background-image: url(../picture/oximetr.png);
-//  background-repeat: no-repeat;
-//  background-size: contain;
-//}
+.human {
+  background-image: url(./images/Human.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.tonometr {
+  background-image: url(./images/tonometr.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.termometr {
+  background-image: url(./images/termometr.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.heartrate {
+  background-image: url(./images/heartrate.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.oximetr {
+  background-image: url(./images/oximetr.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
