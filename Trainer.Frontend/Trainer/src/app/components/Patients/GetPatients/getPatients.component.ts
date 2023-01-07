@@ -14,7 +14,6 @@ export class GetPatientsComponent implements OnInit {
   patients: Patient[] = [];
   selectedPatient:any;
   isMasterSel:boolean = false;
-  pageSizeOptions?:number;
   constructor(private patientService: PatientService) {}
   ngOnInit(): void {
     this.loadPatients();

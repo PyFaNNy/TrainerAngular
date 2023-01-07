@@ -8,6 +8,7 @@ import {ExaminationService} from "../../../services/examination.service";
 })
 
 export class GetExaminationsComponent implements OnInit {
+  displayedColumns?: string[];
   examinations: any[] = [];
   selectedExaminations: any;
   isMasterSel: boolean = false;
@@ -18,6 +19,7 @@ export class GetExaminationsComponent implements OnInit {
   ngOnInit(): void {
     this.loadExamination();
     this.isMasterSel = false;
+    this.displayedColumns = ['typePhysicalActive','lastName', 'firstName', 'middleName', 'date','isSelected', 'btns'];
   }
 
   downloadFile(): void {

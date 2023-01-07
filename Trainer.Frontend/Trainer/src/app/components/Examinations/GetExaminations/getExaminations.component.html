@@ -1,31 +1,63 @@
 <h4>Examinations</h4>
-    <button (click)="delete()" class="btn btn-primary m-1" >Delete</button>
-    <a (click)="downloadFile()" class="btn btn-primary m-1" >Export</a>
-    <a routerLink="/importExaminations" class="btn btn-primary m-1" >Import</a>
-    <table class="table table-striped table-hover">
-      <tr>
-        <th><a>TypePhysicalActive</a></th>
-        <th><a>LastName</a></th>
-        <th><a>FirstName</a></th>
-        <th><a>MiddleName</a></th>
-        <th><a>Date</a></th>
-        <th></th>
-        <th><input type="checkbox" [(ngModel)]="isMasterSel" (change)="checkUncheckAll()"></th>
-      </tr>
-      <tr *ngFor="let examination of examinations">
-        <td>{{examination.typePhysicalActive}}</td>
-        <td>{{examination.patient?.lastName}}</td>
-        <td>{{examination.patient?.firstName}}</td>
-        <td>{{examination.patient?.middleName}}</td>
-        <td>{{examination.date}}</td>
-        <td>
-            <a class="btn btn-success btn-sm">Start</a>
-            <a class="btn btn-primary btn-sm">Edit</a>
-        </td>
-        <td><input type="checkbox" [(ngModel)]="examination.isSelected" (change)="isAllSelected()"/></td>
-      </tr>
-    </table>
-<mat-paginator [pageSizeOptions]="[5, 10, 20]"
-               showFirstLastButtons
-               aria-label="Select page of periodic elements">
-</mat-paginator>
+<button mat-raised-button color="primary" (click)="delete()" class="m-1 mb-3">Delete</button>
+<button mat-raised-button color="primary" (click)="downloadFile()" class="m-1 mb-3">Export</button>
+<button mat-raised-button color="primary" routerLink="/importExaminations" class="m-1 mb-3">Import</button>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="examinations">
+    <!-- TypePhysicalActive Column -->
+    <ng-container matColumnDef="typePhysicalActive">
+      <th mat-header-cell *matHeaderCellDef>TypePhysicalActive</th>
+      <td mat-cell *matCellDef="let element">{{element?.typePhysicalActive}}</td>
+    </ng-container>
+
+    <!-- LastName Column -->
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef>LastName</th>
+      <td mat-cell *matCellDef="let element">{{element?.patient.lastName}}</td>
+    </ng-container>
+
+    <!-- FirstName Column -->
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef>FirstName</th>
+      <td mat-cell *matCellDef="let element">{{element?.patient.firstName}}</td>
+    </ng-container>
+
+    <!-- MiddleName Column -->
+    <ng-container matColumnDef="middleName">
+      <th mat-header-cell *matHeaderCellDef>MiddleName</th>
+      <td mat-cell *matCellDef="let element">{{element?.patient.middleName}}</td>
+    </ng-container>
+
+    <!-- Date Column -->
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>Date</th>
+      <td mat-cell *matCellDef="let element">{{element?.date}}</td>
+    </ng-container>
+
+    <!-- Check Column -->
+    <ng-container matColumnDef="isSelected">
+      <th mat-header-cell *matHeaderCellDef>
+        <input type="checkbox" [(ngModel)]="isMasterSel" (change)="checkUncheckAll()">
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <input type="checkbox" [(ngModel)]="element.isSelected" (change)="isAllSelected()"/>
+      </td>
+    </ng-container>
+
+    <!-- Buttons Column -->
+    <ng-container matColumnDef="btns">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <a mat-raised-button color="primary">Start</a>
+        <a mat-raised-button color="primary">Edit</a>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+  </mat-paginator>
+</div>
