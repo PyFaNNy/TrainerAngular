@@ -102,7 +102,7 @@ namespace Trainer.Controllers
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.BaseUserApproveUser);
             await Mediator.Send(new ApproveUserCommand {UserId = userId});
-            return RedirectToAction("GetModels");
+            return Ok();
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace Trainer.Controllers
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.BaseUserDeclineUser);
             await Mediator.Send(new DeclineUserCommand {UserId = userId});
-            return RedirectToAction("GetModels");
+            return Ok();
         }
         
         /// <summary>
