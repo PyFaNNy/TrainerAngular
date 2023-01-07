@@ -1,9 +1,13 @@
 <div class="row mb-2">
   <div class="col">
-    <button type="button" id="start" class="btn btn-success btn-block">Start</button>
+    <button type="button" id="start" class="btn btn-success h-100 w-100">Start</button>
   </div>
   <div class="col-1">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Info</button>
+    <button mat-raised-button color="primary" class="btn h-100 w-100" data-toggle="modal"
+            data-target="#exampleModalCenter">
+      <mat-icon>info</mat-icon>
+      Info
+    </button>
   </div>
 </div>
 <div class="container" style="height: calc(100vh - 200px);">
@@ -11,66 +15,73 @@
     <div class="col human h-100">
       <div class="row h-25">
         <div class="col-4">
-          <select id="2" class="form-control" style="opacity: 0.5;" onchange='findOption2(this)'>
-            <option value=0></option>
-            <option value=1>Tonometr</option>
-            <option value=2>Termometr</option>
-            <option value=3>HeartRate</option>
-            <option value=4>Oximetr</option>
-          </select>
+          <mat-form-field appearance="outline">
+            <mat-select id="2" [(ngModel)]="sensor2" [(value)]="sensor2" style="opacity: 0.5;"
+                        onchange='findOption2(this)'>
+              <mat-option value=0></mat-option>
+              <mat-option value=1>Tonometr</mat-option>
+              <mat-option value=2>Termometr</mat-option>
+              <mat-option value=3>HeartRate</mat-option>
+              <mat-option value=4>Oximetr</mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
       </div>
       <div class="row h-25">
         <div class="col-4">
-          <select id="3" class="form-control" style="opacity: 0.5;" onchange='findOption3(this)'>
-            <option value=0></option>
-            <option value=1>Tonometr</option>
-            <option value=2>Termometr</option>
-            <option value=3>HeartRate</option>
-            <option value=4>Oximetr</option>
-          </select>
+          <mat-form-field appearance="outline">
+            <mat-select id="3" [(ngModel)]="sensor3" [(value)]="sensor3" style="opacity: 0.5;"
+                        onchange='findOption3(this)'>
+              <mat-option value=0></mat-option>
+              <mat-option value=1>Tonometr</mat-option>
+              <mat-option value=2>Termometr</mat-option>
+              <mat-option value=3>HeartRate</mat-option>
+              <mat-option value=4>Oximetr</mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
-        <div class="col"></div>
         <div class="col-4">
-          <select id="1" class="form-control" style="opacity: 0.5;" onchange='findOption1(this)'>
-            <option value=0></option>
-            <option value=1>Tonometr</option>
-            <option value=2>Termometr</option>
-            <option value=3>HeartRate</option>
-            <option value=4>Oximetr</option>
-          </select>
+          <mat-form-field appearance="outline">
+            <mat-select id="1" [(ngModel)]="sensor1" [(value)]="sensor1" style="opacity: 0.5;"
+                        onchange='findOption1(this)'>
+              <mat-option value=0></mat-option>
+              <mat-option value=1>Tonometr</mat-option>
+              <mat-option value=2>Termometr</mat-option>
+              <mat-option value=3>HeartRate</mat-option>
+              <mat-option value=4>Oximetr</mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
       </div>
       <div class="row h-25">
         <div class="col-4"></div>
         <div class="col-4">
-          <select id="4" class="form-control" style="opacity: 0.5;" onchange='findOption4(this)'>
-            <option value=0></option>
-            <option value=1>Tonometr</option>
-            <option value=2>Termometr</option>
-            <option value=3>HeartRate</option>
-            <option value=4>Oximetr</option>
-          </select>
+          <mat-form-field appearance="outline">
+            <mat-select id="4" [(ngModel)]="sensor4" [(value)]="sensor4" style="opacity: 0.5;"
+                        onchange='findOption4(this)'>
+              <mat-option value=0></mat-option>
+              <mat-option value=1>Tonometr</mat-option>
+              <mat-option value=2>Termometr</mat-option>
+              <mat-option value=3>HeartRate</mat-option>
+              <mat-option value=4>Oximetr</mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
       </div>
     </div>
     <div class="col h-100" style="overflow-y: auto;">
       <div class="row h-25">
         <div class="col tonometr"></div>
-        <div class="col">
-          <button type="button" id="testTonometr" class="btn btn-primary mt-1">Test</button>
-          <div class="form-check">
-            <input class="form-check-input" value="1" type="radio" name="tonometr" id="tonometrON" onclick="tonometrClick(this);">
-            <label class="form-check-label" for="tonometrON">
-              On
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" value="0" type="radio" name="tonometr" id="tonometrOFF" onclick="tonometrClick(this);" checked>
-            <label class="form-check-label" for="tonometrOFF">
-              Off
-            </label>
-          </div>
+        <div class="col pt-5">
+          <button type="button" id="testTonometr" mat-raised-button color="primary">Test</button>
+          <mat-radio-group>
+            <mat-radio-button>On</mat-radio-button>
+            <!--              <input class="form-check-input" value="1" type="radio" name="tonometr" id="tonometrON"-->
+            <!--                     onclick="tonometrClick(this);">-->
+            <mat-radio-button>Off</mat-radio-button>
+            <!--              <input class="form-check-input" value="0" type="radio" name="tonometr" id="tonometrOFF"-->
+            <!--                     onclick="tonometrClick(this);" checked>-->
+          </mat-radio-group>
         </div>
       </div>
       <div class="row h-50 mb-5">
@@ -85,20 +96,16 @@
       </div>
       <div class="row h-25">
         <div class="col termometr"></div>
-        <div class="col">
-          <button type="button" id="testTermometr" class="btn btn-primary mt-1">Test</button>
-          <div class="form-check">
-            <input class="form-check-input" value="1" type="radio" name="termometr" id="termometrON" onclick="termometrClick(this);">
-            <label class="form-check-label" for="termometrON">
-              On
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" value="0" type="radio" name="termometr" id="termometrOFF" onclick="termometrClick(this);" checked>
-            <label class="form-check-label" for="termometrOFF">
-              Off
-            </label>
-          </div>
+        <div class="col pt-5">
+          <button type="button" id="testTermometr" mat-raised-button color="primary">Test</button>
+          <mat-radio-group>
+            <mat-radio-button>On</mat-radio-button>
+            <mat-radio-button>Off</mat-radio-button>
+          </mat-radio-group>
+          <!--            <input class="form-check-input" value="1" type="radio" name="termometr" id="termometrON"-->
+          <!--                   onclick="termometrClick(this);">-->
+          <!--            <input class="form-check-input" value="0" type="radio" name="termometr" id="termometrOFF"-->
+          <!--                   onclick="termometrClick(this);" checked>-->
         </div>
       </div>
       <div class="row h-50 mb-5">
@@ -113,20 +120,16 @@
       </div>
       <div class="row h-25">
         <div class="col heartrate"></div>
-        <div class="col">
-          <button type="button" id="testHeartrate" class="btn btn-primary mt-1">Test</button>
-          <div class="form-check">
-            <input class="form-check-input" value="1" type="radio" name="heartrate" id="heartrateON" onclick="heartrateClick(this);">
-            <label class="form-check-label" for="heartrateON">
-              On
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" value="0" type="radio" name="heartrate" id="heartrateOFF" onclick="heartrateClick(this);" checked>
-            <label class="form-check-label" for="heartrateOFF">
-              Off
-            </label>
-          </div>
+        <div class="col pt-5">
+          <button type="button" id="testHeartrate" mat-raised-button color="primary">Test</button>
+          <mat-radio-group>
+            <mat-radio-button>On</mat-radio-button>
+            <mat-radio-button>Off</mat-radio-button>
+          </mat-radio-group>
+          <!--            <input class="form-check-input" value="1" type="radio" name="heartrate" id="heartrateON"-->
+          <!--                   onclick="heartrateClick(this);">-->
+          <!--            <input class="form-check-input" value="0" type="radio" name="heartrate" id="heartrateOFF"-->
+          <!--                   onclick="heartrateClick(this);" checked>-->
         </div>
       </div>
       <div class="row h-50 mb-5">
@@ -141,20 +144,16 @@
       </div>
       <div class="row h-25">
         <div class="col oximetr"></div>
-        <div class="col">
-          <button type="button" id="testOximetr" class="btn btn-primary mt-1">Test</button>
-          <div class="form-check">
-            <input class="form-check-input" value="1" type="radio" name="oximetr" id="oximetrON" onclick="oximetrClick(this);">
-            <label class="form-check-label" for="oximetrON">
-              On
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" value="0" type="radio" name="oximetr" id="oximetrOFF" onclick="oximetrClick(this);" checked>
-            <label class="form-check-label" for="oximetrOFF">
-              Off
-            </label>
-          </div>
+        <div class="col pt-5">
+          <button type="button" id="testOximetr" mat-raised-button color="primary">Test</button>
+          <mat-radio-group>
+            <mat-radio-button>On</mat-radio-button>
+            <mat-radio-button>Off</mat-radio-button>
+          </mat-radio-group>
+          <!--            <input class="form-check-input" value="1" type="radio" name="oximetr" id="oximetrON"-->
+          <!--                   onclick="oximetrClick(this);">-->
+          <!--            <input class="form-check-input" value="0" type="radio" name="oximetr" id="oximetrOFF"-->
+          <!--                   onclick="oximetrClick(this);" checked>-->
         </div>
       </div>
       <div class="row h-50 mb-5">
@@ -171,7 +170,8 @@
   </div>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
