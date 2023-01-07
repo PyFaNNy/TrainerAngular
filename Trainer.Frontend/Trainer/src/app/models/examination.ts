@@ -1,9 +1,9 @@
 import {Patient} from "./patient";
 
 export class Examination {
-  id? : string;
+  id : string = '';
   patientId? : string;
-  typePhysicalActive?: number;
+  typePhysicalActive?: string;
   date: Date = new Date();
   indicators: number = 0;
   status? : number;

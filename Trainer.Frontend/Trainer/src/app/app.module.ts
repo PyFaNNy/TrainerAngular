@@ -25,6 +25,7 @@ import {ImportPatientsComponent} from "./components/Patients/ImportPatient/impor
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ErrorComponent} from "./components/Error/error.component";
 import {MaterialModule} from "./material.module";
+import {UpdateExaminationComponent} from "./components/Examinations/UpdateExamination/updateExamination.component";
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import {MaterialModule} from "./material.module";
     LoginComponent,
     ResetPasswordComponent,
     ImportExaminationsComponent,
-    ImportPatientsComponent
+    ImportPatientsComponent,
+    UpdateExaminationComponent
   ],
   imports: [
     BrowserModule,

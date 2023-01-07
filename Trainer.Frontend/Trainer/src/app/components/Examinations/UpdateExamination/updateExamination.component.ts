@@ -5,24 +5,38 @@ import {Subscription} from "rxjs";
 import {ExaminationService} from "../../../services/examination.service";
 
 @Component({
-  selector: 'app-addExamination',
-  templateUrl: './addExamination.component.html'
+  selector: 'app-updateExamination',
+  templateUrl: './updateExamination.component.html'
 })
 
-export class AddExaminationComponent {
+export class UpdateExaminationComponent {
   examination: Examination = new Examination();
   diaSis:boolean = false;
   tempareture:boolean = false;
   heartRate:boolean = false;
   spO2:boolean = false;
-
   errors: any = null;
   subscriptions: Subscription = new Subscription();
   constructor(private route: ActivatedRoute, private examinationService: ExaminationService,private router: Router){
-    this.subscriptions.add(route.params.subscribe(params=>this.examination.patientId=params['id']));
+    this.subscriptions.add(route.params.subscribe(params=>this.examination.id=params['id']));
   }
 
-  createExamination() {
+  ngOnInit(): void {
+    this.subscriptions.add(this.examinationService
+      .getExamination(this.examination.id)
+      .subscribe((result: any) => {
+        console.log(result);
+        this.examination = result
+        console.log(this.examination);
+
+        this.diaSis = result.diaSis;
+        this.tempareture = result.tempareture;
+        this.heartRate = result.heartRate;
+        this.spO2 = result.sp02;
+      }));
+  }
+
+  updateExamination() {
     if (this.diaSis) {
       this.examination.indicators += 1;
     }
@@ -37,7 +51,7 @@ export class AddExaminationComponent {
     }
 
     this.examinationService
-      .createExamination(this.examination)
+      .updateExamination(this.examination)
       .subscribe(value => {
           this.router.navigate(['/examinations'])
         },

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Examination } from '../models/examination';
 import { environment } from 'src/environments/environment';
+import {Patient} from "../models/patient";
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,10 @@ export class ExaminationService {
 
   public getExaminations(): Observable<Examination[]> {
     return this.http.get<Examination[]>(`${environment.apiUrl}/${this.url}`);
+  }
+
+  public getExamination(id: string): Observable<Examination> {
+    return this.http.get<Examination>(`${environment.apiUrl}/${this.url}/${id}`);
   }
 
   public updateExamination(examination: Examination): Observable<Examination[]> {
