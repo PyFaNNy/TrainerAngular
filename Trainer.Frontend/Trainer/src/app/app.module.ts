@@ -26,6 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ErrorComponent} from "./components/Error/error.component";
 import {MaterialModule} from "./material.module";
 import {UpdateExaminationComponent} from "./components/Examinations/UpdateExamination/updateExamination.component";
+import {GetExaminationComponent} from "./components/Examinations/GetExamination/getExamination.component";
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import {UpdateExaminationComponent} from "./components/Examinations/UpdateExamin
     ResetPasswordComponent,
     ImportExaminationsComponent,
     ImportPatientsComponent,
-    UpdateExaminationComponent
+    UpdateExaminationComponent,
+    GetExaminationComponent
   ],
   imports: [
     BrowserModule,

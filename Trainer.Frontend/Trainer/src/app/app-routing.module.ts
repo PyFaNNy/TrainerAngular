@@ -14,6 +14,7 @@ import {LoginComponent} from "./components/Login/login.component";
 import {RegisterComponent} from "./components/Register/register.component";
 import {ErrorComponent} from "./components/Error/error.component";
 import {UpdateExaminationComponent} from "./components/Examinations/UpdateExamination/updateExamination.component";
+import {GetExaminationComponent} from "./components/Examinations/GetExamination/getExamination.component";
 
 const appRoute: Routes  = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -24,6 +25,7 @@ const appRoute: Routes  = [
   {path: 'importPatients', component: ImportPatientsComponent},
   {path: 'updatePatient/:id', component: UpdatePatientComponent},
   {path: 'examinations', component: GetExaminationsComponent},
+  {path: 'examination/:id', component: GetExaminationComponent},
   {path: 'addExamination/:id', component: AddExaminationComponent},
   {path: 'updateExamination/:id', component: UpdateExaminationComponent},
   {path: 'importExaminations', component: ImportExaminationsComponent},

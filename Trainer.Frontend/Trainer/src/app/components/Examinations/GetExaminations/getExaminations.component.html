@@ -1,7 +1,7 @@
 <h2>Examinations</h2>
-<button mat-raised-button color="warn" (click)="delete()" class="m-1 mb-3">Delete</button>
-<button mat-raised-button color="primary" (click)="downloadFile()" class="m-1 mb-3">Export</button>
-<button mat-raised-button color="primary" routerLink="/importExaminations" class="m-1 mb-3">Import</button>
+<button mat-raised-button color="warn" (click)="delete()" class="m-1 mb-3"><mat-icon>delete</mat-icon>Delete</button>
+<button mat-raised-button color="primary" (click)="downloadFile()" class="m-1 mb-3"><mat-icon>file_download</mat-icon>Export</button>
+<button mat-raised-button color="primary" routerLink="/importExaminations" class="m-1 mb-3"><mat-icon>file_upload</mat-icon>Import</button>
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="examinations">
     <!-- TypePhysicalActive Column -->
@@ -48,8 +48,8 @@
     <ng-container matColumnDef="btns">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">
-        <button mat-raised-button color="primary">Start</button>
-        <button routerLink="/updateExamination/{{element.id}}" mat-raised-button color="primary">Edit</button>
+        <button routerLink="/examination/{{element.id}}" mat-raised-button color="primary" class="m-1">Start</button>
+        <button routerLink="/updateExamination/{{element.id}}" mat-raised-button color="primary" class="m-1"><mat-icon>edit</mat-icon>Edit</button>
       </td>
     </ng-container>
 
