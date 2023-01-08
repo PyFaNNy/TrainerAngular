@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, OnDestroy} from "@angular/core";
 import {Otp} from "../../models/otp";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PatientService} from "../../services/patient.service";
@@ -10,7 +10,7 @@ import {OtpService} from "../../services/otp.Service";
   templateUrl: './verify-code.component.html'
 })
 
-export class VerifyCodeComponent {
+export class VerifyCodeComponent implements OnDestroy{
   otp: Otp = new Otp;
   errors: any;
   subscriptions: Subscription = new Subscription();
@@ -26,7 +26,10 @@ export class VerifyCodeComponent {
     .verify(this.otp)
     .subscribe(
       result  => {
-        this.router.navigate(['/home'])
+        if(this.otp.action == 'ResetPassword')
+        {
+          this.router.navigate(['/resetPassword',this.otp.email])
+        }
       },
       error => {
         this.errors = error.error

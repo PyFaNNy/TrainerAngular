@@ -2,12 +2,10 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using Microsoft.Extensions.Localization;
 using Trainer.Application.Aggregates.BaseUser.Commands.SignIn;
 using Trainer.Application.Aggregates.BaseUser.Queries.GetBaseUser;
 using Trainer.Application.Aggregates.OTPCodes.Commands.RequestLoginCode;
 using Trainer.Application.Aggregates.OTPCodes.Commands.RequestRegistrationCode;
-using Trainer.Application.Exceptions;
 using Trainer.Common;
 using Trainer.Common.TableConnect.Common;
 using Trainer.Enums;

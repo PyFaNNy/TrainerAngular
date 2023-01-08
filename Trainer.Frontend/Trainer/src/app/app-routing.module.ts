@@ -34,6 +34,7 @@ const appRoute: Routes  = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'verifycode/:email/:action', component: VerifyCodeComponent},
+  {path: 'resetPassowrd/:email', component: VerifyCodeComponent},
   {path: '**', component: ErrorComponent},
 ]
 

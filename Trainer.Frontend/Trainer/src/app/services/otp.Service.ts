@@ -19,4 +19,14 @@ export class OtpService {
       otp
     );
   }
+
+  public resetPassowrdRequest(email: string): Observable<boolean> {
+    const options = {
+      headers: new HttpHeaders({
+        'content-type' : 'application/json'
+      })};
+    return this.http.post<boolean>(
+      `${environment.apiUrl}/${this.url}/reset?email=${email}`, null
+    );
+  }
 }
