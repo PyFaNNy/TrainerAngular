@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, OnDestroy, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription, take} from "rxjs";
 import {PatientService} from "../../../services/patient.service";
@@ -9,7 +9,7 @@ import {Patient} from "../../../models/patient";
   templateUrl: './updatePatient.component.html'
 })
 
-export class UpdatePatientComponent {
+export class UpdatePatientComponent implements OnInit, OnDestroy{
   id: string ="";
   patient: Patient =new Patient;
   errors: any = null;

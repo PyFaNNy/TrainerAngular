@@ -15,6 +15,7 @@ import {RegisterComponent} from "./components/Register/register.component";
 import {ErrorComponent} from "./components/Error/error.component";
 import {UpdateExaminationComponent} from "./components/Examinations/UpdateExamination/updateExamination.component";
 import {GetExaminationComponent} from "./components/Examinations/GetExamination/getExamination.component";
+import {VerifyCodeComponent} from "./components/VerifyCode/verify-code.component";
 
 const appRoute: Routes  = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -32,6 +33,7 @@ const appRoute: Routes  = [
   {path: 'admin', component: AdminPanelComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'verifycode/:email/:action', component: VerifyCodeComponent},
   {path: '**', component: ErrorComponent},
 ]
 

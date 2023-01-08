@@ -28,6 +28,7 @@ import {ErrorComponent} from "./components/Error/error.component";
 import {MaterialModule} from "./material.module";
 import {UpdateExaminationComponent} from "./components/Examinations/UpdateExamination/updateExamination.component";
 import {GetExaminationComponent} from "./components/Examinations/GetExamination/getExamination.component";
+import {VerifyCodeComponent} from "./components/VerifyCode/verify-code.component";
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import {GetExaminationComponent} from "./components/Examinations/GetExamination/
     ImportExaminationsComponent,
     ImportPatientsComponent,
     UpdateExaminationComponent,
-    GetExaminationComponent
+    GetExaminationComponent,
+    VerifyCodeComponent
   ],
   imports: [
     BrowserModule,
