@@ -21,7 +21,7 @@ namespace Trainer.Controllers
         public AccountController(ILogger<AccountController> logger) : base(logger)
         {
         }
-        
+
         [HttpPost("register")]
         public async Task<IActionResult> Register(SignInCommand command)
         {
@@ -35,7 +35,7 @@ namespace Trainer.Controllers
                 });
 
                 return RedirectToAction("VerifyCode", "OTP",
-                    new { otpAction = OTPAction.Registration, email = command.Email });
+                    new {otpAction = OTPAction.Registration, email = command.Email});
             }
             catch (FluentValidation.ValidationException ex)
             {
@@ -43,6 +43,7 @@ namespace Trainer.Controllers
                 {
                     modelValue.Errors.Clear();
                 }
+
                 ModelState.AddModelError(string.Empty, ex.Errors.First().ErrorMessage);
             }
 
@@ -54,7 +55,7 @@ namespace Trainer.Controllers
         {
             try
             {
-                var user = await Mediator.Send(new GetBaseUserQuery(model.UserName));
+                var user = await Mediator.Send(new GetBaseUserQuery(model.Email));
                 var result = CryptoHelper.VerifyHashedPassword(user.PasswordHash, model.Password);
 
                 if (result)
@@ -64,20 +65,16 @@ namespace Trainer.Controllers
                         Email = user.Email,
                         Host = HttpContext.Request.Host.ToString()
                     });
-                    return RedirectToAction("VerifyCode", "OTP",
-                        new { otpAction = OTPAction.Login, email = user.Email });
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Error login/password");
+                    return Ok();
+                    // return RedirectToAction("VerifyCode", "OTP",
+                    // new { otpAction = OTPAction.Login, email = user.Email });
                 }
             }
-            catch (NotFoundException ex)
+            catch (Exception e)
             {
-                ModelState.AddModelError("", "Error login/password");
+                return BadRequest("Error login/password");
             }
-
-            return Ok(model);
+            return BadRequest("Error login/password");
         }
 
         [HttpGet("claim")]

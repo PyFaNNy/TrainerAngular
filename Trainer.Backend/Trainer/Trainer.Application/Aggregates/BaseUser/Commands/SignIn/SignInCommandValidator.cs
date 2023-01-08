@@ -17,35 +17,29 @@ namespace Trainer.Application.Aggregates.BaseUser.Commands.SignIn
 
             RuleFor(x => x.Email)
                 .EmailAddress()
-                .Must(this.IsUniqueEmail)
-                .WithMessage("Wrong email");
+                .Must(this.IsUniqueEmail);
 
             RuleFor(x => x.LastName)
                 .NotNull()
-                .Matches(@"^([А-Я]{1}[а-яё]{1,49}|[A-Z]{1}[a-z]{1,49})$")
-                .WithMessage("Wrong last name");
+                .Matches(@"^([А-Я]{1}[а-яё]{1,49}|[A-Z]{1}[a-z]{1,49})$");
 
             RuleFor(x => x.FirstName)
                 .NotNull()
-                .Matches(@"^([А-Я]{1}[а-яё]{1,49}|[A-Z]{1}[a-z]{1,49})$")
-                .WithMessage("Wrong first name");
+                .Matches(@"^([А-Я]{1}[а-яё]{1,49}|[A-Z]{1}[a-z]{1,49})$");
 
             RuleFor(x => x.MiddleName)
                 .NotNull()
-                .Matches(@"^([А-Я]{1}[а-яё]{1,49}|[A-Z]{1}[a-z]{1,49})$")
-                .WithMessage("Wrong middle name");
+                .Matches(@"^([А-Я]{1}[а-яё]{1,49}|[A-Z]{1}[a-z]{1,49})$");
 
             RuleFor(x => x.Password)
                 .NotNull()
                 .NotEmpty()
-                .Must(PasswordsHelper.IsMeetsRequirements)
-                .WithMessage("Wrong password");
+                .Must(PasswordsHelper.IsMeetsRequirements);
 
             RuleFor(x => x.ConfirmPassword)
                 .NotNull()
                 .NotEmpty()
-                .Equal(x => x.Password)
-                .WithMessage("Wrong ConfirmPassword");
+                .Equal(x => x.Password);
         }
 
         private bool IsUniqueEmail(string email)

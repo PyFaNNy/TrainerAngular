@@ -47,46 +47,42 @@ namespace Trainer.Controllers
         }
         
         /// <summary>
-        /// 
+        /// Verify Code
         /// </summary>
         /// <param name="code"></param>
-        /// <param name="email"></param>
-        /// <param name="OTPaction"></param>
         /// <returns></returns>
         [HttpPost("verify")]
-        public async Task<IActionResult> VerifyCode(ValidateSmsCode code, string email, OTPAction OTPaction)
+        public async Task<IActionResult> VerifyCode(ValidateSmsCode code)
         {
             var result = await Mediator.Send(new ValidateSmsCodeQuery
             {
-                Code = code.Codes,
-                Email = email,
-                Action = OTPaction
+                Code = code.Code,
+                Email = code.Email,
+                Action = code.OTPaction
             });
             if (result.IsValid)
             {
-                if (OTPaction == OTPAction.ResetPassword)
-                {
-                    return RedirectToAction("ResetPassword", "BaseUser", new { email });
-                }
+                // if (code.OTPaction == OTPAction.ResetPassword)
+                // {
+                //     return RedirectToAction("ResetPassword", "BaseUser", new { code.Email });
+                // }
+                //
+                // if (OTPaction == OTPAction.Registration)
+                // {
+                //     return RedirectToAction("ConfirmEmail", "BaseUser", new { code.Email });
+                // }
+                //
+                // if (OTPaction == OTPAction.Login)
+                // {
+                //     return RedirectToAction("ReturnClaim", "Account", new { code.Email });
+                // }
 
-                if (OTPaction == OTPAction.Registration)
-                {
-                    return RedirectToAction("ConfirmEmail", "BaseUser", new { email });
-                }
-
-                if (OTPaction == OTPAction.Login)
-                {
-                    return RedirectToAction("ReturnClaim", "Account", new { email });
-                }
+                return Ok();
             }
             else
             {
-                // ModelState.AddModelError("All", Localizer["IncorrectCode"]);
+                return BadRequest("Incorrect code");
             }
-
-            //ViewBag.Email = email;
-            //ViewBag.Action = OTPaction;
-            return Ok();
         }
     }
 }
