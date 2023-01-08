@@ -1,10 +1,6 @@
-﻿using System.Data;
-using App.Metrics;
+﻿using App.Metrics;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Localization;
-using Trainer.Application.Exceptions;
 using Trainer.Application.Aggregates.CSV.Commands.CSVToExaminations;
 using Trainer.Application.Aggregates.CSV.Queries.ExaminationsToCSV;
 using Trainer.Application.Aggregates.Examination.Commands.CreateExamination;
@@ -12,10 +8,8 @@ using Trainer.Application.Aggregates.Examination.Commands.DeleteExamination;
 using Trainer.Application.Aggregates.Examination.Commands.UpdateExamination;
 using Trainer.Application.Aggregates.Examination.Queries.GetExamination;
 using Trainer.Application.Aggregates.Examination.Queries.GetExaminations;
-using Trainer.Application.Interfaces;
 using Trainer.Common;
 using Trainer.Enums;
-using Trainer.Infrastructure.Extensions;
 using Trainer.Metrics;
 using Trainer.Models;
 

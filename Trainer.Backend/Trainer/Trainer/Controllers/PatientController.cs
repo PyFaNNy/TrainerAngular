@@ -1,7 +1,6 @@
 ﻿using App.Metrics;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Localization;
 using Trainer.Application.Aggregates.CSV.Commands.CSVToPatients;
 using Trainer.Application.Aggregates.CSV.Queries.PatientsToCSV;
 using Trainer.Application.Aggregates.Patient.Commands.CreatePatient;

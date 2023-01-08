@@ -1,7 +1,6 @@
 ﻿using App.Metrics;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Localization;
 using Trainer.Application.Aggregates.BaseUser.Commands.ApproveUser;
 using Trainer.Application.Aggregates.BaseUser.Commands.BlockUser;
 using Trainer.Application.Aggregates.BaseUser.Commands.ConfirmEmail;
@@ -130,18 +129,5 @@ namespace Trainer.Controllers
             await Mediator.Send(command);
             return Ok();
         }
-
-        /// <summary>
-        /// Confirm email
-        /// </summary>
-        /// <param name="email"></param>
-        /// <returns></returns>
-        [HttpGet("confirm")]
-        public async Task<IActionResult> ConfirmEmail([FromQuery] string email)
-        {
-            await Mediator.Send(new ConfirmEmailCommand {Email = email});
-            return Ok();
-        }
-
     }
 }

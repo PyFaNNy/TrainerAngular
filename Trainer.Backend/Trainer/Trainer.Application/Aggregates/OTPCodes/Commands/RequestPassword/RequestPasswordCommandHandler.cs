@@ -22,9 +22,9 @@
         {
             if (OTPCodesErrorSettings.RequestPasswordEnable)
             {
-                this.CheckIfUserExists(request.Email);
-                this.LimitsCodeValid(request);
-                await this.CreateCode(request);
+                CheckIfUserExists(request.Email);
+                LimitsCodeValid(request);
+                await CreateCode(request);
             }
 
             return Unit.Value;

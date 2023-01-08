@@ -11,6 +11,7 @@
             set;
         }
 
+        [JsonIgnore]
         public string Host
         {
             get;

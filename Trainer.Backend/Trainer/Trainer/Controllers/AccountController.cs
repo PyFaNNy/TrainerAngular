@@ -23,27 +23,12 @@ namespace Trainer.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(SignInCommand command)
         {
-            try
+            await Mediator.Send(command);
+            await Mediator.Send(new RequestRegistrationCodeCommand
             {
-                await Mediator.Send(command);
-                await Mediator.Send(new RequestRegistrationCodeCommand
-                {
-                    Email = command.Email,
-                    Host = HttpContext.Request.Host.ToString()
-                });
-
-                return RedirectToAction("VerifyCode", "OTP",
-                    new {otpAction = OTPAction.Registration, email = command.Email});
-            }
-            catch (FluentValidation.ValidationException ex)
-            {
-                foreach (var modelValue in ModelState.Values)
-                {
-                    modelValue.Errors.Clear();
-                }
-
-                ModelState.AddModelError(string.Empty, ex.Errors.First().ErrorMessage);
-            }
+                Email = command.Email,
+                Host = HttpContext.Request.Host.ToString()
+            });
 
             return Ok();
         }
@@ -72,6 +57,7 @@ namespace Trainer.Controllers
             {
                 return BadRequest("Error login/password");
             }
+
             return BadRequest("Error login/password");
         }
 

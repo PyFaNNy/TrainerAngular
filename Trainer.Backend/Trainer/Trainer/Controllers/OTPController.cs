@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
+using Trainer.Application.Aggregates.BaseUser.Commands.ConfirmEmail;
 using Trainer.Application.Aggregates.BaseUser.Commands.ResetPasswordUser;
 using Trainer.Application.Aggregates.OTPCodes.Commands.RequestPassword;
 using Trainer.Application.Aggregates.OTPCodes.Queries.ValidateSmsCode;
@@ -49,15 +50,10 @@ namespace Trainer.Controllers
             });
             if (result.IsValid)
             {
-                // if (OTPaction == OTPAction.Registration)
-                // {
-                //     return RedirectToAction("ConfirmEmail", "BaseUser", new { code.Email });
-                // }
-                //
-                // if (OTPaction == OTPAction.Login)
-                // {
-                //     return RedirectToAction("ReturnClaim", "Account", new { code.Email });
-                // }
+                if (code.OTPaction == OTPAction.Registration)
+                {
+                    await Mediator.Send(new ConfirmEmailCommand() {Email = code.Email});
+                }
 
                 return Ok();
             }

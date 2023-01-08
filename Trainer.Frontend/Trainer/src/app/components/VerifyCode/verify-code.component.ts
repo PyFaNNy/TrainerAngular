@@ -30,6 +30,14 @@ export class VerifyCodeComponent implements OnDestroy{
         {
           this.router.navigate(['/resetPassword',this.otp.email])
         }
+        if(this.otp.action == 'Login')
+        {
+          this.router.navigate(['/home'])
+        }
+        if(this.otp.action == 'Registration')
+        {
+          this.router.navigate(['/login'])
+        }
       },
       error => {
         this.errors = error.error
