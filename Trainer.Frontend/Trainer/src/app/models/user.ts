@@ -5,5 +5,7 @@ export class User  {
   middleName = "";
   email = "";
   role = "";
+  password ="";
+  confirmPassword ="";
   status = "";
 }
