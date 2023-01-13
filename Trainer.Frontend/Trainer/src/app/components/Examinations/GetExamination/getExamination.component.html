@@ -84,15 +84,25 @@
           </mat-radio-group>
         </div>
       </div>
-      <div class="row h-50 mb-5">
-        <div class="card">
-          <h4 class="card-header">
-            MeasureDiaSis
-          </h4>
-          <div class="card-body">
-            <canvas id="myChart" height="300" width="500">ChartLoad</canvas>
-          </div>
-        </div>
+      <div class="row h-25 w-100">
+        <tui-axes
+          class="axes"
+          [verticalLines]="4"
+          [horizontalLines]="2"
+        >
+          <tui-line-chart
+            [x]="0"
+            [y]="0"
+            [width]="400"
+            [height]="150"
+            [smoothingFactor]="50"
+            [dots]="true"
+            [value]="value"
+            [filled]="true"
+            [xStringify]="stringify"
+            [yStringify]="stringify"
+          ></tui-line-chart>
+        </tui-axes>
       </div>
       <div class="row h-25">
         <div class="col termometr"></div>
@@ -108,15 +118,25 @@
           <!--                   onclick="termometrClick(this);" checked>-->
         </div>
       </div>
-      <div class="row h-50 mb-5">
-        <div class="card">
-          <h4 class="card-header">
-            MeasureTemp
-          </h4>
-          <div class="card-body">
-            <canvas id="myChart1" width="500" height="300">Load</canvas>
-          </div>
-        </div>
+      <div class="row h-25 mb-5">
+        <tui-axes
+          class="axes"
+          [verticalLines]="4"
+          [horizontalLines]="2"
+        >
+          <tui-line-chart
+            [x]="0"
+            [y]="0"
+            [width]="400"
+            [height]="150"
+            [smoothingFactor]="50"
+            [dots]="true"
+            [value]="value"
+            [filled]="true"
+            [xStringify]="stringify"
+            [yStringify]="stringify"
+          ></tui-line-chart>
+        </tui-axes>
       </div>
       <div class="row h-25">
         <div class="col heartrate"></div>
@@ -132,15 +152,25 @@
           <!--                   onclick="heartrateClick(this);" checked>-->
         </div>
       </div>
-      <div class="row h-50 mb-5">
-        <div class="card">
-          <h4 class="card-header">
-            MeasureHeart
-          </h4>
-          <div class="card-body">
-            <canvas id="myChart2" width="500" height="300">Load</canvas>
-          </div>
-        </div>
+      <div class="row h-25 mb-5">
+        <tui-axes
+          class="axes"
+          [verticalLines]="4"
+          [horizontalLines]="2"
+        >
+          <tui-line-chart
+            [x]="0"
+            [y]="0"
+            [width]="400"
+            [height]="150"
+            [smoothingFactor]="50"
+            [dots]="true"
+            [value]="value"
+            [filled]="true"
+            [xStringify]="stringify"
+            [yStringify]="stringify"
+          ></tui-line-chart>
+        </tui-axes>
       </div>
       <div class="row h-25">
         <div class="col oximetr"></div>
@@ -156,16 +186,25 @@
           <!--                   onclick="oximetrClick(this);" checked>-->
         </div>
       </div>
-      <div class="row h-50 mb-5">
-        <div class="card">
-          <h4 class="card-header">
-            MeasureSpO2
-          </h4>
-          <div class="card-body">
-            <canvas id="myChart3" width="500" height="300">Load</canvas>
-          </div>
-        </div>
-      </div>
+      <div class="row h-25 mb-5">
+        <tui-axes
+          class="axes"
+          [verticalLines]="4"
+          [horizontalLines]="2"
+        >
+          <tui-line-chart
+            [x]="0"
+            [y]="0"
+            [width]="400"
+            [height]="150"
+            [smoothingFactor]="50"
+            [dots]="true"
+            [value]="value"
+            [filled]="true"
+            [xStringify]="stringify"
+            [yStringify]="stringify"
+          ></tui-line-chart>
+        </tui-axes>
     </div>
   </div>
 </div>

@@ -31,7 +31,7 @@
     <!-- Date Column -->
     <ng-container matColumnDef="date">
       <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by middleName">Date</th>
-      <td mat-cell *matCellDef="let element">{{element?.date}}</td>
+      <td mat-cell *matCellDef="let element">{{element?.date | date:'MMMM d, y'}}</td>
     </ng-container>
 
     <!-- Check Column -->

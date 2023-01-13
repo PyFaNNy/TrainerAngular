@@ -1,4 +1,3 @@
-import { TuiRootModule, TuiDialogModule, TuiAlertModule } from "@taiga-ui/core";
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -29,6 +28,7 @@ import {MaterialModule} from "./material.module";
 import {UpdateExaminationComponent} from "./components/Examinations/UpdateExamination/updateExamination.component";
 import {GetExaminationComponent} from "./components/Examinations/GetExamination/getExamination.component";
 import {VerifyCodeComponent} from "./components/VerifyCode/verify-code.component";
+import {TuiModule} from "./tui.module";
 
 @NgModule({
   declarations: [
@@ -62,10 +62,8 @@ import {VerifyCodeComponent} from "./components/VerifyCode/verify-code.component
     FormsModule,
     BrowserAnimationsModule,
     MaterialModule,
-      TuiRootModule,
-      TuiDialogModule,
-      TuiAlertModule
-],
+    TuiModule,
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
