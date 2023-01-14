@@ -34,19 +34,19 @@ namespace Trainer.Application.Aggregates.Examination.Queries.GetExaminations
 
                 switch (request.SortOrder)
                 {
-                    case SortState.DateSort:
+                    case SortState.DateSortAsc:
                         paginatedList.Items = paginatedList.Items.OrderBy(x => x.Date).ToList();
                         break;
                     case SortState.DateSortDesc:
                         paginatedList.Items = paginatedList.Items.OrderByDescending(s => s.Date).ToList();
                         break;
-                    case SortState.TypeSort:
+                    case SortState.TypeSortAsc:
                         paginatedList.Items = paginatedList.Items.OrderBy(s => s.TypePhysicalActive).ToList();
                         break;
                     case SortState.TypeSortDesc:
                         paginatedList.Items = paginatedList.Items.OrderByDescending(s => s.TypePhysicalActive).ToList();
                         break;
-                    case SortState.FirstNameSort:
+                    case SortState.FirstNameSortAsc:
                         paginatedList.Items = paginatedList.Items.OrderBy(s => s.Patient.FirstName).ToList();
                         break;
                     case SortState.FirstNameSortDesc:
@@ -55,13 +55,13 @@ namespace Trainer.Application.Aggregates.Examination.Queries.GetExaminations
                     case SortState.MiddleNameSortDesc:
                         paginatedList.Items = paginatedList.Items.OrderByDescending(s => s.Patient.MiddleName).ToList();
                         break;
-                    case SortState.MiddleNameSort:
+                    case SortState.MiddleNameSortAsc:
                         paginatedList.Items = paginatedList.Items.OrderBy(s => s.Patient.MiddleName).ToList();
                         break;
                     case SortState.LastNameSortDesc:
                         paginatedList.Items = paginatedList.Items.OrderByDescending(s => s.Patient.LastName).ToList();
                         break;
-                    case SortState.LastNameSort:
+                    case SortState.LastNameSortAsc:
                         paginatedList.Items = paginatedList.Items.OrderBy(s => s.Patient.LastName).ToList();
                         break;
                 }
@@ -81,19 +81,19 @@ namespace Trainer.Application.Aggregates.Examination.Queries.GetExaminations
 
                 switch (request.SortOrder)
                 {
-                    case SortState.DateSort:
+                    case SortState.DateSortAsc:
                         paginatedList.Items = paginatedList.Items.OrderBy(x => x.Date).ToList();
                         break;
                     case SortState.DateSortDesc:
                         paginatedList.Items = paginatedList.Items.OrderByDescending(s => s.Date).ToList();
                         break;
-                    case SortState.TypeSort:
+                    case SortState.TypeSortAsc:
                         paginatedList.Items = paginatedList.Items.OrderBy(s => s.TypePhysicalActive).ToList();
                         break;
                     case SortState.TypeSortDesc:
                         paginatedList.Items = paginatedList.Items.OrderByDescending(s => s.TypePhysicalActive).ToList();
                         break;
-                    case SortState.FirstNameSort:
+                    case SortState.FirstNameSortAsc:
                         paginatedList.Items = paginatedList.Items.OrderBy(s => s.Patient.FirstName).ToList();
                         break;
                     case SortState.FirstNameSortDesc:
@@ -102,13 +102,13 @@ namespace Trainer.Application.Aggregates.Examination.Queries.GetExaminations
                     case SortState.MiddleNameSortDesc:
                         paginatedList.Items = paginatedList.Items.OrderByDescending(s => s.Patient.MiddleName).ToList();
                         break;
-                    case SortState.MiddleNameSort:
+                    case SortState.MiddleNameSortAsc:
                         paginatedList.Items = paginatedList.Items.OrderBy(s => s.Patient.MiddleName).ToList();
                         break;
                     case SortState.LastNameSortDesc:
                         paginatedList.Items = paginatedList.Items.OrderByDescending(s => s.Patient.LastName).ToList();
                         break;
-                    case SortState.LastNameSort:
+                    case SortState.LastNameSortAsc:
                         paginatedList.Items = paginatedList.Items.OrderBy(s => s.Patient.LastName).ToList();
                         break;
                 }

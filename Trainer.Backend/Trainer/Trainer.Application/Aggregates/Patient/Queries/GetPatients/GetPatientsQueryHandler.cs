@@ -38,7 +38,7 @@ namespace Trainer.Application.Aggregates.Patient.Queries.GetPatients
 
                 switch (request.SortOrder)
                 {
-                    case SortState.FirstNameSort:
+                    case SortState.FirstNameSortAsc:
                         paginatedList.Items = paginatedList.Items.OrderBy(s => s.FirstName).ToList();
                         break;
                     case SortState.FirstNameSortDesc:
@@ -47,22 +47,22 @@ namespace Trainer.Application.Aggregates.Patient.Queries.GetPatients
                     case SortState.MiddleNameSortDesc:
                         paginatedList.Items = paginatedList.Items.OrderByDescending(s => s.MiddleName).ToList();
                         break;
-                    case SortState.MiddleNameSort:
+                    case SortState.MiddleNameSortAsc:
                         paginatedList.Items = paginatedList.Items.OrderBy(s => s.MiddleName).ToList();
                         break;
                     case SortState.LastNameSortDesc:
                         paginatedList.Items = paginatedList.Items.OrderByDescending(s => s.LastName).ToList();
                         break;
-                    case SortState.LastNameSort:
+                    case SortState.LastNameSortAsc:
                         paginatedList.Items = paginatedList.Items.OrderBy(s => s.LastName).ToList();
                         break;
-                    case SortState.AgeSort:
+                    case SortState.AgeSortAsc:
                         paginatedList.Items = paginatedList.Items.OrderBy(s => s.Age).ToList();
                         break;
                     case SortState.AgeSortDesc:
                         paginatedList.Items = paginatedList.Items.OrderByDescending(s => s.Age).ToList();
                         break;
-                    case SortState.SexSort:
+                    case SortState.SexSortAsc:
                         paginatedList.Items = paginatedList.Items.OrderBy(s => s.Sex).ToList();
                         break;
                     case SortState.SexSortDesc:
@@ -88,7 +88,7 @@ namespace Trainer.Application.Aggregates.Patient.Queries.GetPatients
 
                 switch (request.SortOrder)
                 {
-                    case SortState.FirstNameSort:
+                    case SortState.FirstNameSortAsc:
                         paginatedList.Items = paginatedList.Items.OrderBy(s => s.FirstName).ToList();
                         break;
                     case SortState.FirstNameSortDesc:
@@ -97,22 +97,22 @@ namespace Trainer.Application.Aggregates.Patient.Queries.GetPatients
                     case SortState.MiddleNameSortDesc:
                         paginatedList.Items = paginatedList.Items.OrderByDescending(s => s.MiddleName).ToList();
                         break;
-                    case SortState.MiddleNameSort:
+                    case SortState.MiddleNameSortAsc:
                         paginatedList.Items = paginatedList.Items.OrderBy(s => s.MiddleName).ToList();
                         break;
                     case SortState.LastNameSortDesc:
                         paginatedList.Items = paginatedList.Items.OrderByDescending(s => s.LastName).ToList();
                         break;
-                    case SortState.LastNameSort:
+                    case SortState.LastNameSortAsc:
                         paginatedList.Items = paginatedList.Items.OrderBy(s => s.LastName).ToList();
                         break;
-                    case SortState.AgeSort:
+                    case SortState.AgeSortAsc:
                         paginatedList.Items = paginatedList.Items.OrderBy(s => s.Age).ToList();
                         break;
                     case SortState.AgeSortDesc:
                         paginatedList.Items = paginatedList.Items.OrderByDescending(s => s.Age).ToList();
                         break;
-                    case SortState.SexSort:
+                    case SortState.SexSortAsc:
                         paginatedList.Items = paginatedList.Items.OrderBy(s => s.Sex).ToList();
                         break;
                     case SortState.SexSortDesc:

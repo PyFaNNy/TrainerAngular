@@ -38,13 +38,13 @@ namespace Trainer.Application.Aggregates.BaseUser.Queries.GetBaseUsers
 
                 switch (request.SortOrder)
                 {
-                    case SortState.EmailSort:
+                    case SortState.EmailSortAsc:
                         paginatedList.Items = paginatedList.Items.OrderBy(s => s.Email).ToList();
                         break;
                     case SortState.EmailSortDesc:
                         paginatedList.Items = paginatedList.Items.OrderByDescending(s => s.Email).ToList();
                         break;
-                    case SortState.FirstNameSort:
+                    case SortState.FirstNameSortAsc:
                         paginatedList.Items = paginatedList.Items.OrderBy(s => s.FirstName).ToList();
                         break;
                     case SortState.FirstNameSortDesc:
@@ -53,25 +53,25 @@ namespace Trainer.Application.Aggregates.BaseUser.Queries.GetBaseUsers
                     case SortState.MiddleNameSortDesc:
                         paginatedList.Items = paginatedList.Items.OrderByDescending(s => s.MiddleName).ToList();
                         break;
-                    case SortState.MiddleNameSort:
+                    case SortState.MiddleNameSortAsc:
                         paginatedList.Items = paginatedList.Items.OrderBy(s => s.MiddleName).ToList();
                         break;
                     case SortState.LastNameSortDesc:
                         paginatedList.Items = paginatedList.Items.OrderByDescending(s => s.LastName).ToList();
                         break;
-                    case SortState.LastNameSort:
+                    case SortState.LastNameSortAsc:
                         paginatedList.Items = paginatedList.Items.OrderBy(s => s.LastName).ToList();
                         break;
                     case SortState.RoleSortDesc:
                         paginatedList.Items = paginatedList.Items.OrderByDescending(s => s.Role).ToList();
                         break;
-                    case SortState.RoleSort:
+                    case SortState.RoleSortAsc:
                         paginatedList.Items = paginatedList.Items.OrderBy(s => s.Role).ToList();
                         break;
                     case SortState.StatusSortDesc:
                         paginatedList.Items = paginatedList.Items.OrderByDescending(s => s.Status).ToList();
                         break;
-                    case SortState.StatusSort:
+                    case SortState.StatusSortAsc:
                         paginatedList.Items = paginatedList.Items.OrderBy(s => s.Status).ToList();
                         break;
                 }
@@ -93,13 +93,13 @@ namespace Trainer.Application.Aggregates.BaseUser.Queries.GetBaseUsers
 
                 switch (request.SortOrder)
                 {
-                    case SortState.EmailSort:
+                    case SortState.EmailSortAsc:
                         paginatedList.Items = paginatedList.Items.OrderBy(s => s.Email).ToList();
                         break;
                     case SortState.EmailSortDesc:
                         paginatedList.Items = paginatedList.Items.OrderByDescending(s => s.Email).ToList();
                         break;
-                    case SortState.FirstNameSort:
+                    case SortState.FirstNameSortAsc:
                         paginatedList.Items = paginatedList.Items.OrderBy(s => s.FirstName).ToList();
                         break;
                     case SortState.FirstNameSortDesc:
@@ -108,25 +108,25 @@ namespace Trainer.Application.Aggregates.BaseUser.Queries.GetBaseUsers
                     case SortState.MiddleNameSortDesc:
                         paginatedList.Items = paginatedList.Items.OrderByDescending(s => s.MiddleName).ToList();
                         break;
-                    case SortState.MiddleNameSort:
+                    case SortState.MiddleNameSortAsc:
                         paginatedList.Items = paginatedList.Items.OrderBy(s => s.MiddleName).ToList();
                         break;
                     case SortState.LastNameSortDesc:
                         paginatedList.Items = paginatedList.Items.OrderByDescending(s => s.LastName).ToList();
                         break;
-                    case SortState.LastNameSort:
+                    case SortState.LastNameSortAsc:
                         paginatedList.Items = paginatedList.Items.OrderBy(s => s.LastName).ToList();
                         break;
                     case SortState.RoleSortDesc:
                         paginatedList.Items = paginatedList.Items.OrderByDescending(s => s.Role).ToList();
                         break;
-                    case SortState.RoleSort:
+                    case SortState.RoleSortAsc:
                         paginatedList.Items = paginatedList.Items.OrderBy(s => s.Role).ToList();
                         break;
                     case SortState.StatusSortDesc:
                         paginatedList.Items = paginatedList.Items.OrderByDescending(s => s.Status).ToList();
                         break;
-                    case SortState.StatusSort:
+                    case SortState.StatusSortAsc:
                         paginatedList.Items = paginatedList.Items.OrderBy(s => s.Status).ToList();
                         break;
                 }

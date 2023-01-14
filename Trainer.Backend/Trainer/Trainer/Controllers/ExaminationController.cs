@@ -38,7 +38,7 @@ namespace Trainer.Controllers
         [HttpGet]
         // [Authorize(Roles = "admin, doctor, manager")]
         public async Task<IActionResult> GetModels(
-            SortState sortOrder = SortState.FirstNameSort,
+            SortState sortOrder = SortState.FirstNameSortAsc,
             int? pageIndex = 1,
             int? pageSize = 10)
         {
