@@ -12,8 +12,8 @@ export class PatientService {
 
   constructor(private http: HttpClient) {}
 
-  public getPatients(): Observable<Patient[]> {
-    return this.http.get<Patient[]>(`${environment.apiUrl}/${this.url}`);
+  public getPatients(pageIndex:number, pageSize:number): Observable<Patient[]> {
+    return this.http.get<Patient[]>(`${environment.apiUrl}/${this.url}?pageIndex=${pageIndex}&pageSize=${pageSize}`);
   }
 
   public getPatient(id: string): Observable<Patient> {

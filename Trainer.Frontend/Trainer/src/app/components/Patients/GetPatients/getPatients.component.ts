@@ -1,5 +1,7 @@
-import {Component, OnInit} from "@angular/core";
+import {AfterViewInit, Component, OnInit, ViewChild} from "@angular/core";
 import {PatientService} from "../../../services/patient.service";
+import {MatPaginator, PageEvent} from "@angular/material/paginator";
+import {tap} from "rxjs";
 
 @Component({
   selector: 'app-getPatients',
@@ -11,9 +13,15 @@ import {PatientService} from "../../../services/patient.service";
 export class GetPatientsComponent implements OnInit {
   displayedColumns?: string[];
   patients: any[] = [];
-  selectedPatient:any;
-  isMasterSel:boolean = false;
-  constructor(private patientService: PatientService) {}
+  selectedPatient: any;
+  isMasterSel: boolean = false;
+  length: number =0;
+  pageSize: number = 5;
+  pageIndex: number = 0;
+  pageEvent: PageEvent = new PageEvent();
+  constructor(private patientService: PatientService) {
+  }
+
   ngOnInit(): void {
     this.loadPatients();
     this.isMasterSel = false;
@@ -32,42 +40,40 @@ export class GetPatientsComponent implements OnInit {
         a.click();
       });
   }
-
-  delete(): void
-  {
+  delete(): void {
     this.patientService
       .deletePatients(this.selectedPatient)
       .subscribe();
   }
-
   checkUncheckAll() {
-    for (var i = 0; i < this.patients.length; i++) {
+    for (let i = 0; i < this.patients.length; i++) {
       this.patients[i].isSelected = this.isMasterSel;
     }
     this.getCheckedItemList();
   }
-
   isAllSelected() {
-    this.isMasterSel = this.patients.every(function(item:any) {
+    this.isMasterSel = this.patients.every(function (item: any) {
       return item.isSelected == true;
     })
     this.getCheckedItemList();
   }
-
-  getCheckedItemList(){
+  getCheckedItemList() {
     this.selectedPatient = [];
-    for (var i = 0; i < this.patients.length; i++) {
-      if(this.patients[i].isSelected)
+    for (let i = 0; i < this.patients.length; i++) {
+      if (this.patients[i].isSelected)
         this.selectedPatient.push(this.patients[i].id);
     }
     this.selectedPatient = JSON.stringify(this.selectedPatient);
   }
-
-  private loadPatients()
-  {
+  private loadPatients() {
     this.patientService
-      .getPatients()
+      .getPatients(
+        this.pageIndex+1 ?? 0,
+        this.pageSize ?? 10
+      )
       .subscribe((result: any) => {
+        this.pageIndex = result.pageIndex-1;
+        this.length = result.totalCount;
         this.patients = result.items;
         this.patients = this.patients.map(x => (
           {
@@ -80,5 +86,14 @@ export class GetPatientsComponent implements OnInit {
             sex: x.sex
           }))
       });
+  }
+
+  handlePageEvent(e: PageEvent) {
+    this.pageEvent = e;
+    this.length = e.length;
+    this.pageSize = e.pageSize;
+    this.pageIndex = e.pageIndex;
+
+    this.loadPatients();
   }
 }
