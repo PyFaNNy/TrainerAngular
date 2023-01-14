@@ -1,5 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {ExaminationService} from "../../../services/examination.service";
+import {PageEvent} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-getExaminations',
@@ -12,6 +13,10 @@ export class GetExaminationsComponent implements OnInit {
   examinations: any[] = [];
   selectedExaminations: any;
   isMasterSel: boolean = false;
+  length: number = 0;
+  pageSize: number = 5;
+  pageIndex: number = 0;
+  pageEvent: PageEvent = new PageEvent();
 
   constructor(private examinationService: ExaminationService) {
   }
@@ -19,7 +24,7 @@ export class GetExaminationsComponent implements OnInit {
   ngOnInit(): void {
     this.loadExamination();
     this.isMasterSel = false;
-    this.displayedColumns = ['typePhysicalActive','lastName', 'firstName', 'middleName', 'date','isSelected', 'btns'];
+    this.displayedColumns = ['typePhysicalActive', 'lastName', 'firstName', 'middleName', 'date', 'isSelected', 'btns'];
   }
 
   downloadFile(): void {
@@ -66,11 +71,15 @@ export class GetExaminationsComponent implements OnInit {
     this.selectedExaminations = JSON.stringify(this.selectedExaminations);
   }
 
-  private loadExamination()
-  {
+  private loadExamination() {
     this.examinationService
-      .getExaminations()
+      .getExaminations(
+        this.pageIndex+1 ?? 0,
+        this.pageSize ?? 10
+      )
       .subscribe((result: any) => {
+        this.pageIndex = result.pageIndex-1;
+        this.length = result.totalCount;
         this.examinations = result.items;
         this.examinations = this.examinations.map(x => (
           {
@@ -85,5 +94,14 @@ export class GetExaminationsComponent implements OnInit {
             date: x.date
           }))
       });
+  }
+
+  handlePageEvent(e: PageEvent) {
+    this.pageEvent = e;
+    this.length = e.length;
+    this.pageSize = e.pageSize;
+    this.pageIndex = e.pageIndex;
+
+    this.loadExamination();
   }
 }

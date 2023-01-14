@@ -13,8 +13,8 @@ export class ExaminationService {
 
   constructor(private http: HttpClient) {}
 
-  public getExaminations(): Observable<Examination[]> {
-    return this.http.get<Examination[]>(`${environment.apiUrl}/${this.url}`);
+  public getExaminations(pageIndex:number, pageSize:number): Observable<Examination[]> {
+    return this.http.get<Examination[]>(`${environment.apiUrl}/${this.url}?pageIndex=${pageIndex}&pageSize=${pageSize}`);
   }
 
   public getExamination(id: string): Observable<Examination> {
