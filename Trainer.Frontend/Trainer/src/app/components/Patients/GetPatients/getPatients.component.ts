@@ -2,6 +2,7 @@ import {AfterViewInit, Component, OnInit, ViewChild} from "@angular/core";
 import {PatientService} from "../../../services/patient.service";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {tap} from "rxjs";
+import {Sort} from "@angular/material/sort";
 
 @Component({
   selector: 'app-getPatients',
@@ -15,10 +16,11 @@ export class GetPatientsComponent implements OnInit {
   patients: any[] = [];
   selectedPatient: any;
   isMasterSel: boolean = false;
-  length: number =0;
+  length: number = 0;
   pageSize: number = 5;
   pageIndex: number = 0;
   pageEvent: PageEvent = new PageEvent();
+
   constructor(private patientService: PatientService) {
   }
 
@@ -40,23 +42,27 @@ export class GetPatientsComponent implements OnInit {
         a.click();
       });
   }
+
   delete(): void {
     this.patientService
       .deletePatients(this.selectedPatient)
       .subscribe();
   }
+
   checkUncheckAll() {
     for (let i = 0; i < this.patients.length; i++) {
       this.patients[i].isSelected = this.isMasterSel;
     }
     this.getCheckedItemList();
   }
+
   isAllSelected() {
     this.isMasterSel = this.patients.every(function (item: any) {
       return item.isSelected == true;
     })
     this.getCheckedItemList();
   }
+
   getCheckedItemList() {
     this.selectedPatient = [];
     for (let i = 0; i < this.patients.length; i++) {
@@ -65,14 +71,16 @@ export class GetPatientsComponent implements OnInit {
     }
     this.selectedPatient = JSON.stringify(this.selectedPatient);
   }
-  private loadPatients() {
+
+  private loadPatients(sort?:any) {
     this.patientService
       .getPatients(
-        this.pageIndex+1 ?? 0,
-        this.pageSize ?? 10
+        this.pageIndex + 1 ?? 0,
+        this.pageSize ?? 10,
+        sort
       )
       .subscribe((result: any) => {
-        this.pageIndex = result.pageIndex-1;
+        this.pageIndex = result.pageIndex - 1;
         this.length = result.totalCount;
         this.patients = result.items;
         this.patients = this.patients.map(x => (
@@ -95,5 +103,19 @@ export class GetPatientsComponent implements OnInit {
     this.pageIndex = e.pageIndex;
 
     this.loadPatients();
+  }
+
+  announceSortChange(sortState: Sort) {
+    console.log(sortState);
+    let sort;
+    if (sortState.direction) {
+      sort = sortState.active + "Sort";
+      if (sortState.direction == "desc") {
+        sort += "Desc";
+      } else {
+        sort += "Asc";
+      }
+    }
+    this.loadPatients(sort);
   }
 }

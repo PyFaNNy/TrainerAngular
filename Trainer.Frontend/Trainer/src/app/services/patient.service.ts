@@ -12,8 +12,15 @@ export class PatientService {
 
   constructor(private http: HttpClient) {}
 
-  public getPatients(pageIndex:number, pageSize:number): Observable<Patient[]> {
-    return this.http.get<Patient[]>(`${environment.apiUrl}/${this.url}?pageIndex=${pageIndex}&pageSize=${pageSize}`);
+  public getPatients(pageIndex:number, pageSize:number, sort:any): Observable<Patient[]> {
+    if(sort !=null)
+    {
+      return this.http.get<Patient[]>(`${environment.apiUrl}/${this.url}?sortOrder=${sort}&pageIndex=${pageIndex}&pageSize=${pageSize}`);
+    }
+    else
+    {
+      return this.http.get<Patient[]>(`${environment.apiUrl}/${this.url}?pageIndex=${pageIndex}&pageSize=${pageSize}`);
+    }
   }
 
   public getPatient(id: string): Observable<Patient> {
