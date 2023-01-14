@@ -1,6 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {UserService} from "../../services/user.service";
 import {PageEvent} from "@angular/material/paginator";
+import {Sort} from "@angular/material/sort";
 
 @Component({
   selector: 'app-adminPanel',
@@ -24,7 +25,7 @@ export class AdminPanelComponent implements OnInit {
   ngOnInit(): void {
     this.loadUsers();
     this.isMasterSel = false;
-    this.displayedColumns = ['email', 'lastName', 'firstName', 'middleName', 'roles', 'status', 'isSelected', 'btns'];
+    this.displayedColumns = ['email', 'lastName', 'firstName', 'middleName', 'role', 'status', 'isSelected', 'btns'];
   }
 
   delete(): void {
@@ -91,11 +92,12 @@ export class AdminPanelComponent implements OnInit {
     this.selectedUsers = JSON.stringify(this.selectedUsers);
   }
 
-  private loadUsers() {
+  private loadUsers(sort?:any) {
     this.userService
       .getUsers(
         this.pageIndex+1 ?? 0,
-        this.pageSize ?? 10
+        this.pageSize ?? 10,
+        sort
       )
       .subscribe((result: any) => {
         this.pageIndex = result.pageIndex-1;
@@ -122,5 +124,19 @@ export class AdminPanelComponent implements OnInit {
     this.pageIndex = e.pageIndex;
 
     this.loadUsers();
+  }
+
+  announceSortChange(sortState: Sort) {
+    console.log(sortState);
+    let sort;
+    if (sortState.direction) {
+      sort = sortState.active + "Sort";
+      if (sortState.direction == "desc") {
+        sort += "Desc";
+      } else {
+        sort += "Asc";
+      }
+    }
+    this.loadUsers(sort);
   }
 }

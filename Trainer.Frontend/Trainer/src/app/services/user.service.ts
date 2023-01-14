@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
 import {User} from "../models/user";
+import {Patient} from "../models/patient";
 
 @Injectable({
   providedIn: 'root',
@@ -12,8 +13,15 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  public getUsers(pageIndex:number, pageSize:number): Observable<User[]> {
-    return this.http.get<User[]>(`${environment.apiUrl}/${this.url}?pageIndex=${pageIndex}&pageSize=${pageSize}`);
+  public getUsers(pageIndex:number, pageSize:number, sort:any): Observable<User[]> {
+    if(sort !=null)
+    {
+      return this.http.get<User[]>(`${environment.apiUrl}/${this.url}?sortOrder=${sort}&pageIndex=${pageIndex}&pageSize=${pageSize}`);
+    }
+    else
+    {
+      return this.http.get<User[]>(`${environment.apiUrl}/${this.url}?pageIndex=${pageIndex}&pageSize=${pageSize}`);
+    }
   }
   public createUser(user: User): Observable<User[]> {
     return this.http.post<User[]>(
