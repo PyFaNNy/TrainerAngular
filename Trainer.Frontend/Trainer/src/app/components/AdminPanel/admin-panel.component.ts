@@ -1,5 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {UserService} from "../../services/user.service";
+import {PageEvent} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-adminPanel',
@@ -12,6 +13,10 @@ export class AdminPanelComponent implements OnInit {
   users: any[] = [];
   selectedUsers: any;
   isMasterSel: boolean = false;
+  length: number = 0;
+  pageSize: number = 5;
+  pageIndex: number = 0;
+  pageEvent: PageEvent = new PageEvent();
 
   constructor(private userService: UserService) {
   }
@@ -19,7 +24,7 @@ export class AdminPanelComponent implements OnInit {
   ngOnInit(): void {
     this.loadUsers();
     this.isMasterSel = false;
-    this.displayedColumns = ['email','lastName', 'firstName', 'middleName', 'roles','status','isSelected', 'btns'];
+    this.displayedColumns = ['email', 'lastName', 'firstName', 'middleName', 'roles', 'status', 'isSelected', 'btns'];
   }
 
   delete(): void {
@@ -47,7 +52,7 @@ export class AdminPanelComponent implements OnInit {
       );
   }
 
-  approve(id:string): void {
+  approve(id: string): void {
     this.userService
       .approveUser(id)
       .subscribe(() =>
@@ -55,7 +60,7 @@ export class AdminPanelComponent implements OnInit {
       );
   }
 
-  decline(id:string): void {
+  decline(id: string): void {
     this.userService
       .declineUser(id)
       .subscribe(() =>
@@ -88,8 +93,13 @@ export class AdminPanelComponent implements OnInit {
 
   private loadUsers() {
     this.userService
-      .getUsers()
+      .getUsers(
+        this.pageIndex+1 ?? 0,
+        this.pageSize ?? 10
+      )
       .subscribe((result: any) => {
+        this.pageIndex = result.pageIndex-1;
+        this.length = result.totalCount;
         this.users = result.items;
         this.users = this.users.map(x => (
           {
@@ -103,5 +113,14 @@ export class AdminPanelComponent implements OnInit {
             status: x.status
           }))
       });
+  }
+
+  handlePageEvent(e: PageEvent) {
+    this.pageEvent = e;
+    this.length = e.length;
+    this.pageSize = e.pageSize;
+    this.pageIndex = e.pageIndex;
+
+    this.loadUsers();
   }
 }

@@ -12,8 +12,8 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  public getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${environment.apiUrl}/${this.url}`);
+  public getUsers(pageIndex:number, pageSize:number): Observable<User[]> {
+    return this.http.get<User[]>(`${environment.apiUrl}/${this.url}?pageIndex=${pageIndex}&pageSize=${pageSize}`);
   }
   public createUser(user: User): Observable<User[]> {
     return this.http.post<User[]>(
