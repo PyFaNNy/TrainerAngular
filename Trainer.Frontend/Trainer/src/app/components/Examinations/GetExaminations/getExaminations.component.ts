@@ -1,6 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {ExaminationService} from "../../../services/examination.service";
 import {PageEvent} from "@angular/material/paginator";
+import {Sort} from "@angular/material/sort";
 
 @Component({
   selector: 'app-getExaminations',
@@ -24,7 +25,7 @@ export class GetExaminationsComponent implements OnInit {
   ngOnInit(): void {
     this.loadExamination();
     this.isMasterSel = false;
-    this.displayedColumns = ['typePhysicalActive', 'lastName', 'firstName', 'middleName', 'date', 'isSelected', 'btns'];
+    this.displayedColumns = ['type', 'lastName', 'firstName', 'middleName', 'date', 'isSelected', 'btns'];
   }
 
   downloadFile(): void {
@@ -71,11 +72,12 @@ export class GetExaminationsComponent implements OnInit {
     this.selectedExaminations = JSON.stringify(this.selectedExaminations);
   }
 
-  private loadExamination() {
+  private loadExamination(sort?:any) {
     this.examinationService
       .getExaminations(
         this.pageIndex+1 ?? 0,
-        this.pageSize ?? 10
+        this.pageSize ?? 10,
+        sort
       )
       .subscribe((result: any) => {
         this.pageIndex = result.pageIndex-1;
@@ -103,5 +105,19 @@ export class GetExaminationsComponent implements OnInit {
     this.pageIndex = e.pageIndex;
 
     this.loadExamination();
+  }
+
+  announceSortChange(sortState: Sort) {
+    console.log(sortState);
+    let sort;
+    if (sortState.direction) {
+      sort = sortState.active + "Sort";
+      if (sortState.direction == "desc") {
+        sort += "Desc";
+      } else {
+        sort += "Asc";
+      }
+    }
+    this.loadExamination(sort);
   }
 }

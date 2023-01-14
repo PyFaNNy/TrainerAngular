@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { Examination } from '../models/examination';
 import { environment } from 'src/environments/environment';
 import {Patient} from "../models/patient";
+import {User} from "../models/user";
 
 @Injectable({
   providedIn: 'root',
@@ -13,8 +14,15 @@ export class ExaminationService {
 
   constructor(private http: HttpClient) {}
 
-  public getExaminations(pageIndex:number, pageSize:number): Observable<Examination[]> {
-    return this.http.get<Examination[]>(`${environment.apiUrl}/${this.url}?pageIndex=${pageIndex}&pageSize=${pageSize}`);
+  public getExaminations(pageIndex:number, pageSize:number, sort:any): Observable<Examination[]> {
+    if(sort !=null)
+    {
+      return this.http.get<Examination[]>(`${environment.apiUrl}/${this.url}?sortOrder=${sort}&pageIndex=${pageIndex}&pageSize=${pageSize}`);
+    }
+    else
+    {
+      return this.http.get<Examination[]>(`${environment.apiUrl}/${this.url}?pageIndex=${pageIndex}&pageSize=${pageSize}`);
+    }
   }
 
   public getExamination(id: string): Observable<Examination> {
