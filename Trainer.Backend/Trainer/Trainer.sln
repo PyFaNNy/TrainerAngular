@@ -35,6 +35,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trainer.BlobStorage", "Trai
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{840BF1FB-0BB9-4E67-9383-D69DA93A2BAD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trainer.IdentityServer", "Trainer.IdentityServer\Trainer.IdentityServer.csproj", "{4FE46FCB-EEDF-4F89-89F0-83DFE4EA59FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -89,6 +91,10 @@ Global
 		{840BF1FB-0BB9-4E67-9383-D69DA93A2BAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{840BF1FB-0BB9-4E67-9383-D69DA93A2BAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{840BF1FB-0BB9-4E67-9383-D69DA93A2BAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FE46FCB-EEDF-4F89-89F0-83DFE4EA59FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FE46FCB-EEDF-4F89-89F0-83DFE4EA59FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FE46FCB-EEDF-4F89-89F0-83DFE4EA59FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FE46FCB-EEDF-4F89-89F0-83DFE4EA59FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,6 +111,7 @@ Global
 		{468A735A-1594-4F5F-B248-E83EFA350D65} = {DB449657-A1ED-46DF-87E1-B930A9FAEA67}
 		{3687A7C3-3DAB-4DE5-BF9A-0EDF3294A531} = {DB449657-A1ED-46DF-87E1-B930A9FAEA67}
 		{820A4E29-5FE3-4546-A583-ECFC32543E11} = {DB449657-A1ED-46DF-87E1-B930A9FAEA67}
+		{4FE46FCB-EEDF-4F89-89F0-83DFE4EA59FE} = {AC4CFC79-5E79-4176-956C-5CC2B1F64030}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A0D96048-6E71-41A2-BACC-BFFC314D8FB2}
