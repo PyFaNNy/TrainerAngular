@@ -22,10 +22,12 @@ export class LoginComponent {
     this.authService
       .login(this.user)
       .subscribe(value => {
-          this.router.navigate(['/verifycode',this.user.email,'Login'])
+          window.location.replace("");
+          // this.router.navigate(['/verifycode',this.user.email,'Login'])
         },
         error => {
-          this.errors = error.error
+          if(error.status < 500)
+          this.errors = "Login/Password incorrect"
         });
   }
 

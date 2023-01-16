@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {TokenService} from "../../services/token.service";
 import {AuthService} from "../../services/auth.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     let token = this.tokenService.getToken();
+    this.email = this.tokenService.decodeToken(token).email;
     this.IsAuth = token != null;
   }
 
