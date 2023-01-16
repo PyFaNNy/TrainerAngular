@@ -1,14 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="1dd7c2b3-1a20-46f5-8148-4b0be7e78237" name="Changes" comment="" />
+    <list default="true" id="1dd7c2b3-1a20-46f5-8148-4b0be7e78237" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Trainer/src/app/services/auth.interceptor.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Trainer/src/app/services/token.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Trainer.Backend/Trainer/Trainer/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Trainer.Backend/Trainer/Trainer/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Trainer/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Trainer/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Trainer/src/app/components/Login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Trainer/src/app/components/Login/login.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Trainer/src/app/services/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Trainer/src/app/services/auth.service.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2JE0w7QtFFrPUDcqlmTzGfnGRCv" />
   <component name="ProjectViewState">
@@ -21,6 +42,12 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "D:/Programming/TrainerAngular/Trainer.Frontend/Trainer",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "D:\\Programming\\TrainerAngular\\Trainer.Frontend\\Trainer\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -33,6 +60,8 @@
       <option name="presentableId" value="Default" />
       <updated>1671628170932</updated>
       <workItem from="1671628172061" duration="15000" />
+      <workItem from="1673889949078" duration="2148000" />
+      <workItem from="1673892724879" duration="45000" />
     </task>
     <servers />
   </component>

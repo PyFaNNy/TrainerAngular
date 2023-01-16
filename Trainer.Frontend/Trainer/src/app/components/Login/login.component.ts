@@ -22,7 +22,7 @@ export class LoginComponent {
     this.authService
       .login(this.user)
       .subscribe(value => {
-          this.router.navigate(['/verifycode',this.user.email,'Login'])
+          // this.router.navigate(['/verifycode',this.user.email,'Login'])
         },
         error => {
           this.errors = error.error

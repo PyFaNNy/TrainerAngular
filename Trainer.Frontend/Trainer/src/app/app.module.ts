@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 
 import {HeaderComponent} from "./components/Header/header.component";
@@ -29,6 +29,7 @@ import {UpdateExaminationComponent} from "./components/Examinations/UpdateExamin
 import {GetExaminationComponent} from "./components/Examinations/GetExamination/getExamination.component";
 import {VerifyCodeComponent} from "./components/VerifyCode/verify-code.component";
 import {TuiModule} from "./tui.module";
+import {AuthInterceptor} from "./services/auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -64,7 +65,13 @@ import {TuiModule} from "./tui.module";
     MaterialModule,
     TuiModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
