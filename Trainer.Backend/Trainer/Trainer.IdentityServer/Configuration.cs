@@ -13,7 +13,7 @@ public static class Configuration
             {
                 ClientId = "angular_client",
                 ClientSecrets = { new Secret("angular_client".ToSha256()) },
-                AllowedCorsOrigins = {"https://localhost:7075"},
+                AllowedCorsOrigins = {"https://localhost:7075", "http://localhost:4200"},
                 AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
 
                 AllowedScopes =

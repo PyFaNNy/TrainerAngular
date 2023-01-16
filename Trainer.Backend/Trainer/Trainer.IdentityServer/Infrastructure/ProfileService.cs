@@ -4,6 +4,7 @@ using IdentityServer4.Models;
 using IdentityServer4.Services;
 using Microsoft.EntityFrameworkCore;
 using Trainer.Application.Interfaces;
+using Trainer.Common;
 
 namespace Trainer.IdentityServer.Infrastructure;
 
@@ -24,7 +25,7 @@ public class ProfileService : IProfileService
         var claims = new List<Claim>
         {
             new Claim(JwtClaimTypes.Subject, user.Id.ToString()),
-            new Claim(JwtClaimTypes.Role, user.Role.ToString()),
+            new Claim(JwtClaimTypes.Role, user.Role.ToName()),
             new Claim(JwtClaimTypes.Email, user.Email),
         };
 

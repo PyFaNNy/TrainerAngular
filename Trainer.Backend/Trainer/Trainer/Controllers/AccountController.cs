@@ -32,51 +32,5 @@ namespace Trainer.Controllers
 
             return Ok();
         }
-
-        [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginViewModel model)
-        {
-            try
-            {
-                var user = await Mediator.Send(new GetBaseUserQuery(model.Email));
-                var result = CryptoHelper.VerifyHashedPassword(user.PasswordHash, model.Password);
-
-                if (result)
-                {
-                    await Mediator.Send(new RequestLoginCodeCommand
-                    {
-                        Email = user.Email,
-                        Host = HttpContext.Request.Host.ToString()
-                    });
-                    return Ok();
-                    // return RedirectToAction("VerifyCode", "OTP",
-                    // new { otpAction = OTPAction.Login, email = user.Email });
-                }
-            }
-            catch (Exception e)
-            {
-                return BadRequest("Error login/password");
-            }
-
-            return BadRequest("Error login/password");
-        }
-
-        [HttpGet("claim")]
-        public async Task<IActionResult> ReturnClaim(string Email)
-        {
-            var user = await Mediator.Send(new GetBaseUserQuery(Email));
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, user.Email),
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Role, user.Role.ToName())
-            };
-
-            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-            await HttpContext.SignInAsync(new ClaimsPrincipal(claimsIdentity));
-
-            return Ok();
-        }
     }
 }

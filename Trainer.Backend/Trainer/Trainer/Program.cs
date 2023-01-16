@@ -1,8 +1,11 @@
-﻿using System.Reflection;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Reflection;
 using App.Metrics.Formatters.Prometheus;
 using FluentValidation.AspNetCore;
 using IdentityServer4.AccessTokenValidation;
 using Jdenticon.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
@@ -91,12 +94,23 @@ builder.Services.AddAuthentication(options =>
         options.DefaultChallengeScheme = IdentityServerAuthenticationDefaults.AuthenticationScheme;
         options.DefaultAuthenticateScheme = IdentityServerAuthenticationDefaults.AuthenticationScheme;
     })
-    .AddIdentityServerAuthentication(options =>
+    .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
     {
-        options.ApiName = "TrainerAPI";
+        options.RequireHttpsMetadata = true;
         options.Authority = "https://localhost:10001";
-        options.RequireHttpsMetadata = false;
+
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateAudience = false
+        };
     });
+    // .AddIdentityServerAuthentication(options =>
+    // {
+    //     options.ApiName = "TrainerAPI";
+    //     options.Authority = "https://localhost:10001";
+    //     options.RequireHttpsMetadata = false;
+    //     
+    // });
 
 builder.Services.AddAuthorization();
 

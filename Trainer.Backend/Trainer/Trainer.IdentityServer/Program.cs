@@ -16,7 +16,7 @@ builder.Services.AddIdentityServer()
     .AddInMemoryApiResources(Configuration.GetApiResources())
     .AddInMemoryIdentityResources(Configuration.GetIdentityResources())
     .AddInMemoryApiScopes(Configuration.GetApiScopes())
-    .AddResourceOwnerValidator<UserValidator>()
+    .AddResourceOwnerValidator<UserValidator>() 
     .AddProfileService<ProfileService>()
     .AddDeveloperSigningCredential();
 
