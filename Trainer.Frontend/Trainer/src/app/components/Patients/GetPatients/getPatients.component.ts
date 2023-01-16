@@ -3,6 +3,7 @@ import {PatientService} from "../../../services/patient.service";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {tap} from "rxjs";
 import {Sort} from "@angular/material/sort";
+import {TokenService} from "../../../services/token.service";
 
 @Component({
   selector: 'app-getPatients',
@@ -20,14 +21,15 @@ export class GetPatientsComponent implements OnInit {
   pageSize: number = 5;
   pageIndex: number = 0;
   pageEvent: PageEvent = new PageEvent();
-
-  constructor(private patientService: PatientService) {
+  role:string ="";
+  constructor(private patientService: PatientService, private tokenService: TokenService) {
   }
 
   ngOnInit(): void {
     this.loadPatients();
     this.isMasterSel = false;
-    this.displayedColumns = ['lastName', 'firstName', 'middleName', 'age', 'sex', 'isSelected', 'update', 'setExamination'];
+    this.displayedColumns = ['lastName', 'firstName', 'middleName', 'age', 'sex', 'isSelected', 'setExamination'];
+    this.role = this.tokenService.decodeToken(this.tokenService.getToken()).role;
   }
 
   downloadFile(): void {

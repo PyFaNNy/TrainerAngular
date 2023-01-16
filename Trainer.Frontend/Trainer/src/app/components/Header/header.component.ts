@@ -9,13 +9,16 @@ import {AuthService} from "../../services/auth.service";
 
 export class HeaderComponent implements OnInit {
   email: string = '';
+  role: string = '';
   IsAuth: boolean = false;
   constructor(private tokenService: TokenService, private authService: AuthService) {
   }
 
   ngOnInit(): void {
     let token = this.tokenService.getToken();
-    this.email = this.tokenService.decodeToken(token).email;
+    let decodeTok = this.tokenService.decodeToken(token);
+    this.email = decodeTok.email;
+    this.role = decodeTok.role;
     this.IsAuth = token != null;
   }
 

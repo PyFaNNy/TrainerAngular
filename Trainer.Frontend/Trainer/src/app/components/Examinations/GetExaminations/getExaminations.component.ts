@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {ExaminationService} from "../../../services/examination.service";
 import {PageEvent} from "@angular/material/paginator";
 import {Sort} from "@angular/material/sort";
+import {TokenService} from "../../../services/token.service";
 
 @Component({
   selector: 'app-getExaminations',
@@ -18,14 +19,16 @@ export class GetExaminationsComponent implements OnInit {
   pageSize: number = 5;
   pageIndex: number = 0;
   pageEvent: PageEvent = new PageEvent();
+  role:string ="";
 
-  constructor(private examinationService: ExaminationService) {
+  constructor(private examinationService: ExaminationService, private tokenService: TokenService) {
   }
 
   ngOnInit(): void {
     this.loadExamination();
     this.isMasterSel = false;
     this.displayedColumns = ['type', 'lastName', 'firstName', 'middleName', 'date', 'isSelected', 'btns'];
+    this.role = this.tokenService.decodeToken(this.tokenService.getToken()).role;
   }
 
   downloadFile(): void {

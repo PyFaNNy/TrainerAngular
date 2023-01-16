@@ -22,7 +22,7 @@ export class AuthService {
   };
 
   private static handleError(error: HttpErrorResponse): any {
-    return throwError(error);
+
   }
 
   private static log(message: string): any {
