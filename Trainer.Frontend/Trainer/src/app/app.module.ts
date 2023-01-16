@@ -30,6 +30,7 @@ import {GetExaminationComponent} from "./components/Examinations/GetExamination/
 import {VerifyCodeComponent} from "./components/VerifyCode/verify-code.component";
 import {TuiModule} from "./tui.module";
 import {AuthInterceptor} from "./services/auth.interceptor";
+import {AuthGuard} from "./guard/auth.guard";
 
 @NgModule({
   declarations: [

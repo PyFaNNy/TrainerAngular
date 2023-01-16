@@ -16,21 +16,47 @@ import {ErrorComponent} from "./components/Error/error.component";
 import {UpdateExaminationComponent} from "./components/Examinations/UpdateExamination/updateExamination.component";
 import {GetExaminationComponent} from "./components/Examinations/GetExamination/getExamination.component";
 import {VerifyCodeComponent} from "./components/VerifyCode/verify-code.component";
+import {AuthGuard} from "./guard/auth.guard";
+import {RoleGuard} from "./guard/role.guard";
 
 const appRoute: Routes  = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
   {path: 'reset', component: ResetPasswordComponent},
-  {path: 'patients', component: GetPatientsComponent},
-  {path: 'addPatient', component: AddPatientComponent},
-  {path: 'importPatients', component: ImportPatientsComponent},
-  {path: 'updatePatient/:id', component: UpdatePatientComponent},
-  {path: 'examinations', component: GetExaminationsComponent},
-  {path: 'examination/:id', component: GetExaminationComponent},
-  {path: 'addExamination/:id', component: AddExaminationComponent},
-  {path: 'updateExamination/:id', component: UpdateExaminationComponent},
-  {path: 'importExaminations', component: ImportExaminationsComponent},
-  {path: 'admin', component: AdminPanelComponent},
+  {path: 'patients', component: GetPatientsComponent, canActivate: [ AuthGuard ]},
+  {path: 'addPatient', component: AddPatientComponent, canActivate: [ RoleGuard ],
+    data: {
+      role: ['admin', 'manager']
+    }},
+  {path: 'importPatients', component: ImportPatientsComponent, canActivate: [ RoleGuard ],
+    data: {
+      role: ['admin', 'manager']
+    }},
+  {path: 'updatePatient/:id', component: UpdatePatientComponent, canActivate: [ RoleGuard ],
+    data: {
+      role: ['admin', 'manager']
+    }},
+  {path: 'examinations', component: GetExaminationsComponent, canActivate: [ AuthGuard ]},
+  {path: 'examination/:id', component: GetExaminationComponent, canActivate: [ RoleGuard ],
+    data: {
+      role: 'doctor'
+    }},
+  {path: 'addExamination/:id', component: AddExaminationComponent, canActivate: [ RoleGuard ],
+    data: {
+      role: 'doctor'
+    }},
+  {path: 'updateExamination/:id', component: UpdateExaminationComponent, canActivate: [ RoleGuard ],
+    data: {
+      role: 'doctor'
+    }},
+  {path: 'importExaminations', component: ImportExaminationsComponent, canActivate: [ RoleGuard ],
+    data: {
+      role: ['admin', 'manager']
+    }},
+  {path: 'admin', component: AdminPanelComponent,  canActivate: [ RoleGuard ],
+    data: {
+      role: 'admin'
+    }},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'verifycode/:email/:action', component: VerifyCodeComponent},

@@ -1,7 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {TokenService} from "../../services/token.service";
 import {AuthService} from "../../services/auth.service";
-import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -11,7 +10,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class HeaderComponent implements OnInit {
   email: string = '';
   IsAuth: boolean = false;
-  constructor(private tokenService: TokenService, private authService: AuthService, private router: Router) {
+  constructor(private tokenService: TokenService, private authService: AuthService) {
   }
 
   ngOnInit(): void {
@@ -24,7 +23,6 @@ export class HeaderComponent implements OnInit {
   {
     this.authService
       .logout();
-    this.ngOnInit();
-    this.router.navigate(['/'])
+    window.location.replace("");
   }
 }
