@@ -24,18 +24,21 @@ public class UserValidator : IResourceOwnerPasswordValidator
         if (user != null)
         {
             var result = CryptoHelper.VerifyHashedPassword(user.PasswordHash, context.Password);
-            // context set to success
-            context.Result = new GrantValidationResult(
-                subject: user.Id.ToString(),
-                authenticationMethod: "custom",
-                claims: new Claim[] {
-                    new Claim(ClaimTypes.Name, user.Email),
-                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                    new Claim(ClaimTypes.Role, user.Role.ToName())
-                }
-            );
-
-            return;
+            if (result)
+            {
+                // context set to success
+                context.Result = new GrantValidationResult(
+                    subject: user.Id.ToString(),
+                    authenticationMethod: "custom",
+                    claims: new Claim[]
+                    {
+                        new Claim(ClaimTypes.Name, user.Email),
+                        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                        new Claim(ClaimTypes.Role, user.Role.ToName())
+                    }
+                );
+                return;
+            }
         }
 
         // context set to Failure        
