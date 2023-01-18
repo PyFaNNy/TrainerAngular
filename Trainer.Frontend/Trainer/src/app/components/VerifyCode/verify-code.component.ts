@@ -3,7 +3,7 @@ import {Otp} from "../../models/otp";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PatientService} from "../../services/patient.service";
 import {Subscription} from "rxjs";
-import {OtpService} from "../../services/otp.Service";
+import {OtpService} from "../../services/otp.service";
 
 @Component({
   selector: 'app-reset-password',

@@ -3,7 +3,7 @@ import {User} from "../../models/user";
 import {UserService} from "../../services/user.service";
 import {Router} from "@angular/router";
 import {AuthService} from "../../services/auth.service";
-import {OtpService} from "../../services/otp.Service";
+import {OtpService} from "../../services/otp.service";
 import {Otp} from "../../models/otp";
 
 @Component({

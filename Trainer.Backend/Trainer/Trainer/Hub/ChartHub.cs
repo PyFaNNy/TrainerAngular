@@ -15,30 +15,30 @@ namespace Trainer.Chart
             _mediator = mediator;
         }
 
-        public async Task ProvideReading(string statTermometr, string statTonometr, string statHeartrate, string statOximetr,
-            string select1, string select2, string select3, string select4,
-            string tonometrValue, string termometrValue, string heartrateValue, string oximetrValue, Guid id)
+        public async Task ProvideReading(int statusTonometr, int statusTermometr, int statusHeartrate, int statusOximetr,
+            int sensor1, int sensor2, int sensor3, int sensor4,
+            bool tonometrOn, bool termometrOn, bool heartrateOn, bool oximetrOn, Guid id)
         {
             bool flag = true;
             var examination = await _mediator.Send(new GetExaminationQuery { ExaminationId = id});
             CountIndicators(examination);
 
-            if (examination.DiaSis && (select1 != "1" || tonometrValue != "1" || statTonometr != "0"))
+            if (examination.DiaSis && (sensor1 != 1 || !tonometrOn || statusTonometr != 0))
             {
                 await this.Clients.Caller.SendAsync("error", "Не правильно подключен тонометр");
                 flag = false;
             }
-            if (examination.Tempareture && (select2 != "2" || termometrValue != "1" || statTermometr != "0"))
+            if (examination.Tempareture && (sensor2 != 2 || !termometrOn || statusTermometr != 0))
             {
                 await this.Clients.Caller.SendAsync("error", "Не правильно подключен термометр");
                 flag = false;
             }
-            if (examination.HeartRate && (select3 != "3" || heartrateValue != "1" || statHeartrate != "0"))
+            if (examination.HeartRate && (sensor3 != 3 || !heartrateOn || statusHeartrate != 0))
             {
                 await this.Clients.Caller.SendAsync("error", "Не правильно подключен пульсометр");
                 flag = false;
             }
-            if (examination.SpO2 && (select4 != "4" || oximetrValue != "1" || statOximetr != "0"))
+            if (examination.SpO2 && (sensor4 != 4 || !oximetrOn || statusOximetr != 0))
             {
                 await this.Clients.Caller.SendAsync("error", "Не правильно подключен оксиметр");
                 flag = false;

@@ -5,12 +5,14 @@ using FluentValidation.AspNetCore;
 using IdentityServer4.AccessTokenValidation;
 using Jdenticon.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using Trainer.Application;
+using Trainer.Chart;
 using Trainer.CSVParserService;
 using Trainer.EmailService;
 using Trainer.Persistence;
@@ -104,16 +106,20 @@ builder.Services.AddAuthentication(options =>
             ValidateAudience = false
         };
     });
-    // .AddIdentityServerAuthentication(options =>
-    // {
-    //     options.ApiName = "TrainerAPI";
-    //     options.Authority = "https://localhost:10001";
-    //     options.RequireHttpsMetadata = false;
-    //     
-    // });
+
+builder.Services.AddCors((options) =>
+{
+    options.AddPolicy("TrainerClientApp",
+        new CorsPolicyBuilder()
+            .WithOrigins("http://localhost:4200")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials()
+            .Build());
+});
 
 builder.Services.AddAuthorization();
-
+builder.Services.AddSignalR();
 builder.Services.AddControllers()    
     .AddFluentValidation()
     .AddNewtonsoftJson(options =>
@@ -137,9 +143,7 @@ if (app.Environment.IsDevelopment())
 // app.UseMiddleware<ResponseMetricMiddleware>();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-app.UseCors(x => x.AllowAnyOrigin()
-    .AllowAnyHeader()
-    .AllowAnyMethod());
+app.UseCors("TrainerClientApp");
             
 app.UseSwagger();
 app.UseSwaggerUI(c =>
@@ -161,4 +165,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHub<ChartHub>("/chart");
 app.Run();

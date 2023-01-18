@@ -1,6 +1,6 @@
 <div class="row mb-2">
   <div class="col">
-    <button type="button" id="start" class="btn btn-success h-100 w-100">Start</button>
+    <button type="button" id="start" (click)="start()" class="btn btn-success h-100 w-100">Start</button>
   </div>
   <div class="col-1">
     <button mat-raised-button color="primary" class="btn h-100 w-100" data-toggle="modal"
@@ -16,13 +16,12 @@
       <div class="row h-25">
         <div class="col-4">
           <mat-form-field appearance="outline">
-            <mat-select id="2" [(ngModel)]="sensor2" [(value)]="sensor2" style="opacity: 0.5;"
-                        onchange='findOption2(this)'>
-              <mat-option value=0></mat-option>
-              <mat-option value=1>Tonometr</mat-option>
-              <mat-option value=2>Termometr</mat-option>
-              <mat-option value=3>HeartRate</mat-option>
-              <mat-option value=4>Oximetr</mat-option>
+            <mat-select id="2" [(ngModel)]="sensor2" style="opacity: 0.5;">
+              <mat-option [value]=0></mat-option>
+              <mat-option [value]=1>Tonometr</mat-option>
+              <mat-option [value]=2>Termometr</mat-option>
+              <mat-option [value]=3>HeartRate</mat-option>
+              <mat-option [value]=4>Oximetr</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
@@ -30,25 +29,23 @@
       <div class="row h-25">
         <div class="col-4">
           <mat-form-field appearance="outline">
-            <mat-select id="3" [(ngModel)]="sensor3" [(value)]="sensor3" style="opacity: 0.5;"
-                        onchange='findOption3(this)'>
-              <mat-option value=0></mat-option>
-              <mat-option value=1>Tonometr</mat-option>
-              <mat-option value=2>Termometr</mat-option>
-              <mat-option value=3>HeartRate</mat-option>
-              <mat-option value=4>Oximetr</mat-option>
+            <mat-select id="3" [(ngModel)]="sensor3" style="opacity: 0.5;">
+              <mat-option [value]=0></mat-option>
+              <mat-option [value]=1>Tonometr</mat-option>
+              <mat-option [value]=2>Termometr</mat-option>
+              <mat-option [value]=3>HeartRate</mat-option>
+              <mat-option [value]=4>Oximetr</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
         <div class="col-4">
           <mat-form-field appearance="outline">
-            <mat-select id="1" [(ngModel)]="sensor1" [(value)]="sensor1" style="opacity: 0.5;"
-                        onchange='findOption1(this)'>
-              <mat-option value=0></mat-option>
-              <mat-option value=1>Tonometr</mat-option>
-              <mat-option value=2>Termometr</mat-option>
-              <mat-option value=3>HeartRate</mat-option>
-              <mat-option value=4>Oximetr</mat-option>
+            <mat-select id="1" [(ngModel)]="sensor1" style="opacity: 0.5;">
+              <mat-option [value]="0"></mat-option>
+              <mat-option [value]="1">Tonometr</mat-option>
+              <mat-option [value]="2">Termometr</mat-option>
+              <mat-option [value]="3">HeartRate</mat-option>
+              <mat-option [value]="4">Oximetr</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
@@ -57,13 +54,12 @@
         <div class="col-4"></div>
         <div class="col-4">
           <mat-form-field appearance="outline">
-            <mat-select id="4" [(ngModel)]="sensor4" [(value)]="sensor4" style="opacity: 0.5;"
-                        onchange='findOption4(this)'>
-              <mat-option value=0></mat-option>
-              <mat-option value=1>Tonometr</mat-option>
-              <mat-option value=2>Termometr</mat-option>
-              <mat-option value=3>HeartRate</mat-option>
-              <mat-option value=4>Oximetr</mat-option>
+            <mat-select id="4" [(ngModel)]="sensor4" style="opacity: 0.5;">
+              <mat-option [value]=0></mat-option>
+              <mat-option [value]=1>Tonometr</mat-option>
+              <mat-option [value]=2>Termometr</mat-option>
+              <mat-option [value]=3>HeartRate</mat-option>
+              <mat-option [value]=4>Oximetr</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
@@ -73,183 +69,186 @@
       <div class="row h-25">
         <div class="col tonometr"></div>
         <div class="col pt-5">
-          <button type="button" id="testTonometr" mat-raised-button color="primary">Test</button>
+          <button type="button" id="testTonometr" (click)="testTonometr()" mat-raised-button color="primary">Test
+          </button>
           <mat-radio-group>
-            <mat-radio-button>On</mat-radio-button>
-            <!--              <input class="form-check-input" value="1" type="radio" name="tonometr" id="tonometrON"-->
-            <!--                     onclick="tonometrClick(this);">-->
-            <mat-radio-button>Off</mat-radio-button>
-            <!--              <input class="form-check-input" value="0" type="radio" name="tonometr" id="tonometrOFF"-->
-            <!--                     onclick="tonometrClick(this);" checked>-->
+            <mat-radio-button (click)="tonometrClick()">On</mat-radio-button>
+            <mat-radio-button (click)="tonometrClick()">Off</mat-radio-button>
           </mat-radio-group>
         </div>
       </div>
       <div class="row h-25 w-100">
-        <tui-axes
-          class="axes"
-          [verticalLines]="4"
-          [horizontalLines]="2"
-        >
-          <tui-line-chart
-            [x]="0"
-            [y]="0"
-            [width]="400"
-            [height]="150"
-            [smoothingFactor]="50"
-            [dots]="true"
-            [value]="value"
-            [filled]="true"
-            [xStringify]="stringify"
-            [yStringify]="stringify"
-          ></tui-line-chart>
-        </tui-axes>
+        <ng-container #tonometrConteiner>
+        </ng-container>
+        <ng-template #tonometrTemplate>
+          <tui-axes
+            class="axes"
+            [verticalLines]="4"
+            [horizontalLines]="2"
+          >
+            <tui-line-chart
+              [x]="0"
+              [y]="0"
+              [width]="400"
+              [height]="150"
+              [smoothingFactor]="50"
+              [dots]="true"
+              [value]=(valueTonometr)
+              [filled]="true"
+              [xStringify]="stringify"
+              [yStringify]="stringify"
+            ></tui-line-chart>
+          </tui-axes>
+        </ng-template>
       </div>
       <div class="row h-25">
         <div class="col termometr"></div>
         <div class="col pt-5">
-          <button type="button" id="testTermometr" mat-raised-button color="primary">Test</button>
+          <button type="button" id="testTermometr" (click)="testTermometr()" mat-raised-button color="primary">Test
+          </button>
           <mat-radio-group>
-            <mat-radio-button>On</mat-radio-button>
-            <mat-radio-button>Off</mat-radio-button>
+            <mat-radio-button (click)="termometrClick()">On</mat-radio-button>
+            <mat-radio-button (click)="termometrClick()">Off</mat-radio-button>
           </mat-radio-group>
-          <!--            <input class="form-check-input" value="1" type="radio" name="termometr" id="termometrON"-->
-          <!--                   onclick="termometrClick(this);">-->
-          <!--            <input class="form-check-input" value="0" type="radio" name="termometr" id="termometrOFF"-->
-          <!--                   onclick="termometrClick(this);" checked>-->
         </div>
       </div>
       <div class="row h-25 mb-5">
-        <tui-axes
-          class="axes"
-          [verticalLines]="4"
-          [horizontalLines]="2"
-        >
-          <tui-line-chart
-            [x]="0"
-            [y]="0"
-            [width]="400"
-            [height]="150"
-            [smoothingFactor]="50"
-            [dots]="true"
-            [value]="value"
-            [filled]="true"
-            [xStringify]="stringify"
-            [yStringify]="stringify"
-          ></tui-line-chart>
-        </tui-axes>
+        <ng-container #termometrConteiner>
+        </ng-container>
+        <ng-template #termometrTemplate>
+          <tui-axes
+            class="axes"
+            [verticalLines]="4"
+            [horizontalLines]="2"
+          >
+            <tui-line-chart
+              [x]="0"
+              [y]="0"
+              [width]="400"
+              [height]="150"
+              [smoothingFactor]="50"
+              [dots]="true"
+              [value]="valueTermometr"
+              [filled]="true"
+              [xStringify]="stringify"
+              [yStringify]="stringify"
+            ></tui-line-chart>
+          </tui-axes>
+        </ng-template>
       </div>
       <div class="row h-25">
         <div class="col heartrate"></div>
         <div class="col pt-5">
-          <button type="button" id="testHeartrate" mat-raised-button color="primary">Test</button>
+          <button type="button" id="testHeartrate" (click)="testHeartrate()" mat-raised-button color="primary">Test
+          </button>
           <mat-radio-group>
-            <mat-radio-button>On</mat-radio-button>
-            <mat-radio-button>Off</mat-radio-button>
+            <mat-radio-button (click)="heartrateClick()">On</mat-radio-button>
+            <mat-radio-button (click)="heartrateClick()">Off</mat-radio-button>
           </mat-radio-group>
-          <!--            <input class="form-check-input" value="1" type="radio" name="heartrate" id="heartrateON"-->
-          <!--                   onclick="heartrateClick(this);">-->
-          <!--            <input class="form-check-input" value="0" type="radio" name="heartrate" id="heartrateOFF"-->
-          <!--                   onclick="heartrateClick(this);" checked>-->
         </div>
       </div>
       <div class="row h-25 mb-5">
-        <tui-axes
-          class="axes"
-          [verticalLines]="4"
-          [horizontalLines]="2"
-        >
-          <tui-line-chart
-            [x]="0"
-            [y]="0"
-            [width]="400"
-            [height]="150"
-            [smoothingFactor]="50"
-            [dots]="true"
-            [value]="value"
-            [filled]="true"
-            [xStringify]="stringify"
-            [yStringify]="stringify"
-          ></tui-line-chart>
-        </tui-axes>
+        <ng-container #heartRateContainer>
+        </ng-container>
+        <ng-template #heartRateTemplate>
+          <tui-axes
+            class="axes"
+            [verticalLines]="4"
+            [horizontalLines]="4"
+          >
+            <tui-line-chart
+              [x]="0"
+              [y]="0"
+              [width]="610"
+              [height]="200"
+              [smoothingFactor]="50"
+              [dots]="true"
+              [value]=valueHeatRate
+              [filled]="true"
+              [xStringify]="stringify"
+              [yStringify]="stringify"
+            ></tui-line-chart>
+          </tui-axes>
+        </ng-template>
       </div>
       <div class="row h-25">
         <div class="col oximetr"></div>
         <div class="col pt-5">
-          <button type="button" id="testOximetr" mat-raised-button color="primary">Test</button>
+          <button type="button" id="testOximetr" (click)="testOximetr()" mat-raised-button color="primary">Test</button>
           <mat-radio-group>
-            <mat-radio-button>On</mat-radio-button>
-            <mat-radio-button>Off</mat-radio-button>
+            <mat-radio-button (click)="oximetrClick()">On</mat-radio-button>
+            <mat-radio-button (click)="oximetrClick()">Off</mat-radio-button>
           </mat-radio-group>
-          <!--            <input class="form-check-input" value="1" type="radio" name="oximetr" id="oximetrON"-->
-          <!--                   onclick="oximetrClick(this);">-->
-          <!--            <input class="form-check-input" value="0" type="radio" name="oximetr" id="oximetrOFF"-->
-          <!--                   onclick="oximetrClick(this);" checked>-->
         </div>
       </div>
       <div class="row h-25 mb-5">
-        <tui-axes
-          class="axes"
-          [verticalLines]="4"
-          [horizontalLines]="2"
-        >
-          <tui-line-chart
-            [x]="0"
-            [y]="0"
-            [width]="400"
-            [height]="150"
-            [smoothingFactor]="50"
-            [dots]="true"
-            [value]="value"
-            [filled]="true"
-            [xStringify]="stringify"
-            [yStringify]="stringify"
-          ></tui-line-chart>
-        </tui-axes>
-    </div>
-  </div>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Info</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <span>Patient: LastName FirstName MiddleName</span>
-        </div>
-        <div class="row">
-          <span>Age: Age</span>
-        </div>
-        <div class="row">
-          <span>Sex: Sex</span>
-        </div>
-        <div class="row">
-          <span>Date: Date</span>
-        </div>
-        <div class="row">
-          <span>TypePhysicalActive: TypePhysicalActive</span>
-        </div>
-        <div class="row">
-          <span>Measure:</span>
-        </div>
-        <ul>
-          <li>DiaSis</li>
-          <li>Temperature</li>
-          <li>HeartRating</li>
-          <li>SpO2</li>
-        </ul>
-      </div>
-      <div class="modal-footer">
+        <ng-container #oximetrContainer>
+        </ng-container>
+        <ng-template #oximetrTemplate>
+          <tui-axes
+            class="axes"
+            [verticalLines]="4"
+            [horizontalLines]="2"
+          >
+            <tui-line-chart
+              [x]="0"
+              [y]="0"
+              [width]="400"
+              [height]="150"
+              [smoothingFactor]="50"
+              [dots]="true"
+              [value]="valueTonometr"
+              [filled]="true"
+              [xStringify]="stringify"
+              [yStringify]="stringify"
+            ></tui-line-chart>
+          </tui-axes>
+        </ng-template>
       </div>
     </div>
   </div>
-</div>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+       aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Info</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <span>Patient: LastName FirstName MiddleName</span>
+          </div>
+          <div class="row">
+            <span>Age: Age</span>
+          </div>
+          <div class="row">
+            <span>Sex: Sex</span>
+          </div>
+          <div class="row">
+            <span>Date: Date</span>
+          </div>
+          <div class="row">
+            <span>TypePhysicalActive: TypePhysicalActive</span>
+          </div>
+          <div class="row">
+            <span>Measure:</span>
+          </div>
+          <ul>
+            <li>DiaSis</li>
+            <li>Temperature</li>
+            <li>HeartRating</li>
+            <li>SpO2</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
 
 
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>-->
+  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>-->

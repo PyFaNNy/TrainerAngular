@@ -5,7 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {PatientService} from "../../services/patient.service";
 import {User} from "../../models/user";
 import {UserService} from "../../services/user.service";
-import {OtpService} from "../../services/otp.Service";
+import {OtpService} from "../../services/otp.service";
 
 @Component({
   selector: 'app-addPatient',
