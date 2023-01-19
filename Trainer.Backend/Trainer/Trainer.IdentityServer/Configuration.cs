@@ -20,7 +20,7 @@ public static class Configuration
                 {
                     "TrainerAPI"
                 },
-                AccessTokenLifetime = 360,
+                AccessTokenLifetime = 10,
                 AllowOfflineAccess = true
             }
         };
