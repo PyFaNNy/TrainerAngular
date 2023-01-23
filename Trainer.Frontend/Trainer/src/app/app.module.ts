@@ -31,6 +31,9 @@ import {VerifyCodeComponent} from "./components/VerifyCode/verify-code.component
 import {TuiModule} from "./tui.module";
 import {AuthInterceptor} from "./services/auth.interceptor";
 import {AuthGuard} from "./guard/auth.guard";
+import {
+  ExaminationDialogComponent
+} from "./components/Examinations/GetExamination/ExaminationDialog/examination-dialog.component.";
 
 @NgModule({
   declarations: [
@@ -54,7 +57,8 @@ import {AuthGuard} from "./guard/auth.guard";
     ImportPatientsComponent,
     UpdateExaminationComponent,
     GetExaminationComponent,
-    VerifyCodeComponent
+    VerifyCodeComponent,
+    ExaminationDialogComponent
   ],
   imports: [
     BrowserModule,

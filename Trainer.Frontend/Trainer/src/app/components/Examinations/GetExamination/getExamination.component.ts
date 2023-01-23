@@ -3,6 +3,11 @@ import {TUI_DEFAULT_STRINGIFY} from "@taiga-ui/cdk";
 import {TuiPoint} from "@taiga-ui/core";
 import {HubConnection, HubConnectionBuilder} from "@microsoft/signalr";
 import {environment} from "../../../../environments/environment";
+import {ActivatedRoute} from "@angular/router";
+import {Subscription} from "rxjs";
+import {MatDialog} from '@angular/material/dialog';
+import {ExaminationDialogComponent} from "./ExaminationDialog/examination-dialog.component.";
+import {ExaminationService} from "../../../services/examination.service";
 
 @Component({
   selector: 'app-getExamination',
@@ -52,8 +57,11 @@ export class GetExaminationComponent implements OnInit,AfterContentInit {
 
   readonly stringify = TUI_DEFAULT_STRINGIFY;
   private hubConnectionBuilder!: HubConnection;
-
-  constructor() {
+  dialogData: any;
+  private examinationId: string ='';
+  subscriptions: Subscription = new Subscription();
+  constructor(private route: ActivatedRoute, public dialog: MatDialog, private examinationService: ExaminationService) {
+    this.subscriptions.add(route.params.subscribe(params=>this.examinationId=params['id']));
   }
 
   ngAfterContentInit() {
@@ -68,7 +76,19 @@ export class GetExaminationComponent implements OnInit,AfterContentInit {
     container.createEmbeddedView(template);
   }
 
+  openDialog() {
+    this.dialog.open(ExaminationDialogComponent,{
+        data: this.dialogData
+    });
+  }
+
   ngOnInit(): void {
+      this.subscriptions.add(this.examinationService
+      .getExamination(this.examinationId)
+      .subscribe((result: any) => {
+        this.dialogData = result
+      }));
+
       this.hubConnectionBuilder = new HubConnectionBuilder().withUrl(`${environment.apiUrl}/chart`).build();
       this.hubConnectionBuilder.start().then(() => console.log('Connection started.......!')).catch(err => console.log('Error while connect with server'));
 
@@ -144,7 +164,7 @@ export class GetExaminationComponent implements OnInit,AfterContentInit {
     this.hubConnectionBuilder.invoke("ProvideReading",
       this.statusTonometr, this.statusTermometr, this.statusHeatRate, this.statusOximetr,
       this.sensor1, this.sensor2, this.sensor3, this.sensor4,
-      this.tonometrOn, this.termometrOn, this.heartRaterOn, this.oximetrOn, '4D5E3608-676C-4156-1B94-08DAF97B9F05');
+      this.tonometrOn, this.termometrOn, this.heartRaterOn, this.oximetrOn, this.examinationId);
   }
   public tonometrClick() {
     this.tonometrOn = !this.tonometrOn;

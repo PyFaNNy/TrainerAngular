@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>Information about Examination</h2>
+<mat-dialog-content>
+  <div>
+    <div class="row">
+      <span>Patient: {{examination.patient.lastName}} {{examination.patient.firstName}} {{examination.patient.middleName}}</span>
+    </div>
+    <div class="row">
+      <span>Age: {{examination.patient.age}}</span>
+    </div>
+    <div class="row">
+      <span>Sex: {{examination.patient.sex}}</span>
+    </div>
+    <div class="row">
+      <span>Date: {{examination.date | date:'MMMM d, y'}}</span>
+    </div>
+    <div class="row">
+      <span>TypePhysicalActive: {{examination.typePhysicalActive}}</span>
+    </div>
+    <div class="row">
+      <span>Measure:</span>
+    </div>
+    <ul>
+      <li *ngIf="examination.diaSis">DiaSis</li>
+      <li *ngIf="examination.tempareture">Temperature</li>
+      <li *ngIf="examination.heartRate">HeartRating</li>
+      <li *ngIf="examination.spO2">SpO2</li>
+    </ul>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

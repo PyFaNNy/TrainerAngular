@@ -3,7 +3,7 @@
     <button type="button" id="start" (click)="start()" class="btn btn-success h-100 w-100">Start</button>
   </div>
   <div class="col-1">
-    <button mat-raised-button color="primary" class="btn h-100 w-100" data-toggle="modal"
+    <button mat-raised-button color="primary" (click)="openDialog()" class="btn h-100 w-100" data-toggle="modal"
             data-target="#exampleModalCenter">
       <mat-icon>info</mat-icon>
       Info
@@ -207,48 +207,4 @@
       </div>
     </div>
   </div>
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-       aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Info</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <span>Patient: LastName FirstName MiddleName</span>
-          </div>
-          <div class="row">
-            <span>Age: Age</span>
-          </div>
-          <div class="row">
-            <span>Sex: Sex</span>
-          </div>
-          <div class="row">
-            <span>Date: Date</span>
-          </div>
-          <div class="row">
-            <span>TypePhysicalActive: TypePhysicalActive</span>
-          </div>
-          <div class="row">
-            <span>Measure:</span>
-          </div>
-          <ul>
-            <li>DiaSis</li>
-            <li>Temperature</li>
-            <li>HeartRating</li>
-            <li>SpO2</li>
-          </ul>
-        </div>
-        <div class="modal-footer">
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>-->
+</div>

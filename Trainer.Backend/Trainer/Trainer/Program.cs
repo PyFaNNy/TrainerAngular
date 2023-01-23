@@ -152,9 +152,7 @@ app.UseSwaggerUI(c =>
     c.DocumentTitle = "Title";
     c.RoutePrefix = "docs";
     c.DocExpansion(DocExpansion.List);
-    c.OAuthClientId("client_id_swagger");
     c.OAuthScopeSeparator(" ");
-    c.OAuthClientSecret("client_secret_swagger");
 });
             
 app.UseJdenticon();

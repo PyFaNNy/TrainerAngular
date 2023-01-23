@@ -25,9 +25,7 @@ export class UpdateExaminationComponent {
     this.subscriptions.add(this.examinationService
       .getExamination(this.examination.id)
       .subscribe((result: any) => {
-        console.log(result);
         this.examination = result
-        console.log(this.examination);
 
         this.diaSis = result.diaSis;
         this.tempareture = result.tempareture;
