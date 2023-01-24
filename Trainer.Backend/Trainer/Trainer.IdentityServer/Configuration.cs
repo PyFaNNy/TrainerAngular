@@ -1,5 +1,4 @@
 ﻿using IdentityModel;
-using IdentityServer4;
 using IdentityServer4.Models;
 
 namespace Trainer.IdentityServer;
@@ -20,7 +19,7 @@ public static class Configuration
                 {
                     "TrainerAPI"
                 },
-                AccessTokenLifetime = 10,
+                AccessTokenLifetime = 3600,
                 AllowOfflineAccess = true
             }
         };
