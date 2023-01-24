@@ -53,7 +53,7 @@ export class GetExaminationsComponent implements OnInit {
   }
 
   checkUncheckAll() {
-    for (var i = 0; i < this.examinations.length; i++) {
+    for (let i = 0; i < this.examinations.length; i++) {
       this.examinations[i].isSelected = this.isMasterSel;
     }
     this.getCheckedItemList();
@@ -68,7 +68,7 @@ export class GetExaminationsComponent implements OnInit {
 
   getCheckedItemList() {
     this.selectedExaminations = [];
-    for (var i = 0; i < this.examinations.length; i++) {
+    for (let i = 0; i < this.examinations.length; i++) {
       if (this.examinations[i].isSelected)
         this.selectedExaminations.push(this.examinations[i].id);
     }

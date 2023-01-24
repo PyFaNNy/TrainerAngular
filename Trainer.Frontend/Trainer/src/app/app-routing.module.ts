@@ -18,6 +18,7 @@ import {GetExaminationComponent} from "./components/Examinations/GetExamination/
 import {VerifyCodeComponent} from "./components/VerifyCode/verify-code.component";
 import {AuthGuard} from "./guard/auth.guard";
 import {RoleGuard} from "./guard/role.guard";
+import {GetPatientComponent} from "./components/Patients/GetPatient/getPatient.component";
 
 const appRoute: Routes  = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -35,6 +36,10 @@ const appRoute: Routes  = [
   {path: 'updatePatient/:id', component: UpdatePatientComponent, canActivate: [ RoleGuard ],
     data: {
       role: ['admin', 'manager']
+    }},
+  {path: 'getPatient/:id', component: GetPatientComponent, canActivate: [ RoleGuard ],
+    data: {
+      role: ['admin', 'manager', 'doctor']
     }},
   {path: 'examinations', component: GetExaminationsComponent, canActivate: [ AuthGuard ]},
   {path: 'examination/:id', component: GetExaminationComponent, canActivate: [ RoleGuard ],

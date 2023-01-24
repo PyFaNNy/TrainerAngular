@@ -44,8 +44,11 @@ export class AuthInterceptor implements HttpInterceptor {
             this.authService.refreshToken({refresh_token: refreshToken})
               .subscribe(() => {
                 location.reload();
-              });
+              },
+              err => console.log(err));
           } else {
+            this.tokenService.removeToken();
+            this.tokenService.removeRefreshToken();
             this.router.navigate(['login']);
           }
         }
