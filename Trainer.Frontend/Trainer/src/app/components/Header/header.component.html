@@ -9,27 +9,27 @@
       <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
         <ul class="navbar-nav">
           <li *ngIf="IsAuth" class="nav-item">
-            <a class="nav-link text-success">{{email}}</a>
+            <a id="userEmail" class="nav-link text-success">{{email}}</a>
           </li>
           <li *ngIf="IsAuth" class="nav-item">
-              <a (click)="logout()" routerLink="" class="nav-link text-success">Logout</a>
+              <a id="logoutBtn" (click)="logout()" routerLink="" class="nav-link text-success">Logout</a>
           </li>
           <li *ngIf="!IsAuth" class="nav-item">
-            <a routerLink="login" class="nav-link text-success">Login</a>
+            <a id="loginBtn" routerLink="login" class="nav-link text-success">Login</a>
           </li>
           <li *ngIf="!IsAuth" class="nav-item">
-            <a routerLink="register" class="nav-link text-success">Register</a>
+            <a id="registerBtn" routerLink="register" class="nav-link text-success">Register</a>
           </li>
         </ul>
         <ul *ngIf="IsAuth" class="navbar-nav flex-grow-1">
           <li class="nav-item">
-            <a routerLink="patients" class="nav-link text-success">Patients</a>
+            <a id="patientsBtn" routerLink="patients" class="nav-link text-success">Patients</a>
           </li>
           <li class="nav-item">
-            <a routerLink="examinations" class="nav-link text-success">Examinations</a>
+            <a id="examinationsBtn" routerLink="examinations" class="nav-link text-success">Examinations</a>
           </li>
           <li *ngIf="role == 'admin'" class="nav-item">
-            <a routerLink="admin" class="nav-link text-success">Admin</a>
+            <a id="adminBtn" routerLink="admin" class="nav-link text-success">Admin</a>
           </li>
         </ul>
       </div>
