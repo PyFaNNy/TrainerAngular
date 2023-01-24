@@ -78,26 +78,29 @@
         </div>
       </div>
       <div class="row h-25 w-100">
-        <ng-container #tonometrConteiner>
+        <ng-container #tonometrContainer>
         </ng-container>
         <ng-template #tonometrTemplate>
           <tui-axes
             class="axes"
             [verticalLines]="4"
             [horizontalLines]="2"
+            [tuiLineChartHint]="hint"
           >
             <tui-line-chart
+              *ngFor="let value of valueTonometr"
+              class="chart"
               [x]="0"
               [y]="0"
-              [width]="400"
-              [height]="150"
+              [width]="610"
+              [height]="200"
               [smoothingFactor]="50"
-              [dots]="true"
-              [value]=(valueTonometr)
               [filled]="true"
+              [dots]="true"
+              [value]="value"
               [xStringify]="stringify"
               [yStringify]="stringify"
-            ></tui-line-chart>
+            >Text</tui-line-chart>
           </tui-axes>
         </ng-template>
       </div>
@@ -124,8 +127,8 @@
             <tui-line-chart
               [x]="0"
               [y]="0"
-              [width]="400"
-              [height]="150"
+              [width]="610"
+              [height]="50"
               [smoothingFactor]="50"
               [dots]="true"
               [value]="valueTermometr"
@@ -160,7 +163,7 @@
               [x]="0"
               [y]="0"
               [width]="610"
-              [height]="200"
+              [height]="230"
               [smoothingFactor]="50"
               [dots]="true"
               [value]=valueHeatRate
@@ -193,11 +196,11 @@
             <tui-line-chart
               [x]="0"
               [y]="0"
-              [width]="400"
-              [height]="150"
+              [width]="610"
+              [height]="105"
               [smoothingFactor]="50"
               [dots]="true"
-              [value]="valueTonometr"
+              [value]="valueOximetr"
               [filled]="true"
               [xStringify]="stringify"
               [yStringify]="stringify"

@@ -1,5 +1,5 @@
 import {AfterContentInit, Component, OnInit, TemplateRef, ViewChild, ViewContainerRef} from "@angular/core";
-import {TUI_DEFAULT_STRINGIFY} from "@taiga-ui/cdk";
+import {TUI_DEFAULT_STRINGIFY, TuiContextWithImplicit, TuiStringHandler} from "@taiga-ui/cdk";
 import {TuiPoint} from "@taiga-ui/core";
 import {HubConnection, HubConnectionBuilder} from "@microsoft/signalr";
 import {environment} from "../../../../environments/environment";
@@ -15,7 +15,7 @@ import {ExaminationService} from "../../../services/examination.service";
   styleUrls: ['./getExamination.component.scss']
 })
 
-export class GetExaminationComponent implements OnInit,AfterContentInit {
+export class GetExaminationComponent implements OnInit, AfterContentInit {
   sensor1: number = 0;
   sensor2: number = 0;
   sensor3: number = 0;
@@ -31,8 +31,8 @@ export class GetExaminationComponent implements OnInit,AfterContentInit {
   statusOximetr: number = 0;
   statusHeatRate: number = 0;
 
-  readonly valueHeatRate: TuiPoint[] = [  ];
-  readonly valueTonometr: TuiPoint[] = [];
+  readonly valueHeatRate: TuiPoint[] = [];
+  readonly valueTonometr: TuiPoint[][] = [[], []];
   readonly valueTermometr: TuiPoint[] = [];
   readonly valueOximetr: TuiPoint[] = [];
 
@@ -58,10 +58,11 @@ export class GetExaminationComponent implements OnInit,AfterContentInit {
   readonly stringify = TUI_DEFAULT_STRINGIFY;
   private hubConnectionBuilder!: HubConnection;
   dialogData: any;
-  private examinationId: string ='';
+  private examinationId: string = '';
   subscriptions: Subscription = new Subscription();
+
   constructor(private route: ActivatedRoute, public dialog: MatDialog, private examinationService: ExaminationService) {
-    this.subscriptions.add(route.params.subscribe(params=>this.examinationId=params['id']));
+    this.subscriptions.add(route.params.subscribe(params => this.examinationId = params['id']));
   }
 
   ngAfterContentInit() {
@@ -77,86 +78,93 @@ export class GetExaminationComponent implements OnInit,AfterContentInit {
   }
 
   openDialog() {
-    this.dialog.open(ExaminationDialogComponent,{
-        data: this.dialogData
+    this.dialog.open(ExaminationDialogComponent, {
+      data: this.dialogData
     });
   }
 
   ngOnInit(): void {
-      this.subscriptions.add(this.examinationService
+    this.hubConnectionBuilder = new HubConnectionBuilder().withUrl(`${environment.apiUrl}/chart`).build();
+    this.hubConnectionBuilder.start().then(() => console.log('Connection started.......!')).catch(err => console.log('Error while connect with server'));
+
+    this.hubConnectionBuilder.on('newTonom', (time: number, dia: number, sis: number) => {
+      this.valueTonometr[0].push([time * 10, dia]);
+      this.valueTonometr[1].push([time * 10, sis]);
+      this.rerender(this.tonometrContainer, this.tonometrTemplate);
+
+    })
+    this.hubConnectionBuilder.on('newTermom', (time: number, temp: number) => {
+      this.valueTermometr.push([time * 10, temp]);
+      this.rerender(this.termometrConteiner, this.termometrTemplate);
+    })
+
+    this.hubConnectionBuilder.on('newHearRate', (time: number, heartRate: number) => {
+      this.valueHeatRate.push([time * 10, heartRate]);
+      this.rerender(this.heartRateContainer, this.heartRateTemplate);
+    })
+
+    this.hubConnectionBuilder.on('newOximetr', (time: number, separation: number) => {
+      this.valueOximetr.push([time, separation]);
+      this.rerender(this.oximetrContainer, this.oximetrTemplate);
+    })
+
+    this.hubConnectionBuilder.on('statusTonometr', (status: string, count: number) => {
+      this.statusTonometr = count;
+      window.alert("Tonometr " + status)
+    })
+
+    this.hubConnectionBuilder.on('statusTermometr', (status: string, count: number) => {
+      this.statusTermometr = count;
+      window.alert("Termometr " + status)
+    })
+
+    this.hubConnectionBuilder.on('statusHeartrate', (status: string, count: number) => {
+      this.statusTermometr = count;
+      window.alert("Heartrate " + status)
+    })
+
+    this.hubConnectionBuilder.on('statusOximetr', (status: number, count: number) => {
+      this.statusTermometr = count;
+      window.alert("Oximetr " + status)
+    })
+
+    this.hubConnectionBuilder.on('error', (messange: string) => {
+      window.alert(messange)
+    })
+
+    this.tonometrOn = false;
+    this.termometrOn = false;
+    this.oximetrOn = false;
+    this.heartRaterOn = false;
+
+    this.sensor1 = 0;
+    this.sensor2 = 0;
+    this.sensor3 = 0;
+    this.sensor4 = 0;
+
+    this.subscriptions.add(this.examinationService
       .getExamination(this.examinationId)
       .subscribe((result: any) => {
         this.dialogData = result
       }));
-
-      this.hubConnectionBuilder = new HubConnectionBuilder().withUrl(`${environment.apiUrl}/chart`).build();
-      this.hubConnectionBuilder.start().then(() => console.log('Connection started.......!')).catch(err => console.log('Error while connect with server'));
-
-      // this.hubConnectionBuilder.on('newTonom', (time: number, dia: number, sis: number) => {
-      //     return {time: time, dia: dia, sis: sis};
-      //   })
-      this.hubConnectionBuilder.on('newTermom', (time: number, temp: number) => {
-        this.valueTermometr.push([time*10, temp]);
-        this.rerender(this.termometrConteiner, this.termometrTemplate);
-      })
-
-      this.hubConnectionBuilder.on('newHearRate', (time: number, heartRate: number) => {
-        this.valueHeatRate.push([time*10, heartRate]);
-        this.rerender(this.heartRateContainer, this.heartRateTemplate);
-      })
-
-      this.hubConnectionBuilder.on('newOximetr', (time: number, separation: number) => {
-        this.valueOximetr.push([time, separation]);
-        this.rerender(this.oximetrContainer, this.oximetrTemplate);
-      })
-
-      this.hubConnectionBuilder.on('statusTonometr', (status: string, count: number) => {
-        this.statusTonometr = count;
-        window.alert("Tonometr " + status)
-      })
-
-      this.hubConnectionBuilder.on('statusTermometr', (status: string, count: number) => {
-        this.statusTermometr = count;
-        window.alert("Termometr " + status)
-      })
-
-      this.hubConnectionBuilder.on('statusHeartrate', (status: string, count: number) => {
-        this.statusTermometr = count;
-        window.alert("Heartrate " + status)
-      })
-
-      this.hubConnectionBuilder.on('statusOximetr', (status: number, count: number) => {
-        this.statusTermometr = count;
-        window.alert("Oximetr " + status)
-      })
-
-      this.hubConnectionBuilder.on('error', (messange: string) => {
-        window.alert(messange)
-      })
-
-      this.tonometrOn = false;
-      this.termometrOn = false;
-      this.oximetrOn = false;
-      this.heartRaterOn = false;
-
-      this.sensor1 = 0;
-      this.sensor2 = 0;
-      this.sensor3 = 0;
-      this.sensor4 = 0;
   }
 
   public testTonometr(): void {
     this.hubConnectionBuilder.invoke("TestTonomert");
   }
+
   public testTermometr(): void {
     this.hubConnectionBuilder.invoke("TestTermometr");
   }
+
   public testHeartrate(): void {
     this.hubConnectionBuilder.invoke("TestHeartrate");
   }
+
   public testOximetr(): void {
     this.hubConnectionBuilder.invoke("TestOximetr");
   }
+
   public start(): void {
     console.log(this.sensor1);
     console.log(this.statusTonometr);
@@ -166,16 +174,23 @@ export class GetExaminationComponent implements OnInit,AfterContentInit {
       this.sensor1, this.sensor2, this.sensor3, this.sensor4,
       this.tonometrOn, this.termometrOn, this.heartRaterOn, this.oximetrOn, this.examinationId);
   }
+
   public tonometrClick() {
     this.tonometrOn = !this.tonometrOn;
   }
+
   public termometrClick() {
     this.termometrOn = !this.termometrOn;
   }
+
   public heartrateClick() {
     this.heartRaterOn = !this.heartRaterOn;
   }
+
   public oximetrClick() {
     this.oximetrOn = !this.oximetrOn;
   }
+
+  readonly hint: TuiStringHandler<TuiContextWithImplicit<readonly TuiPoint[]>>
+    = ({$implicit,}) => `${$implicit[0][0]} items:\n\n${$implicit.map(([_, y]) => y).join(`$\n`)}$`;
 }
