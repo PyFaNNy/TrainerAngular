@@ -19,12 +19,14 @@ public class HeaderPageObject
 
     public LoginPageObject SignIn()
     {
-        _driver.FindElement(_loginButton);
+        Thread.Sleep(400);
+        _driver.FindElement(_loginButton).Click();
         return new LoginPageObject(_driver);
     }
 
     public string GetUserEmail()
     {
+        Thread.Sleep(400);
         return _driver.FindElement(_userEmail).Text;
     }
 }

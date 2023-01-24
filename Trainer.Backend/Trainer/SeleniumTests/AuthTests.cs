@@ -1,5 +1,5 @@
-using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using SeleniumTests.Data;
 using SeleniumTests.PageObjects;
 
 namespace SeleniumTests;
@@ -8,9 +8,6 @@ public class Tests
 {
     private IWebDriver _driver;
     
-    private readonly string _userName = "trainerdoctor@gmail.com";
-    private readonly string _userPassword = "doctor";
-
     [SetUp]
     public void Setup()
     {
@@ -19,18 +16,20 @@ public class Tests
         _driver.Manage().Window.Maximize();
     }
 
-    [Test]
-    public void Test1()
+    [TestCase(UsersLoginPage.doctorUserName, UsersLoginPage.doctorPassword, ExpectedResult = UsersLoginPage.doctorUserName)]
+    [TestCase(UsersLoginPage.adminUserName, UsersLoginPage.adminPassword, ExpectedResult = UsersLoginPage.adminUserName)]
+    [TestCase(UsersLoginPage.managerUserName, UsersLoginPage.managerPassword, ExpectedResult = UsersLoginPage.managerUserName)]
+    public string CheckDefaultAccountsTest(string login, string password)
     {
         var header = new HeaderPageObject(_driver);
 
         header
             .SignIn()
-            .Login(_userName, _userPassword);
+            .Login(login, password);
         
         var email = header.GetUserEmail();
 
-        Assert.AreEqual(_userName, email);
+        return email;
     }
 
     [TearDown]

@@ -16,6 +16,7 @@ public class LoginPageObject
 
     public HeaderPageObject Login(string login, string password)
     {
+        Thread.Sleep(400);
         _driver.FindElement(_loginInput).SendKeys(login);
         _driver.FindElement(_passwordInput).SendKeys(password);
         _driver.FindElement(_loginButton).Click();
