@@ -10,7 +10,6 @@ public class BaseTest
     [OneTimeSetUp]
     protected void DoBeforeAllTheTests()
     {
-        _webDriver = new ChromeDriver();
     }
     
     [OneTimeTearDown]
@@ -27,7 +26,7 @@ public class BaseTest
     [SetUp]
     protected void DoBeforeEach()
     {
-        _webDriver.Manage().Cookies.DeleteAllCookies();
+        _webDriver = new ChromeDriver();
         _webDriver.Navigate().GoToUrl(TestSettings.URL);
         _webDriver.Manage().Window.Maximize();
     }

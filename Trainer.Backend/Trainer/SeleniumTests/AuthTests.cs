@@ -4,23 +4,15 @@ using SeleniumTests.PageObjects;
 
 namespace SeleniumTests;
 
-public class Tests
+[TestFixture]
+public class AuthTests : BaseTest
 {
-    private IWebDriver _driver;
-    
-    [SetUp]
-    public void Setup()
-    {
-        _driver = new ChromeDriver();
-
-    }
-
     [TestCase(UsersLoginPage.doctorUserName, UsersLoginPage.doctorPassword, ExpectedResult = UsersLoginPage.doctorUserName)]
     [TestCase(UsersLoginPage.adminUserName, UsersLoginPage.adminPassword, ExpectedResult = UsersLoginPage.adminUserName)]
     [TestCase(UsersLoginPage.managerUserName, UsersLoginPage.managerPassword, ExpectedResult = UsersLoginPage.managerUserName)]
     public string CheckDefaultAccountsTest(string login, string password)
     {
-        var header = new HeaderPageObject(_driver);
+        var header = new HeaderPageObject(_webDriver);
 
         header
             .SignIn()
@@ -34,22 +26,15 @@ public class Tests
     [TestCase("asda", "asda", ExpectedResult = ErrorMessenge.AUTHERROR)]
     public string FailAuthTest(string login, string password)
     {
-        var header = new HeaderPageObject(_driver);
+        var header = new HeaderPageObject(_webDriver);
 
         var loginPage = header
             .SignIn();
-
         loginPage
             .Login(login, password);
         
         var error = loginPage.GetErrorMessage();
 
         return error;
-    }
-    
-    [TearDown]
-    public void TearDown()
-    {
-        
     }
 }
