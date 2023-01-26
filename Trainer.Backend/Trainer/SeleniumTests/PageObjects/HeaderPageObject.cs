@@ -1,4 +1,6 @@
-﻿namespace SeleniumTests.PageObjects;
+﻿using SeleniumTests.Util;
+
+namespace SeleniumTests.PageObjects;
 
 public class HeaderPageObject
 {
@@ -19,14 +21,13 @@ public class HeaderPageObject
 
     public LoginPageObject SignIn()
     {
-        Thread.Sleep(400);
         _driver.FindElement(_loginButton).Click();
         return new LoginPageObject(_driver);
     }
 
     public string GetUserEmail()
     {
-        Thread.Sleep(400);
+        WaitUntil.WaitElement(_driver,_userEmail);
         return _driver.FindElement(_userEmail).Text;
     }
 }

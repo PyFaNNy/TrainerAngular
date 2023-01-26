@@ -12,8 +12,7 @@ public class Tests
     public void Setup()
     {
         _driver = new ChromeDriver();
-        _driver.Navigate().GoToUrl("http://localhost:4200/home");
-        _driver.Manage().Window.Maximize();
+
     }
 
     [TestCase(UsersLoginPage.doctorUserName, UsersLoginPage.doctorPassword, ExpectedResult = UsersLoginPage.doctorUserName)]
@@ -31,10 +30,26 @@ public class Tests
 
         return email;
     }
+    
+    [TestCase("asda", "asda", ExpectedResult = ErrorMessenge.AUTHERROR)]
+    public string FailAuthTest(string login, string password)
+    {
+        var header = new HeaderPageObject(_driver);
 
+        var loginPage = header
+            .SignIn();
+
+        loginPage
+            .Login(login, password);
+        
+        var error = loginPage.GetErrorMessage();
+
+        return error;
+    }
+    
     [TearDown]
     public void TearDown()
     {
-        _driver.Quit();
+        
     }
 }
