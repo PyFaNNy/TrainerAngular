@@ -127,7 +127,6 @@ export class AdminPanelComponent implements OnInit {
   }
 
   announceSortChange(sortState: Sort) {
-    console.log(sortState);
     let sort;
     if (sortState.direction) {
       sort = sortState.active + "Sort";

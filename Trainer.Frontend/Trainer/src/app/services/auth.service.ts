@@ -22,11 +22,7 @@ export class AuthService {
   };
 
   private static handleError(error: HttpErrorResponse): any {
-
-  }
-
-  private static log(message: string): any {
-    console.log(message);
+    return error;
   }
 
   constructor(private http: HttpClient, private tokenService: TokenService) {
@@ -45,8 +41,7 @@ export class AuthService {
         tap(res => {
           this.tokenService.saveToken(res.access_token);
           this.tokenService.saveRefreshToken(res.refresh_token);
-        }),
-        catchError(AuthService.handleError)
+        })
       );
   }
 
@@ -61,8 +56,7 @@ export class AuthService {
         tap(res => {
           this.tokenService.saveToken(res.access_token);
           this.tokenService.saveRefreshToken(res.refresh_token);
-        }),
-        catchError(AuthService.handleError)
+        })
       );
   }
 
