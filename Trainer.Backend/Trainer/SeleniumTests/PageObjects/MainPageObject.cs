@@ -2,9 +2,9 @@
 
 namespace SeleniumTests.PageObjects;
 
-public class HeaderPageObject
+public class MainPageObject
 {
-    private IWebDriver _driver;
+    private IWebDriver _webDriver;
 
     private readonly By _loginButton = By.XPath("//a[@id='loginBtn']");
     private readonly By _logoutButton = By.XPath("//a[@id='logoutBtn']");
@@ -14,20 +14,31 @@ public class HeaderPageObject
     private readonly By _adminButton = By.XPath("//a[@id='adminBtn']");
     private readonly By _userEmail = By.XPath("//a[@id='userEmail']");
     
-    public HeaderPageObject(IWebDriver webDriver)
+    public MainPageObject(IWebDriver webWebDriver)
     {
-        _driver = webDriver;
+        _webDriver = webWebDriver;
     }
 
     public LoginPageObject SignIn()
     {
-        _driver.FindElement(_loginButton).Click();
-        return new LoginPageObject(_driver);
+        _webDriver.FindElement(_loginButton).Click();
+        return new LoginPageObject(_webDriver);
+    }
+    
+    public RegisterPageObject Register()
+    {
+        _webDriver.FindElement(_registerButton).Click();
+        return new RegisterPageObject(_webDriver);
     }
 
     public string GetUserEmail()
     {
-        WaitUntil.WaitElement(_driver,_userEmail);
-        return _driver.FindElement(_userEmail).Text;
+        WaitUntil.WaitElement(_webDriver,_userEmail);
+        return _webDriver.FindElement(_userEmail).Text;
+    }
+
+    public string GetUrl()
+    {
+        return _webDriver.Url;
     }
 }

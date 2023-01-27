@@ -4,7 +4,7 @@ namespace SeleniumTests.Util;
 
 public class TestGenerateData
 {
-    public static string GenerateRandomString(int size, bool lowerCase = true)
+    public static string GenerateRandomString(int size, bool firstUpper = false, bool lowerCase = true)
     {
         StringBuilder stringBuilder = new StringBuilder();
         Random random = new Random();
@@ -16,10 +16,18 @@ public class TestGenerateData
             ch = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * random.NextDouble() + 65)));
             stringBuilder.Append(ch);
         }
-
+        
+        
         if (lowerCase)
         {
-            return stringBuilder.ToString().ToLower();
+            var str = stringBuilder.ToString().ToLower();
+            if (firstUpper)
+            {
+                
+                return str.First().ToString().ToUpper() + String.Concat(str.Skip(1));
+            }
+
+            return str;
         }
 
         return stringBuilder.ToString();

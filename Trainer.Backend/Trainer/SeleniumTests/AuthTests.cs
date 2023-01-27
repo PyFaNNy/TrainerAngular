@@ -7,12 +7,12 @@ namespace SeleniumTests;
 [TestFixture]
 public class AuthTests : BaseTest
 {
-    [TestCase(UsersLoginPage.doctorUserName, UsersLoginPage.doctorPassword, ExpectedResult = UsersLoginPage.doctorUserName)]
-    [TestCase(UsersLoginPage.adminUserName, UsersLoginPage.adminPassword, ExpectedResult = UsersLoginPage.adminUserName)]
-    [TestCase(UsersLoginPage.managerUserName, UsersLoginPage.managerPassword, ExpectedResult = UsersLoginPage.managerUserName)]
+    [TestCase(Users.doctorUserName, Users.doctorPassword, ExpectedResult = Users.doctorUserName)]
+    [TestCase(Users.adminUserName, Users.adminPassword, ExpectedResult = Users.adminUserName)]
+    [TestCase(Users.managerUserName, Users.managerPassword, ExpectedResult = Users.managerUserName)]
     public string CheckDefaultAccountsTest(string login, string password)
     {
-        var header = new HeaderPageObject(_webDriver);
+        var header = new MainPageObject(_webDriver);
 
         header
             .SignIn()
@@ -26,7 +26,7 @@ public class AuthTests : BaseTest
     [TestCase("asda", "asda", ExpectedResult = ErrorMessenge.AUTHERROR)]
     public string FailAuthTest(string login, string password)
     {
-        var header = new HeaderPageObject(_webDriver);
+        var header = new MainPageObject(_webDriver);
 
         var loginPage = header
             .SignIn();

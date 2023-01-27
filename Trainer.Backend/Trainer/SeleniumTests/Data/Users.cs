@@ -1,6 +1,6 @@
 ﻿namespace SeleniumTests.Data;
 
-public static class UsersLoginPage
+public static class Users
 {
     public const string doctorUserName = "trainerdoctor@gmail.com";
     public const string doctorPassword = "doctor";
@@ -10,4 +10,6 @@ public static class UsersLoginPage
     
     public const string managerUserName = "trainermanager@gmail.com";
     public const string managerPassword = "manager";
+
+    public const string PASSWORD = "Like1_Like2";
 }

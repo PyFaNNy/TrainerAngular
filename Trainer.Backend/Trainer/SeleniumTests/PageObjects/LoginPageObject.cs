@@ -16,13 +16,13 @@ public class LoginPageObject
         _driver = webDriver;
     }
 
-    public HeaderPageObject Login(string login, string password)
+    public MainPageObject Login(string login, string password)
     {
         _driver.FindElement(_loginInput).SendKeys(login);
         _driver.FindElement(_passwordInput).SendKeys(password);
         _driver.FindElement(_loginButton).Click();
 
-        return new HeaderPageObject(_driver);
+        return new MainPageObject(_driver);
     }
     
     public string GetErrorMessage()
