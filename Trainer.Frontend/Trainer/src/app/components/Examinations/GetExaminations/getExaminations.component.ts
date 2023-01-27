@@ -11,6 +11,7 @@ import {TokenService} from "../../../services/token.service";
 })
 
 export class GetExaminationsComponent implements OnInit {
+  showSpinner: boolean = false;
   displayedColumns?: string[];
   examinations: any[] = [];
   selectedExaminations: any;
@@ -76,6 +77,7 @@ export class GetExaminationsComponent implements OnInit {
   }
 
   private loadExamination(sort?:any) {
+    this.showSpinner= true;
     this.examinationService
       .getExaminations(
         this.pageIndex+1 ?? 0,
@@ -98,6 +100,7 @@ export class GetExaminationsComponent implements OnInit {
             typePhysicalActive: x.typePhysicalActive,
             date: x.date
           }))
+        this.showSpinner= false;
       });
   }
 

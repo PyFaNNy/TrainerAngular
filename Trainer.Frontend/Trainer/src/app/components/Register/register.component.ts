@@ -1,8 +1,5 @@
 import {Component} from "@angular/core";
-import {Patient} from "../../models/patient";
-import {Subscription} from "rxjs";
-import {ActivatedRoute, Router} from "@angular/router";
-import {PatientService} from "../../services/patient.service";
+import {Router} from "@angular/router";
 import {User} from "../../models/user";
 import {UserService} from "../../services/user.service";
 import {OtpService} from "../../services/otp.service";
@@ -13,6 +10,7 @@ import {OtpService} from "../../services/otp.service";
 })
 
 export class RegisterComponent {
+  showSpinner: boolean = false;
   user: User =new User;
   errors: any;
 
@@ -22,12 +20,14 @@ export class RegisterComponent {
   }
 
   createUser() {
+    this.showSpinner= true;
     this.userService
       .createUser(this.user)
       .subscribe(value => {
           this.router.navigate(['/verifycode',this.user.email,'Registration'])
         },
         error => {
+          this.showSpinner= false;
           this.errors = error.error.errors
         });
   }

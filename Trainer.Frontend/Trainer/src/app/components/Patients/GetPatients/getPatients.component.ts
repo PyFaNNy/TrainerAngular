@@ -1,7 +1,6 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {PatientService} from "../../../services/patient.service";
-import {MatPaginator, PageEvent} from "@angular/material/paginator";
-import {tap} from "rxjs";
+import {PageEvent} from "@angular/material/paginator";
 import {Sort} from "@angular/material/sort";
 import {TokenService} from "../../../services/token.service";
 
@@ -13,6 +12,7 @@ import {TokenService} from "../../../services/token.service";
 })
 
 export class GetPatientsComponent implements OnInit {
+  showSpinner: boolean = false;
   displayedColumns?: string[];
   patients: any[] = [];
   selectedPatient: any;
@@ -75,6 +75,7 @@ export class GetPatientsComponent implements OnInit {
   }
 
   private loadPatients(sort?:any) {
+    this.showSpinner= true;
     this.patientService
       .getPatients(
         this.pageIndex + 1 ?? 0,
@@ -95,6 +96,7 @@ export class GetPatientsComponent implements OnInit {
             age: x.age,
             sex: x.sex
           }))
+        this.showSpinner= false;
       });
   }
 

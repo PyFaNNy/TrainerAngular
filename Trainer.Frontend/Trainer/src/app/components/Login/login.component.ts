@@ -12,31 +12,35 @@ import {Otp} from "../../models/otp";
 })
 
 export class LoginComponent {
-  user: User =new User;
+  showSpinner: boolean = false;
+  user: User = new User;
   errors: any;
-  constructor(private authService: AuthService, private otpService: OtpService, private router: Router)
-  {
+
+  constructor(private authService: AuthService, private otpService: OtpService, private router: Router) {
   }
 
   login() {
+    this.showSpinner = true;
     this.authService
       .login(this.user)
       .subscribe(value => {
+          this.showSpinner = false;
           window.location.replace("");
           // this.router.navigate(['/verifycode',this.user.email,'Login'])
         },
         error => {
-          if(error.status < 500)
-          this.errors = "Login/Password incorrect"
+          if (error.status < 500) {
+            this.showSpinner = false;
+            this.errors = "Login/Password incorrect"
+          }
         });
   }
 
-  reset()
-  {
+  reset() {
     this.otpService
       .resetPassowrdRequest(this.user.email)
       .subscribe(value => {
-          this.router.navigate(['/verifycode',this.user.email,'ResetPassword'])
+          this.router.navigate(['/verifycode', this.user.email, 'ResetPassword'])
         },
         error => {
           this.errors = error.error

@@ -30,10 +30,10 @@ import {GetExaminationComponent} from "./components/Examinations/GetExamination/
 import {VerifyCodeComponent} from "./components/VerifyCode/verify-code.component";
 import {TuiModule} from "./tui.module";
 import {AuthInterceptor} from "./services/auth.interceptor";
-import {AuthGuard} from "./guard/auth.guard";
 import {
   ExaminationDialogComponent
 } from "./components/Examinations/GetExamination/ExaminationDialog/examination-dialog.component.";
+import {SpinnerComponent} from "./components/Spinner/spinner.component";
 
 @NgModule({
   declarations: [
@@ -58,7 +58,8 @@ import {
     UpdateExaminationComponent,
     GetExaminationComponent,
     VerifyCodeComponent,
-    ExaminationDialogComponent
+    ExaminationDialogComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

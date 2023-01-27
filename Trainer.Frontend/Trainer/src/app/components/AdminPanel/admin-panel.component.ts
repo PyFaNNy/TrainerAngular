@@ -10,6 +10,7 @@ import {Sort} from "@angular/material/sort";
 })
 
 export class AdminPanelComponent implements OnInit {
+  showSpinner: boolean = false;
   displayedColumns?: string[];
   users: any[] = [];
   selectedUsers: any;
@@ -93,6 +94,7 @@ export class AdminPanelComponent implements OnInit {
   }
 
   private loadUsers(sort?:any) {
+    this.showSpinner = true;
     this.userService
       .getUsers(
         this.pageIndex+1 ?? 0,
@@ -114,6 +116,7 @@ export class AdminPanelComponent implements OnInit {
             role: x.role,
             status: x.status
           }))
+        this.showSpinner = false;
       });
   }
 

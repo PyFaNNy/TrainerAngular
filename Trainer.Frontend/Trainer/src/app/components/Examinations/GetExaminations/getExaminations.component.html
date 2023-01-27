@@ -1,3 +1,4 @@
+<app-spinner *ngIf="showSpinner"></app-spinner>
 <h2>Examinations</h2>
 <ng-container *ngIf="role == 'admin' || role == 'manager'">
   <button mat-raised-button color="warn" (click)="delete()" class="m-1 mb-3">
