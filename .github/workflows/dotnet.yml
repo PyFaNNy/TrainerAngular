@@ -22,8 +22,8 @@ jobs:
         dotnet-version: 6.0.x
     - name: Restore dependencies
       run: dotnet restore
-      working-directory: Trainer.Backend/Trainer/Trainer.sln
+      working-directory: Trainer.Backend/Trainer
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build Trainer.sln --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test Trainer.sln --no-build --verbosity normal
