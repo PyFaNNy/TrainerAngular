@@ -1,59 +1,47 @@
 <app-spinner *ngIf="showSpinner"></app-spinner>
 <div class="col-md-4">
   <h2 class="text-center">User registration</h2>
-  <div>
+  <form [formGroup]="registerForm" (ngSubmit)="submit()">
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>FirstName</mat-label>
-      <input matInput [(ngModel)]='user.firstName'/>
+      <input matInput formControlName="firstName"/>
       <span *ngFor="let item of errors?.firstName" class="text-danger">{{item}}</span>
     </mat-form-field>
-  </div>
-  <div>
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>MiddleName</mat-label>
-      <input matInput [(ngModel)]='user.middleName'/>
+      <input matInput formControlName="middleName"/>
       <span *ngFor="let item of errors?.middleName" class="text-danger">{{item}}</span>
     </mat-form-field>
-  </div>
-  <div>
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>LastName</mat-label>
-      <input matInput [(ngModel)]='user.lastName'/>
+      <input matInput formControlName="lastName"/>
       <span *ngFor="let item of errors?.lastName" class="text-danger">{{item}}</span>
     </mat-form-field>
-  </div>
-  <div>
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Role</mat-label>
-      <mat-select [(ngModel)]='user.role' [(value)]="user.role">
+      <mat-select formControlName="role">
         <mat-option value="Doctor">Doctor</mat-option>
         <mat-option value="Manager">Manager</mat-option>
       </mat-select>
       <span *ngFor="let item of errors?.role" class="text-danger">{{item}}</span>
     </mat-form-field>
-  </div>
-  <div>
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Email</mat-label>
-      <input matInput [(ngModel)]='user.email'/>
+      <input matInput formControlName="email"/>
       <span *ngFor="let item of errors?.email" class="text-danger">{{item}}</span>
     </mat-form-field>
-  </div>
-  <div>
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Password</mat-label>
-      <input matInput type="password" [(ngModel)]='user.password'/>
+      <input matInput type="password" formControlName="password">
       <span *ngFor="let item of errors?.password" class="text-danger">{{item}}</span>
     </mat-form-field>
-  </div>
-  <div>
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Password Confirm</mat-label>
-      <input matInput type="password" [(ngModel)]='user.confirmPassword'/>
+      <input matInput type="password" formControlName="confirmPassword"/>
       <span *ngFor="let item of errors?.confirmPassword" class="text-danger">{{item}}</span>
     </mat-form-field>
-  </div>
   <div>
-    <button mat-raised-button color="primary" class="w-100" id="registerBtn" (click)="createUser()">Register</button>
+    <button mat-raised-button color="primary" class="w-100" id="registerBtn" type="submit">Register</button>
   </div>
+  </form>
 </div>
