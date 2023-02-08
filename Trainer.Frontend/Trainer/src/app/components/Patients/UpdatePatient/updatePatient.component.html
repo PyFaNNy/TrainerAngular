@@ -1,50 +1,40 @@
 <div class="col-md-4">
   <h2 class="text-center">Update Patient</h2>
-  <div>
+  <form [formGroup]="patientForm" (ngSubmit)="submit()" >
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>FirstName</mat-label>
-      <input matInput [(ngModel)]='patient.firstName' [ngModelOptions]="{standalone: true}"/>
+      <input matInput [formControlName]="'firstName'"/>
       <span *ngFor="let item of errors?.firstName" class="text-danger">{{item}}</span>
     </mat-form-field>
-  </div>
-  <div>
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>MiddleName</mat-label>
-      <input matInput [(ngModel)]='patient.middleName' [ngModelOptions]="{standalone: true}"/>
+      <input matInput formControlName="middleName"/>
       <span *ngFor="let item of errors?.middleName" class="text-danger">{{item}}</span>
     </mat-form-field>
-  </div>
-  <div>
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>LastName</mat-label>
-      <input matInput [(ngModel)]='patient.lastName' [ngModelOptions]="{standalone: true}"/>
+      <input matInput formControlName="lastName"/>
       <span *ngFor="let item of errors?.lastName" class="text-danger">{{item}}</span>
     </mat-form-field>
-  </div>
-  <div>
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Email</mat-label>
-      <input matInput [(ngModel)]='patient.email' [ngModelOptions]="{standalone: true}"/>
+      <input matInput formControlName="email"/>
       <span *ngFor="let item of errors?.email" class="text-danger">{{item}}</span>
     </mat-form-field>
-  </div>
-  <div>
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Age</mat-label>
-      <input matInput [(ngModel)]='patient.age' [ngModelOptions]="{standalone: true}"/>
+      <input matInput formControlName="age"/>
       <span *ngFor="let item of errors?.age" class="text-danger">{{item}}</span>
     </mat-form-field>
-  </div>
-  <div>
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Sex</mat-label>
-      <mat-select [(ngModel)]='patient.sex' [(value)]="patient.sex" [ngModelOptions]="{standalone: true}">
+      <mat-select formControlName="sex">
         <mat-option value="Female">Female</mat-option>
         <mat-option value="Male">Male</mat-option>
       </mat-select>
     </mat-form-field>
-  </div>
-  <div>
-      <button (click)="updatePatient()" mat-raised-button color="primary" class="w-100">Update</button>
-  </div>
+      <div>
+        <button type="submit" mat-raised-button color="primary" class="w-100">Update</button>
+      </div>
+  </form>
 </div>

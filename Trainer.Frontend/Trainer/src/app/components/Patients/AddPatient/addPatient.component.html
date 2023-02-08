@@ -1,49 +1,42 @@
 <div class="col-md-4">
   <h2 class="text-center">Create Patient</h2>
-  <mat-form-field appearance="fill" class="w-100">
-    <mat-label>FirstName</mat-label>
-    <input matInput [(ngModel)]='patient.firstName'/>
-    <span *ngFor="let item of errors?.firstName" class="text-danger">{{item}}</span>
-  </mat-form-field>
-  <div>
+  <form [formGroup]="patientForm" (ngSubmit)="submit()">
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>FirstName</mat-label>
+      <input matInput formControlName="firstName"/>
+      <span *ngFor="let item of errors?.firstName" class="text-danger">{{item}}</span>
+    </mat-form-field>
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>MiddleName</mat-label>
-      <input matInput [(ngModel)]='patient.middleName' [ngModelOptions]="{standalone: true}"/>
+      <input matInput formControlName="middleName"/>
       <span *ngFor="let item of errors?.middleName" class="text-danger">{{item}}</span>
     </mat-form-field>
-  </div>
-  <div>
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>LastName</mat-label>
-      <input matInput [(ngModel)]='patient.lastName' [ngModelOptions]="{standalone: true}"/>
+      <input matInput formControlName="lastName"/>
       <span *ngFor="let item of errors?.lastName" class="text-danger">{{item}}</span>
     </mat-form-field>
-  </div>
-  <div>
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Email</mat-label>
-      <input matInput [(ngModel)]='patient.email' [ngModelOptions]="{standalone: true}" class="form-control"/>
+      <input matInput formControlName="email"/>
       <span *ngFor="let item of errors?.email" class="text-danger">{{item}}</span>
     </mat-form-field>
-  </div>
-  <div>
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Age</mat-label>
-      <input matInput [(ngModel)]='patient.age' [ngModelOptions]="{standalone: true}" class="form-control"/>
+      <input matInput type="number" formControlName="age"/>
       <span *ngFor="let item of errors?.Age" class="text-danger">{{item}}</span>
     </mat-form-field>
-  </div>
-  <div>
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Sex</mat-label>
-      <mat-select [(ngModel)]='patient.sex'>
-        <mat-option [value]="0">Female</mat-option>
-        <mat-option [value]="1">Male</mat-option>
+      <mat-select formControlName="sex">
+        <mat-option value="Female">Female</mat-option>
+        <mat-option value="Male">Male</mat-option>
       </mat-select>
     </mat-form-field>
-  </div>
-  <div>
-    <button mat-raised-button color="primary" (click)="createPatient(patient)" class="w-100">Create</button>
-  </div>
+    <div>
+      <button mat-raised-button color="primary" type="submit" [disabled]="patientForm.invalid" class="w-100">Create
+      </button>
+    </div>
+  </form>
 </div>
 

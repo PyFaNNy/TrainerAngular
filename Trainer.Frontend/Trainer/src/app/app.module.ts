@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 import {HeaderComponent} from "./components/Header/header.component";
 import {FooterComponent} from "./components/Footer/footer.component";
@@ -61,16 +61,17 @@ import {SpinnerComponent} from "./components/Spinner/spinner.component";
     ExaminationDialogComponent,
     SpinnerComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    NgbModule,
-    HttpClientModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-    TuiModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        NgbModule,
+        HttpClientModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        MaterialModule,
+        TuiModule,
+        ReactiveFormsModule,
+    ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
