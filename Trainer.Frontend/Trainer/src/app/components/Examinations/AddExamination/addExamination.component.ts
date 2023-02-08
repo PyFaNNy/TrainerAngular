@@ -1,8 +1,8 @@
 import {Component} from "@angular/core";
-import {Examination} from "../../../models/examination";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription} from "rxjs";
 import {ExaminationService} from "../../../services/examination.service";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-addExamination',
@@ -10,34 +10,45 @@ import {ExaminationService} from "../../../services/examination.service";
 })
 
 export class AddExaminationComponent {
-  examination: Examination = new Examination();
-  diaSis:boolean = false;
-  tempareture:boolean = false;
-  heartRate:boolean = false;
-  spO2:boolean = false;
-
+  examinationForm: FormGroup;
   errors: any = null;
   subscriptions: Subscription = new Subscription();
   constructor(private route: ActivatedRoute, private examinationService: ExaminationService,private router: Router){
-    this.subscriptions.add(route.params.subscribe(params=>this.examination.patientId=params['id']));
+    this._createForm();
+    this.subscriptions.add(route.params.subscribe(params=>this.examinationForm.patchValue({patientId: params['id']})));
+  }
+  private _createForm() {
+    this.examinationForm = new FormGroup({
+      typePhysicalActive: new FormControl(null),
+      date: new FormControl(null),
+      spO2: new FormControl(null),
+      temperature: new FormControl(null),
+      heartRate: new FormControl(null),
+      diaSis: new FormControl(null),
+      indicators: new  FormControl(0),
+      patientId: new FormControl()
+    })
   }
 
-  createExamination() {
-    if (this.diaSis) {
-      this.examination.indicators += 1;
+  submit(){
+    let ind =0;
+    if (this.examinationForm.get('diaSis')) {
+      ind +=1;
     }
-    if (this.tempareture) {
-      this.examination.indicators += 2;
+    if (this.examinationForm.get('temperature')) {
+      ind +=2;
     }
-    if (this.heartRate) {
-      this.examination.indicators += 4;
+    if (this.examinationForm.get('heartRate')) {
+      ind +=4;
     }
-    if (this.spO2) {
-      this.examination.indicators += 8;
+    if (this.examinationForm.get('spO2')) {
+      ind +=8;
     }
 
+    this.examinationForm.patchValue({indicators: ind})
+
     this.examinationService
-      .createExamination(this.examination)
+      .createExamination(this.examinationForm.value)
       .subscribe(value => {
           this.router.navigate(['/examinations'])
         },

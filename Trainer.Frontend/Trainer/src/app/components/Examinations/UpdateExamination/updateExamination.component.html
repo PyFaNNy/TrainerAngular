@@ -1,9 +1,9 @@
 <div class="col-md-4">
   <h2 class="text-center">Set Examination</h2>
-  <div>
+  <form [formGroup]="examinationForm" (ngSubmit)="submit()">
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>TypePhysicalActive</mat-label>
-      <mat-select [(ngModel)]='examination.typePhysicalActive' [(value)]="examination.typePhysicalActive">
+      <mat-select formControlName="typePhysicalActive">
         <mat-option value="Running">Running</mat-option>
         <mat-option value="Walking">Walking</mat-option>
         <mat-option value="Cycling">Cycling</mat-option>
@@ -11,27 +11,24 @@
         <mat-option value="StrengthExercises">StrengthExercises</mat-option>
       </mat-select>
     </mat-form-field>
-  </div>
-  <div>
-      <mat-label>Sensors</mat-label>
-      <span *ngFor="let item of errors?.indicators" class="text-danger">{{item}}</span>
-      <div>
-        <mat-checkbox [(ngModel)]='diaSis' color="primary">DiaSis</mat-checkbox>
-      </div>
-      <div>
-        <mat-checkbox [(ngModel)]='tempareture' color="primary">Tempareture</mat-checkbox>
-      </div>
-      <div>
-        <mat-checkbox [(ngModel)]='heartRate' color="primary">HeartRate</mat-checkbox>
-      </div>
-      <div>
-        <mat-checkbox [(ngModel)]='spO2' color="primary">SpO2</mat-checkbox>
-      </div>
-  </div>
-  <div>
+    <mat-label>Sensors</mat-label>
+    <span *ngFor="let item of errors?.indicators" class="text-danger">{{item}}</span>
+    <div>
+      <mat-checkbox formControlName="diaSis" color="primary">DiaSis</mat-checkbox>
+    </div>
+    <div>
+      <mat-checkbox formControlName="temperature" color="primary">Tempareture</mat-checkbox>
+    </div>
+    <div>
+      <mat-checkbox formControlName="heartRate" color="primary">HeartRate</mat-checkbox>
+    </div>
+    <div>
+      <mat-checkbox formControlName="spO2" color="primary">SpO2</mat-checkbox>
+    </div>
+
     <mat-form-field appearance="fill" class="w-100">
       <mat-label>Choose a date</mat-label>
-      <input matInput [matDatepicker]="datepicker" [(ngModel)]="examination.date"/>
+      <input matInput formControlName="date"/>
       <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
       <mat-datepicker #datepicker>
@@ -42,8 +39,8 @@
       </mat-datepicker>
       <span *ngFor="let item of errors?.date" class="text-danger">{{item}}</span>
     </mat-form-field>
-  </div>
-  <div>
-    <button (click)="updateExamination()" mat-raised-button color="primary" class="w-100">Update</button>
-  </div>
+    <div>
+      <button type="submit" mat-raised-button color="primary" class="w-100">Update</button>
+    </div>
+  </form>
 </div>
