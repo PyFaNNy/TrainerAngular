@@ -5,26 +5,24 @@
       <h3>Login</h3>
       <hr/>
       <span class="text-danger">{{errors}}</span>
-      <div>
+      <form [formGroup]="loginForm" (ngSubmit)="submit()">
         <mat-form-field appearance="fill" class="w-100">
           <mat-label>Login</mat-label>
-          <input matInput [(ngModel)]='user.email'/>
+          <input matInput formControlName="email"/>
         </mat-form-field>
-      </div>
-      <div>
         <mat-form-field appearance="fill" class="w-100">
           <mat-label>Password</mat-label>
-          <input matInput type="password" [(ngModel)]='user.password'/>
+          <input matInput type="password" formControlName="password"/>
         </mat-form-field>
-      </div>
       <div>
         <div>
           <a (click)="reset()">Forgot Password?</a>
         </div>
       </div>
       <div>
-        <button id="loginBtn" mat-raised-button color="primary" class="w-100" (click)="login()">Login</button>
+        <button id="loginBtn" mat-raised-button color="primary" class="w-100" type="submit">Login</button>
       </div>
+      </form>
     </section>
   </div>
   <div class="col-md-6 col-md-offset-2">
