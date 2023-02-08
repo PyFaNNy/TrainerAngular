@@ -23,6 +23,20 @@ jobs:
     - name: Restore dependencies
       working-directory: Trainer.Backend/Trainer
       run: dotnet restore Trainer.sln
+      
     - name: Build
       working-directory: Trainer.Backend/Trainer
       run: dotnet build Trainer.sln --no-restore
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+
+    - name: Install dependencies
+      working-directory: Trainer.Frontend/Trainer
+      run: npm install
+
+    - name: Build
+      working-directory: Trainer.Frontend/Trainer
+      run: npm run build:prod
