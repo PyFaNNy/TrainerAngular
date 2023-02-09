@@ -15,6 +15,7 @@ using Trainer.Application;
 using Trainer.Chart;
 using Trainer.CSVParserService;
 using Trainer.EmailService;
+using Trainer.Middlewares;
 using Trainer.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -141,6 +142,7 @@ if (app.Environment.IsDevelopment())
 
 // app.UseMetricServer();
 // app.UseMiddleware<ResponseMetricMiddleware>();
+app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseCors("TrainerClientApp");
