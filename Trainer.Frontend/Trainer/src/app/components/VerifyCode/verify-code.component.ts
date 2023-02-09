@@ -1,7 +1,6 @@
 import {Component, OnDestroy} from "@angular/core";
 import {Otp} from "../../models/otp";
 import {ActivatedRoute, Router} from "@angular/router";
-import {PatientService} from "../../services/patient.service";
 import {Subscription} from "rxjs";
 import {OtpService} from "../../services/otp.service";
 
@@ -11,6 +10,7 @@ import {OtpService} from "../../services/otp.service";
 })
 
 export class VerifyCodeComponent implements OnDestroy{
+  showSpinner: boolean;
   otp: Otp = new Otp;
   errors: any;
   subscriptions: Subscription = new Subscription();
@@ -22,10 +22,12 @@ export class VerifyCodeComponent implements OnDestroy{
 
   verify()
   {
+    this.showSpinner = true;
     this.subscriptions.add(this.otpService
     .verify(this.otp)
     .subscribe(
       result  => {
+        this.showSpinner = false;
         if(this.otp.action == 'ResetPassword')
         {
           this.router.navigate(['/resetPassword',this.otp.email])
@@ -40,6 +42,7 @@ export class VerifyCodeComponent implements OnDestroy{
         }
       },
       error => {
+        this.showSpinner = false;
         this.errors = error.error
       }));
   };

@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Subscription, take} from "rxjs";
+import {Subscription} from "rxjs";
 import {PatientService} from "../../../services/patient.service";
 import {Patient} from "../../../models/patient";
 import {FormControl, FormGroup} from "@angular/forms";
@@ -12,18 +12,18 @@ import {FormControl, FormGroup} from "@angular/forms";
 
 export class UpdatePatientComponent implements OnInit, OnDestroy {
   patientForm: FormGroup;
-  id: string = "";
+  showSpinner: boolean = false;
   errors: any = null;
   subscriptions: Subscription = new Subscription();
 
   constructor(private route: ActivatedRoute, private patientService: PatientService, private router: Router) {
-    this.subscriptions.add(route.params.subscribe(params => this.id = params['id']));
     this._createForm()
+    this.subscriptions.add(route.params.subscribe(params => this.patientForm.patchValue({id: params['id']})));
   }
 
   ngOnInit(): void {
     this.subscriptions.add(this.patientService
-      .getPatient(this.id)
+      .getPatient(this.patientForm.value.id)
       .subscribe((result: any) => {
         this._setData(result);
       }));
@@ -60,13 +60,16 @@ export class UpdatePatientComponent implements OnInit, OnDestroy {
   }
 
   submit() {
+    this.showSpinner = true;
     this.subscriptions.add(this.patientService
       .updatePatient(this.patientForm.value)
       .subscribe(
         result => {
+          this.showSpinner = false;
           this.router.navigate(['/patients'])
         },
         error => {
+          this.showSpinner = false;
           this.errors = error.error.errors
         }));
   }

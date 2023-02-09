@@ -10,6 +10,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 })
 
 export class UpdateExaminationComponent implements OnInit, OnDestroy{
+  showSpinner: boolean = false;
   examinationForm: FormGroup;
   errors: any = null;
   subscriptions: Subscription = new Subscription();
@@ -48,6 +49,7 @@ export class UpdateExaminationComponent implements OnInit, OnDestroy{
   }
 
   submit() {
+    this.showSpinner = true;
     let ind =0;
     if (this.examinationForm.get('diaSis')) {
       ind +=1;
@@ -62,12 +64,16 @@ export class UpdateExaminationComponent implements OnInit, OnDestroy{
       ind +=8;
     }
 
+    this.examinationForm.patchValue({indicators: ind})
+
     this.examinationService
       .updateExamination(this.examinationForm.value)
       .subscribe(value => {
+          this.showSpinner = false;
           this.router.navigate(['/examinations'])
         },
         error => {
+          this.showSpinner = false;
           this.errors = error.error.errors
         });
   }

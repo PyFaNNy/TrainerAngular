@@ -1,5 +1,4 @@
 import {Component} from "@angular/core";
-import {Patient} from "../../../models/patient";
 import {PatientService} from "../../../services/patient.service";
 import {Router} from "@angular/router";
 import {FormControl, FormGroup} from "@angular/forms";
@@ -11,6 +10,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 
 export class AddPatientComponent {
   patientForm: FormGroup;
+  showSpinner: boolean = false;
   errors: any;
 
   constructor(private patientsService: PatientService, private router: Router) {
@@ -29,12 +29,15 @@ export class AddPatientComponent {
   }
 
   submit(){
+    this.showSpinner = true;
     this.patientsService
       .createPatient(this.patientForm.value)
       .subscribe(value => {
+          this.showSpinner = false;
           this.router.navigate(['/patients'])
         },
         error => {
+          this.showSpinner = false;
           this.errors = error.error.errors
         });
   }
