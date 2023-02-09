@@ -1,4 +1,9 @@
-<div class="text-center">
+<div *ngIf="errorData.error != null" class="text-center">
+  <h1>{{errorData.error.status}}: {{errorData.error.error}}</h1>
+  <p><a href="https://www.rfc-editor.org/rfc/rfc7231#section-6.1">Read more about error</a></p>
+</div>
+<div *ngIf="errorData.error == null" class="text-center">
   <h1>404: Page Not Found!</h1>
   <p>The page you are looking for cannot be found</p>
+  <p><a href="https://www.rfc-editor.org/rfc/rfc7231#section-6.1">Read more about error</a></p>
 </div>

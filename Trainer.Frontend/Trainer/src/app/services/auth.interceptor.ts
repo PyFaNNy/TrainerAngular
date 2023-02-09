@@ -11,12 +11,20 @@ import {Router} from "@angular/router";
 import {AuthService} from "./auth.service";
 import {TokenService} from "./token.service";
 import {catchError, map, throwError} from "rxjs";
+import {ServerErrorDataService} from "./server-error-data.service";
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private router: Router, private tokenService: TokenService, private authService: AuthService) {}
+  constructor(private router: Router,
+              private tokenService: TokenService,
+              private authService: AuthService,
+              private errorData: ServerErrorDataService
+              )
+  {
+
+  }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): any {
     const token = this.tokenService.getToken();
@@ -51,6 +59,11 @@ export class AuthInterceptor implements HttpInterceptor {
             this.tokenService.removeRefreshToken();
             this.router.navigate(['login']);
           }
+        }
+        if(error.status >= 500)
+        {
+          this.errorData.error = error;
+          this.router.navigate(['**']);
         }
         return throwError(error);
       }));
