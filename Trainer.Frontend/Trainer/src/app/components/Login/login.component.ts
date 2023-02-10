@@ -38,11 +38,8 @@ export class LoginComponent {
           // this.router.navigate(['/verifycode',this.user.email,'Login'])
         },
         error => {
-          console.log(error);
-          if (error.status < 500) {
             this.showSpinner = false;
             this.errors = "Login/Password incorrect"
-          }
         });
   }
 

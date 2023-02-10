@@ -33,13 +33,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trainer.CSVParserService", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trainer.BlobStorage", "Trainer.BlobStorage\Trainer.BlobStorage.csproj", "{820A4E29-5FE3-4546-A583-ECFC32543E11}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{840BF1FB-0BB9-4E67-9383-D69DA93A2BAD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trainer.IdentityServer", "Trainer.IdentityServer\Trainer.IdentityServer.csproj", "{4FE46FCB-EEDF-4F89-89F0-83DFE4EA59FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trainer.IdentityServer", "Trainer.IdentityServer\Trainer.IdentityServer.csproj", "{4FE46FCB-EEDF-4F89-89F0-83DFE4EA59FE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{FAFB96D5-09BB-49D0-872D-A1A393186535}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumTests", "SeleniumTests\SeleniumTests.csproj", "{E79B3C1F-2E1E-4A00-8D8B-6B4C5DB6EC79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeleniumTests", "SeleniumTests\SeleniumTests.csproj", "{E79B3C1F-2E1E-4A00-8D8B-6B4C5DB6EC79}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,10 +89,6 @@ Global
 		{820A4E29-5FE3-4546-A583-ECFC32543E11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{820A4E29-5FE3-4546-A583-ECFC32543E11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{820A4E29-5FE3-4546-A583-ECFC32543E11}.Release|Any CPU.Build.0 = Release|Any CPU
-		{840BF1FB-0BB9-4E67-9383-D69DA93A2BAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{840BF1FB-0BB9-4E67-9383-D69DA93A2BAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{840BF1FB-0BB9-4E67-9383-D69DA93A2BAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{840BF1FB-0BB9-4E67-9383-D69DA93A2BAD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4FE46FCB-EEDF-4F89-89F0-83DFE4EA59FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4FE46FCB-EEDF-4F89-89F0-83DFE4EA59FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FE46FCB-EEDF-4F89-89F0-83DFE4EA59FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
