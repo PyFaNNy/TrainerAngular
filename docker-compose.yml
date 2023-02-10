@@ -1,8 +1,9 @@
 version: '3.4'
-
+name: trainer
 services:
   frontend:
     image: trainer-frontend
+    container_name: frontend
     build:
       context: ./Trainer.Frontend/Trainer/
       dockerfile: Dockerfile
@@ -13,6 +14,7 @@ services:
      - 4200:80
   backend:
     image: trainer-backend
+    container_name: backend
     build:
       context: ./Trainer.Backend/Trainer/
       dockerfile: ./Trainer/Dockerfile
@@ -21,6 +23,7 @@ services:
     - 7000:80
   identityServer:
     image: trainer-identity-server
+    container_name: identityserver
     build:
       context: ./Trainer.Backend/Trainer/
       dockerfile: ./Trainer.IdentityServer/Dockerfile
@@ -29,9 +32,21 @@ services:
     - 5000:80
   database:
     image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: database
     ports: 
      - 1434:1433
     environment:
       ACCEPT_EULA: "Y"
       SA_PASSWORD: "Like1_Like2"
-      
+  prometheus:
+    image: quay.io/prometheus/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+  grafana:
+    container_name: grafana
+    image : grafana/grafana
+    depends_on: 
+      - prometheus
+    ports:
+      - "3000:3000"
