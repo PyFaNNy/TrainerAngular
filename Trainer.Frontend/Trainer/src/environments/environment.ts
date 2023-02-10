@@ -1,4 +1,5 @@
 export const environment = {
   production: false,
-  apiUrl: "https://localhost:7075"
+  apiUrl: "https://backend:443",
+  identityUrl: 'https://identityServer:433/connect/token'
 };

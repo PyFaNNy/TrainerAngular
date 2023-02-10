@@ -2,8 +2,7 @@ import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/c
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment';
-import {User} from "../models/user";
-import {catchError, tap, throwError} from "rxjs";
+import {tap} from "rxjs";
 import {TokenService} from "./token.service";
 
 @Injectable({
@@ -13,7 +12,7 @@ export class AuthService {
   private url = 'auth';
   private OAUTH_CLIENT = 'angular_client';
   private OAUTH_SECRET = 'angular_client';
-  private API_URL = 'https://localhost:10001/connect/token';
+
   private HTTP_OPTIONS = {
     headers: new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -36,7 +35,7 @@ export class AuthService {
       .set('password', loginData.password)
       .set('grant_type', 'password');
 
-    return this.http.post<any>(this.API_URL, body, this.HTTP_OPTIONS)
+    return this.http.post<any>(environment.identityUrl, body, this.HTTP_OPTIONS)
       .pipe(
         tap(res => {
           this.tokenService.saveToken(res.access_token);
@@ -51,7 +50,7 @@ export class AuthService {
     const body = new HttpParams()
       .set('refresh_token', refreshData.refresh_token)
       .set('grant_type', 'refresh_token');
-    return this.http.post<any>(this.API_URL, body, this.HTTP_OPTIONS)
+    return this.http.post<any>(environment.identityUrl, body, this.HTTP_OPTIONS)
       .pipe(
         tap(res => {
           this.tokenService.saveToken(res.access_token);

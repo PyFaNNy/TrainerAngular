@@ -1,0 +1,37 @@
+version: '3.4'
+
+services:
+  frontend:
+    image: trainer-frontend
+    build:
+      context: ./Trainer.Frontend/Trainer/
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    ports: 
+     - 4200:80
+  backend:
+    image: trainer-backend
+    build:
+      context: ./Trainer.Backend/Trainer/
+      dockerfile: ./Trainer/Dockerfile
+    ports:
+    - 7001:443
+    - 7000:80
+  identityServer:
+    image: trainer-identity-server
+    build:
+      context: ./Trainer.Backend/Trainer/
+      dockerfile: ./Trainer.IdentityServer/Dockerfile
+    ports:
+    - 5001:443
+    - 5000:80
+  database:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports: 
+     - 1434:1433
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Like1_Like2"
+      
