@@ -12,6 +12,11 @@ services:
       - '/app/node_modules'
     ports: 
      - 4200:80
+    environment: 
+      - IDENTITY_URL=http://localhost:5000
+      - BACKEND_URL=http://localhost:7000
+    networks:
+      - trainer
   backend:
     image: trainer-backend
     container_name: backend
@@ -21,6 +26,13 @@ services:
     ports:
     - 7001:443
     - 7000:80
+    environment: 
+      - IDENTITY_URL=http://localhost:5000
+      - MSSQL_URL=database
+    networks:
+      - trainer
+    depends_on:
+      - database
   identityServer:
     image: trainer-identity-server
     container_name: identityserver
@@ -30,19 +42,32 @@ services:
     ports:
     - 5001:443
     - 5000:80
+    environment: 
+      - FRONTEND_URL=http://localhost:4200
+      - BACKEND_URL=http://localhost:7000
+      - MSSQL_URL=database
+    networks:
+      - trainer
+    depends_on:
+      - database
+      - backend
   database:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: database
     ports: 
      - 1434:1433
     environment:
-      ACCEPT_EULA: "Y"
+      ACCEPT_EULA: "sa"
       SA_PASSWORD: "Like1_Like2"
+    networks:
+      - trainer
   prometheus:
     image: quay.io/prometheus/prometheus:latest
     container_name: prometheus
     ports:
       - "9090:9090"
+    networks:
+      - trainer
   grafana:
     container_name: grafana
     image : grafana/grafana
@@ -50,3 +75,8 @@ services:
       - prometheus
     ports:
       - "3000:3000"
+    networks:
+      - trainer
+networks:
+  trainer:
+    driver: bridge

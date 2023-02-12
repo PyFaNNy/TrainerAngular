@@ -1,18 +1,15 @@
 FROM node:latest as build
-WORKDIR /app
+WORKDIR /usr/src/app
 EXPOSE 4200
 
-COPY src ./src
-COPY *.json ./
+COPY package.json package-lock.json ./
 
 RUN npm install -g @angular/cli@latest
 RUN npm install
+COPY . .
 RUN ng build --configuration production
 
-COPY . /app
-
-
-
 FROM nginx:alpine as deploy
-WORKDIR /KTCUI
-COPY --from=build /app/dist/trainer/*.* /usr/share/nginx/html/
+COPY --from=build /usr/src/app/dist/trainer/*.* /usr/share/nginx/html/
+COPY ./config/nginx.conf /etc/nginx/nginx.conf
+

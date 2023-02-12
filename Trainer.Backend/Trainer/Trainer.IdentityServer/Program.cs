@@ -1,3 +1,5 @@
+using IdentityServer4.Services;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Trainer.IdentityServer;
 using Trainer.IdentityServer.Infrastructure;
 using Trainer.Persistence;
@@ -9,12 +11,23 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddPersistence(builder.Configuration);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy",
+        options => options.WithOrigins(
+                builder.Configuration.GetValue<string>("FRONTEND_URL"),
+                builder.Configuration.GetValue<string>("BACKEND_URL"))
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials());
+});
+
 builder.Services.AddIdentityServer()
-    .AddInMemoryClients(Configuration.GetClients())
+    .AddInMemoryClients(Configuration.GetClients(builder.Configuration))
     .AddInMemoryApiResources(Configuration.GetApiResources())
     .AddInMemoryIdentityResources(Configuration.GetIdentityResources())
     .AddInMemoryApiScopes(Configuration.GetApiScopes())
-    .AddResourceOwnerValidator<UserValidator>() 
+    .AddResourceOwnerValidator<UserValidator>()
     .AddProfileService<ProfileService>()
     .AddDeveloperSigningCredential();
 
@@ -24,14 +37,11 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "identityServer v1"));
 
-app.UseHttpsRedirection();
+app.UseCors("CorsPolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();

@@ -12,13 +12,14 @@ namespace Trainer.Persistence
             services.AddDbContext<TrainerDbContext>(options =>
             {
                 options.UseSqlServer(
-                        configuration.GetConnectionString("DefaultConnection"),
-                        b => b.MigrationsAssembly(typeof(TrainerDbContext).Assembly.FullName));
+                    $"Server={configuration.GetValue<string>("MSSQL_URL")};" +
+                    configuration.GetConnectionString("DefaultConnection"),
+                    b => b.MigrationsAssembly(typeof(TrainerDbContext).Assembly.FullName));
 
                 options.EnableDetailedErrors();
                 options.EnableSensitiveDataLogging();
             });
-
+            Console.WriteLine("============================================================" + configuration.GetValue<string>("MSSQL_URL"));
             services.AddScoped<ITrainerDbContext>(provider => provider.GetService<TrainerDbContext>());
 
             return services;

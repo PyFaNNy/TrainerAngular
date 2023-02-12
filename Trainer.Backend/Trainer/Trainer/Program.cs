@@ -5,11 +5,13 @@ using IdentityServer4.AccessTokenValidation;
 using Jdenticon.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Cors.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.SwaggerUI;
+using Trainer;
 using Trainer.Application;
 using Trainer.Chart;
 using Trainer.CSVParserService;
@@ -18,11 +20,8 @@ using Trainer.Middlewares;
 using Trainer.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Host    
-    .UseMetricsWebTracking(options =>
-    {
-        options.OAuth2TrackingEnabled = true;
-    })
+builder.Host
+    .UseMetricsWebTracking(options => { options.OAuth2TrackingEnabled = true; })
     .UseMetricsEndpoints(options =>
     {
         options.EnvironmentInfoEndpointEnabled = true;
@@ -52,7 +51,7 @@ builder.Services.AddSwaggerGen(options =>
             Url = new Uri("https://github.com/PyFaNNy")
         }
     });
-    
+
     options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
     {
         Type = SecuritySchemeType.OAuth2,
@@ -69,7 +68,7 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 
-    options.AddSecurityRequirement( new OpenApiSecurityRequirement
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {
             new OpenApiSecurityScheme
@@ -99,7 +98,7 @@ builder.Services.AddAuthentication(options =>
     .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
     {
         options.RequireHttpsMetadata = true;
-        options.Authority = "https://localhost:10001";
+        options.Authority = builder.Configuration.GetValue<string>("IDENTITY_URL");
 
         options.TokenValidationParameters = new TokenValidationParameters
         {
@@ -111,16 +110,15 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("TrainerClientApp",
         new CorsPolicyBuilder()
-            .WithOrigins("http://localhost:4200")
+            .AllowAnyOrigin()
             .AllowAnyHeader()
             .AllowAnyMethod()
-            .AllowCredentials()
             .Build());
 });
 
 builder.Services.AddAuthorization();
 builder.Services.AddSignalR();
-builder.Services.AddControllers()    
+builder.Services.AddControllers()
     .AddFluentValidation()
     .AddNewtonsoftJson(options =>
     {
@@ -132,20 +130,23 @@ builder.Services.AddControllers()
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+var dbContext = app.Services.CreateScope().ServiceProvider.GetRequiredService<TrainerDbContext>();
+if (dbContext.Database.IsSqlServer())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    dbContext.Database.Migrate();
 }
+await DefaultInitializer.InitializeAsync(dbContext);
+
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "trainer v1"));
 
 // app.UseMetricServer();
 // app.UseMiddleware<ResponseMetricMiddleware>();
 app.UseMiddleware<ErrorHandlerMiddleware>();
-app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseCors("TrainerClientApp");
-            
+
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
@@ -155,7 +156,7 @@ app.UseSwaggerUI(c =>
     c.DocExpansion(DocExpansion.List);
     c.OAuthScopeSeparator(" ");
 });
-            
+
 app.UseJdenticon();
 
 app.UseRouting();
