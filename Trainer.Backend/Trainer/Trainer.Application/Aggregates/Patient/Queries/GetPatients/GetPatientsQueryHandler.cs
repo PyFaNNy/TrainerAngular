@@ -31,7 +31,7 @@ namespace Trainer.Application.Aggregates.Patient.Queries.GetPatients
             {
                 var patients = DbContext.Patients
                     .NotRemoved()
-                    .ProjectTo<Patient>(this.Mapper.ConfigurationProvider);
+                    .ProjectTo<Patient>(Mapper.ConfigurationProvider);
 
                 var paginatedList =
                     await PaginatedList<Patient>.CreateAsync(patients, request.PageIndex, request.PageSize);
@@ -79,7 +79,7 @@ namespace Trainer.Application.Aggregates.Patient.Queries.GetPatients
                 var patients = DbContext.Patients
                     .Skip(rnd.Next(30))
                     .NotRemoved()
-                    .ProjectTo<Patient>(this.Mapper.ConfigurationProvider);
+                    .ProjectTo<Patient>(Mapper.ConfigurationProvider);
 
                 patients = patients.Skip(rnd.Next(patients.Count()));
 

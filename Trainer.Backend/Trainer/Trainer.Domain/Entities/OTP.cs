@@ -1,9 +1,8 @@
-﻿namespace Trainer.Domain.Entities
-{
-    using Interfaces;
-    using System;
-    using Trainer.Enums;
+﻿using Trainer.Domain.Interfaces;
+using Trainer.Enums;
 
+namespace Trainer.Domain.Entities
+{
     public class OTP : IBaseEntity
     {
         public Guid Id

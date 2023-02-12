@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Trainer.Models
+﻿namespace Trainer.Models
 {
     public class LoginViewModel
     {

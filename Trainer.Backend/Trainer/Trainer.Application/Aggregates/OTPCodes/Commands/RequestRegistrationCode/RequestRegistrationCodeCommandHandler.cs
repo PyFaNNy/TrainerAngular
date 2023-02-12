@@ -1,13 +1,11 @@
-﻿namespace Trainer.Application.Aggregates.OTPCodes.Commands.RequestRegistrationCode
-{
-    using AutoMapper;
-    using Interfaces;
-    using MediatR;
-    using Microsoft.Extensions.Options;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using Trainer.Settings.Error;
+﻿using AutoMapper;
+using MediatR;
+using Microsoft.Extensions.Options;
+using Trainer.Application.Interfaces;
+using Trainer.Settings.Error;
 
+namespace Trainer.Application.Aggregates.OTPCodes.Commands.RequestRegistrationCode
+{
     public class RequestRegistrationCodeCommandHandler : RequestSmsCodeAbstractCommandHandler, IRequestHandler<RequestRegistrationCodeCommand, Unit>
     {
         public RequestRegistrationCodeCommandHandler(
@@ -24,8 +22,8 @@
         {
             if (OTPCodesErrorSettings.RequestRegistrationCodeEnable)
             {
-                this.LimitsCodeValid(request);
-                await this.CreateCode(request);
+                LimitsCodeValid(request);
+                await CreateCode(request);
             }
             return Unit.Value;
         }

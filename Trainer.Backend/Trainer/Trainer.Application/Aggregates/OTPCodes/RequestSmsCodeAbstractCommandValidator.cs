@@ -1,13 +1,13 @@
-﻿namespace Trainer.Application.Aggregates.OTPCodes
-{
-    using FluentValidation;
+﻿using FluentValidation;
 
+namespace Trainer.Application.Aggregates.OTPCodes
+{
     public abstract class RequestSmsCodeAbstractCommandValidator<T>
         : AbstractValidator<T> where T : RequestSmsCodeAbstractCommand
     {
         public RequestSmsCodeAbstractCommandValidator()
         {
-            this.RuleFor(x => x.Email)
+            RuleFor(x => x.Email)
                 .EmailAddress();
         }
     }

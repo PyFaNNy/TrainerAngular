@@ -37,7 +37,7 @@ namespace Trainer.Application.Aggregates.Patient.Commands.CreatePatient
 
         private bool IsUniqueEmail(string email)
         {
-            return !this.DbContext.Patients.Any(x => x.Email.Equals(email));
+            return !DbContext.Patients.Any(x => x.Email.Equals(email));
         }
     }
 }

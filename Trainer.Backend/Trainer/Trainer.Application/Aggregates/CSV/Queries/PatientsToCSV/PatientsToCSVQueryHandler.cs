@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Trainer.Application.Abstractions;
 using Trainer.Application.Interfaces;
+using Trainer.Enums;
 
 namespace Trainer.Application.Aggregates.CSV.Queries.PatientsToCSV
 {
@@ -28,7 +29,7 @@ namespace Trainer.Application.Aggregates.CSV.Queries.PatientsToCSV
             {
                 FileName = $"Patients_{DateTime.UtcNow.Date}",
                 Content = await csvParserService.WriteNewCsvFile(patients),
-                Type = Enums.ContentType.CSV
+                Type = ContentType.CSV
             };
         }
     }

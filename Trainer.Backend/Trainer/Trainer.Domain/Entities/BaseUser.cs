@@ -1,8 +1,8 @@
-﻿namespace Trainer.Domain.Entities
-{
-    using Trainer.Domain.Interfaces;
-    using Trainer.Enums;
+﻿using Trainer.Domain.Interfaces;
+using Trainer.Enums;
 
+namespace Trainer.Domain.Entities
+{
     public class BaseUser : IBaseEntity, IRemovedAt
     {
         public Guid Id

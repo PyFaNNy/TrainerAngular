@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Trainer.Domain.Entities.Examination;
 
 namespace Trainer.Persistence.Configurations.Examiantion
 {
-    public class ExaminationConfiguration : IEntityTypeConfiguration<Domain.Entities.Examination.Examination>
+    public class ExaminationConfiguration : IEntityTypeConfiguration<Examination>
     {
-        public void Configure(EntityTypeBuilder<Domain.Entities.Examination.Examination> builder)
+        public void Configure(EntityTypeBuilder<Examination> builder)
         {
             builder.HasOne(x => x.Patient)
                 .WithMany(x => x.Examinations)

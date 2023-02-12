@@ -1,14 +1,16 @@
-﻿namespace Prixy.Application.Aggregates.OTPCodes.Queries.GetSmsOtp;
-using MediatR;
+﻿using MediatR;
+using Trainer.Domain.Entities;
 using Trainer.Enums;
 
-public class GetSmsOtpQuery: IRequest<Trainer.Domain.Entities.OTP>
+namespace Prixy.Application.Aggregates.OTPCodes.Queries.GetSmsOtp;
+
+public class GetSmsOtpQuery: IRequest<OTP>
 {
     public GetSmsOtpQuery(string email, string code, OTPAction action)
     {
-        this.Email = email;
-        this.Code = code;
-        this.Action = action;
+        Email = email;
+        Code = code;
+        Action = action;
     }
 
     public string Email

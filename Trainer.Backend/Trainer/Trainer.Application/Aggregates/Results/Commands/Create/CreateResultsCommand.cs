@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
 using MediatR;
 using Trainer.Application.Mappings;
+using Trainer.Domain.Entities.Result;
 using Trainer.Enums;
 
 namespace Trainer.Application.Aggregates.Results.Commands.Create
 {
-    public class CreateResultsCommand : IRequest<Unit>, IMapTo<Domain.Entities.Result.Result>
+    public class CreateResultsCommand : IRequest<Unit>, IMapTo<Result>
     {
         public Guid Id
         {
@@ -61,7 +62,7 @@ namespace Trainer.Application.Aggregates.Results.Commands.Create
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<CreateResultsCommand, Domain.Entities.Result.Result>()
+            profile.CreateMap<CreateResultsCommand, Result>()
                 .ForMember(d => d.AverageOxigen, opt => opt.MapFrom(s => s.AverageOxigen))
                 .ForMember(d => d.AverageTemperature, opt => opt.MapFrom(s => s.AverageTemperature))
                 .ForMember(d => d.AverageSis, opt => opt.MapFrom(s => s.AverageSis))

@@ -22,7 +22,7 @@ namespace Trainer.Application.Behaviours
             {
                 var requestName = typeof(TRequest).Name;
 
-                this.logger.LogError(ex, "Trainer Request: Unhandled Exception for Request {Name} {@Request}", requestName, request);
+                logger.LogError(ex, "Trainer Request: Unhandled Exception for Request {Name} {@Request}", requestName, request);
 
                 throw;
             }

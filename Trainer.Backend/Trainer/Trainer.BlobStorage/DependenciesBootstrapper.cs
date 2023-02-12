@@ -3,7 +3,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Trainer.Application.Interfaces;
 using Trainer.BlobStorage.Services;
 using Trainer.Settings;
-using Trainer.Settings;
 
 namespace Prixy.BlobStorage
 {

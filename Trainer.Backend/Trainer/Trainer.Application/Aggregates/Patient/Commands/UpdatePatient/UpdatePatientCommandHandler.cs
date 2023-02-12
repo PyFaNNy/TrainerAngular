@@ -27,7 +27,7 @@ namespace Trainer.Application.Aggregates.Patient.Commands.UpdatePatient
         {
             if (PatientErrorSettings.UpdatePatientEnable)
             {
-                var patient = await this.DbContext.Patients
+                var patient = await DbContext.Patients
                 .Where(x => x.Id == request.Id)
                 .FirstOrDefaultAsync(cancellationToken);
 
@@ -36,8 +36,8 @@ namespace Trainer.Application.Aggregates.Patient.Commands.UpdatePatient
                     throw new NotFoundException(nameof(Domain.Entities.Patient.Patient), request.Id);
                 }
 
-                this.Mapper.Map(request, patient);
-                await this.DbContext.SaveChangesAsync(cancellationToken);
+                Mapper.Map(request, patient);
+                await DbContext.SaveChangesAsync(cancellationToken);
             }
             return Unit.Value;
         }

@@ -1,6 +1,6 @@
-namespace Trainer.Application.Abstractions;
-
 using MediatR;
+
+namespace Trainer.Application.Abstractions;
 
 public class GetPaginatedListBaseQuery<T> : IRequest<T>
 {
@@ -18,14 +18,14 @@ public class GetPaginatedListBaseQuery<T> : IRequest<T>
     {
         get
         {
-            return this.PageSize * (this.PageIndex - 1);
+            return PageSize * (PageIndex - 1);
         }
     }
 
     protected GetPaginatedListBaseQuery(int? pageIndex, int? pageSize)
     {
-        this.PageIndex = this.GetValue(pageIndex,1);
-        this.PageSize = this.GetValue(pageSize, 10);
+        PageIndex = GetValue(pageIndex,1);
+        PageSize = GetValue(pageSize, 10);
     }
 
     private int GetValue(int? value, int defaultValue)

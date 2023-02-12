@@ -5,7 +5,6 @@ using Microsoft.Extensions.Options;
 using Scriban;
 using Trainer.Application.Abstractions;
 using Trainer.Application.Interfaces;
-using Trainer.Application.Exceptions;
 using Trainer.Application.Models.Email;
 using Trainer.Application.Templates;
 using Trainer.Settings.Error;
@@ -33,10 +32,10 @@ namespace Trainer.Application.Aggregates.Examination.Commands.CreateExamination
         {
             if (ExaminationErrorSettings.CreateExaminationEnable)
             {
-                var examination = this.Mapper.Map<Domain.Entities.Examination.Examination>(request);
+                var examination = Mapper.Map<Domain.Entities.Examination.Examination>(request);
                 
-                await this.DbContext.Examinations.AddAsync(examination, cancellationToken);
-                await this.DbContext.SaveChangesAsync(cancellationToken);
+                await DbContext.Examinations.AddAsync(examination, cancellationToken);
+                await DbContext.SaveChangesAsync(cancellationToken);
 
                 var patient = await DbContext.Patients
                     .Where(x => x.Id == examination.PatientId)
@@ -52,7 +51,7 @@ namespace Trainer.Application.Aggregates.Examination.Commands.CreateExamination
 
                     var body = template.Render(new
                     {
-                        patient = patient,
+                        patient,
                         model = request
                     });
 

@@ -28,7 +28,7 @@ namespace Trainer.Application.Aggregates.Examination.Queries.GetExaminations
             if (ExaminationErrorSettings.GetExaminationsEnable)
             {
                 var examinations = DbContext.Examinations
-                    .ProjectTo<Examination>(this.Mapper.ConfigurationProvider);
+                    .ProjectTo<Examination>(Mapper.ConfigurationProvider);
 
                 var paginatedList = await PaginatedList<Examination>.CreateAsync(examinations, request.PageIndex, request.PageSize);
 
@@ -73,7 +73,7 @@ namespace Trainer.Application.Aggregates.Examination.Queries.GetExaminations
             {
                 Random rnd = new Random();
                 var examinations = DbContext.Examinations
-                    .ProjectTo<Examination>(this.Mapper.ConfigurationProvider);
+                    .ProjectTo<Examination>(Mapper.ConfigurationProvider);
 
                 examinations = examinations.Skip(rnd.Next(examinations.Count()));
 

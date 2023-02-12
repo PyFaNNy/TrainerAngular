@@ -27,7 +27,7 @@ namespace Trainer.Application.Aggregates.Examination.Queries.GetExamination
             {
                 var examination = DbContext.Examinations
                     .Where(x => x.Id == request.ExaminationId)
-                    .ProjectTo<Examination>(this.Mapper.ConfigurationProvider)
+                    .ProjectTo<Examination>(Mapper.ConfigurationProvider)
                     .FirstOrDefault();
 
                 InvCountIndicators(examination);
@@ -40,7 +40,7 @@ namespace Trainer.Application.Aggregates.Examination.Queries.GetExamination
                 Random rnd = new Random();
                 var examination = DbContext.Examinations
                     .Skip(rnd.Next(30))
-                    .ProjectTo<Examination>(this.Mapper.ConfigurationProvider)
+                    .ProjectTo<Examination>(Mapper.ConfigurationProvider)
                     .FirstOrDefault();
 
                 InvCountIndicators(examination);

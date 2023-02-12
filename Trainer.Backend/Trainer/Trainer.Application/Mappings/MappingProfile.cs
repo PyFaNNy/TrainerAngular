@@ -1,15 +1,13 @@
-﻿namespace Trainer.Application.Mappings
-{
-    using System;
-    using System.Linq;
-    using System.Reflection;
-    using AutoMapper;
+﻿using System.Reflection;
+using AutoMapper;
 
+namespace Trainer.Application.Mappings
+{
     public class MappingProfile : Profile
     {
         public MappingProfile()
         {
-            this.ApplyMappingsFromAssembly(Assembly.GetExecutingAssembly());
+            ApplyMappingsFromAssembly(Assembly.GetExecutingAssembly());
         }
 
         private void ApplyMappingsFromAssembly(Assembly assembly)

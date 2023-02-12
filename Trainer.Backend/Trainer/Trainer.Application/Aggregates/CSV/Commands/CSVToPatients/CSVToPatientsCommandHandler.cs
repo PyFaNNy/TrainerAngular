@@ -20,7 +20,7 @@ namespace Trainer.Application.Aggregates.CSV.Commands.CSVToPatients
             IOptions<CSVErrorSettings> csvErrorSettings)
             : base(mediator, dbContext, mapper)
         {
-            this.CSVParserService = csvParserService;
+            CSVParserService = csvParserService;
             CSVErrorSettings = csvErrorSettings.Value;
         }
 

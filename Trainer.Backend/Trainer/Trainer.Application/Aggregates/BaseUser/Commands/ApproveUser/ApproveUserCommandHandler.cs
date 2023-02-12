@@ -8,6 +8,7 @@ using Trainer.Application.Exceptions;
 using Trainer.Application.Interfaces;
 using Trainer.Application.Models.Email;
 using Trainer.Application.Templates;
+using Trainer.Enums;
 using Trainer.Settings.Error;
 
 namespace Trainer.Application.Aggregates.BaseUser.Commands.ApproveUser
@@ -33,7 +34,7 @@ namespace Trainer.Application.Aggregates.BaseUser.Commands.ApproveUser
         {
             if (BaseUserErrorSettings.ApproveUserEnable)
             {
-                var user = await this.DbContext.BaseUsers
+                var user = await DbContext.BaseUsers
                 .Where(x => x.Id == request.UserId)
                 .FirstOrDefaultAsync(cancellationToken);
 
@@ -42,8 +43,8 @@ namespace Trainer.Application.Aggregates.BaseUser.Commands.ApproveUser
                     throw new NotFoundException(nameof(Domain.Entities.BaseUser), request.UserId);
                 }
 
-                user.Status = Enums.StatusUser.Active;
-                await this.DbContext.SaveChangesAsync(cancellationToken);
+                user.Status = StatusUser.Active;
+                await DbContext.SaveChangesAsync(cancellationToken);
                 if (BaseUserErrorSettings.ApproveUserEmailEnable)
                 {
                     var template = Template.Parse(EmailTemplates.ApproveUser);
@@ -54,7 +55,7 @@ namespace Trainer.Application.Aggregates.BaseUser.Commands.ApproveUser
                     {
                         ToEmail = user.Email,
                         Body = body,
-                        Subject = $"Approve registration"
+                        Subject = "Approve registration"
                     });
                 }
             }

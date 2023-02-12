@@ -28,25 +28,25 @@ namespace Trainer.Application.Aggregates.Examination.Queries.GetExamination
         {
             get;
             set;
-        } = false;
+        }
 
         public bool Tempareture
         {
             get;
             set;
-        } = false;
+        }
 
         public bool HeartRate
         {
             get;
             set;
-        } = false;
+        }
 
         public bool SpO2
         {
             get;
             set;
-        } = false;
+        }
 
         public int Indicators
         {

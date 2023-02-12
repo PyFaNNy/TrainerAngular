@@ -1,15 +1,12 @@
-﻿namespace Trainer.Application.Aggregates.OTPCodes.Commands.RequestPassword
-{
-    using System.Threading;
-    using System.Threading.Tasks;
-    using AutoMapper;
-    using MediatR;
-    using Exceptions;
-    using Interfaces;
-    using Trainer.Domain.Entities;
-    using Trainer.Settings.Error;
-    using Microsoft.Extensions.Options;
+﻿using AutoMapper;
+using MediatR;
+using Microsoft.Extensions.Options;
+using Trainer.Application.Exceptions;
+using Trainer.Application.Interfaces;
+using Trainer.Settings.Error;
 
+namespace Trainer.Application.Aggregates.OTPCodes.Commands.RequestPassword
+{
     public class RequestPasswordCommandHandler : RequestSmsCodeAbstractCommandHandler, IRequestHandler<RequestPasswordCommand, Unit>
     {
         public RequestPasswordCommandHandler(IMediator mediator, ITrainerDbContext dbContext, IMapper mapper, IMailService emailService,
@@ -32,7 +29,7 @@
 
         private void CheckIfUserExists(string email)
         {
-            var isUserExist = this.DbContext.BaseUsers.Any(x => x.Email == email);
+            var isUserExist = DbContext.BaseUsers.Any(x => x.Email == email);
 
             if (!isUserExist)
             {

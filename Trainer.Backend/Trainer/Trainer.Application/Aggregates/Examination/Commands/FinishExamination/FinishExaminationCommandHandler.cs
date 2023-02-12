@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 using Trainer.Application.Abstractions;
 using Trainer.Application.Exceptions;
 using Trainer.Application.Interfaces;
+using Trainer.Enums;
 using Trainer.Settings.Error;
 
 namespace Trainer.Application.Aggregates.Examination.Commands.FinishExamination
@@ -27,7 +28,7 @@ namespace Trainer.Application.Aggregates.Examination.Commands.FinishExamination
         {
             if (ExaminationErrorSettings.FinishExaminationEnable)
             {
-                var examination = await this.DbContext.Examinations
+                var examination = await DbContext.Examinations
                 .Where(x => x.Id == request.ExaminationId)
                 .FirstOrDefaultAsync(cancellationToken);
 
@@ -36,7 +37,7 @@ namespace Trainer.Application.Aggregates.Examination.Commands.FinishExamination
                     throw new NotFoundException(nameof(Domain.Entities.Examination.Examination), request.ExaminationId);
                 }
 
-                examination.Status = Enums.ExaminationStatus.Finished;
+                examination.Status = ExaminationStatus.Finished;
                 DbContext.Examinations.Update(examination);
                 await DbContext.SaveChangesAsync(cancellationToken);
             }

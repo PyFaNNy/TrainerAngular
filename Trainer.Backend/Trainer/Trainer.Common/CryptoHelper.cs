@@ -1,12 +1,11 @@
-﻿namespace Trainer.Common
+﻿using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+
+namespace Trainer.Common
 {
     namespace TableConnect.Common
     {
-        using System;
-        using System.Runtime.CompilerServices;
-        using System.Security.Cryptography;
-        using Microsoft.AspNetCore.Cryptography.KeyDerivation;
-
         public static class CryptoHelper
         {
             private const int PBKDF2IterCount = 10000;
@@ -163,7 +162,7 @@
                 return ((uint)(buffer[offset + 0]) << 24)
                     | ((uint)(buffer[offset + 1]) << 16)
                     | ((uint)(buffer[offset + 2]) << 8)
-                    | ((uint)(buffer[offset + 3]));
+                    | buffer[offset + 3];
             }
 
             private static void WriteNetworkByteOrder(byte[] buffer, int offset, uint value)

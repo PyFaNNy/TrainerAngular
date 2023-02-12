@@ -1,16 +1,12 @@
-﻿namespace Trainer.Application.Aggregates.OTPCodes.Commands.RequestLoginCode
-{
-    using System.Linq;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using AutoMapper;
-    using Trainer.Application.Exceptions;
-    using Trainer.Application.Interfaces;
-    using Trainer.Common.TableConnect.Common;
-    using MediatR;
-    using Trainer.Settings.Error;
-    using Microsoft.Extensions.Options;
+﻿using AutoMapper;
+using MediatR;
+using Microsoft.Extensions.Options;
+using Trainer.Application.Exceptions;
+using Trainer.Application.Interfaces;
+using Trainer.Settings.Error;
 
+namespace Trainer.Application.Aggregates.OTPCodes.Commands.RequestLoginCode
+{
     public class RequestLoginCodeCommandHandler
         : RequestSmsCodeAbstractCommandHandler, IRequestHandler<RequestLoginCodeCommand, Unit>
     {
@@ -27,16 +23,16 @@
         {
             if (OTPCodesErrorSettings.RequestLoginCodeEnable)
             {
-                this.CredentialsMustBeValid(request);
-                this.LimitsCodeValid(request);
-                await this.CreateCode(request);
+                CredentialsMustBeValid(request);
+                LimitsCodeValid(request);
+                await CreateCode(request);
             }
             return Unit.Value;
         }
 
         private void CredentialsMustBeValid(RequestLoginCodeCommand request)
         {
-            var user = this.DbContext.BaseUsers
+            var user = DbContext.BaseUsers
                 .Where(x => x.Email.Equals(request.Email))
                 .FirstOrDefault();
 

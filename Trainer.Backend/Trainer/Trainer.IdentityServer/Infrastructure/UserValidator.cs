@@ -30,7 +30,7 @@ public class UserValidator : IResourceOwnerPasswordValidator
                 context.Result = new GrantValidationResult(
                     subject: user.Id.ToString(),
                     authenticationMethod: "custom",
-                    claims: new Claim[]
+                    claims: new[]
                     {
                         new Claim(ClaimTypes.Name, user.Email),
                         new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
@@ -44,7 +44,5 @@ public class UserValidator : IResourceOwnerPasswordValidator
         // context set to Failure        
         context.Result = new GrantValidationResult(
             TokenRequestErrors.UnauthorizedClient, "Invalid Credentials");
-        
-        return;
     }
 }

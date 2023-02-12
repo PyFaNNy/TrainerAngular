@@ -1,13 +1,13 @@
-﻿namespace Trainer.Application
-{
-    using System.Reflection;
-    using FluentValidation;
-    using MediatR;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Trainer.Application.Behaviours;
-    using Trainer.Settings.Error;
+﻿using System.Reflection;
+using FluentValidation;
+using MediatR;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Trainer.Application.Behaviours;
+using Trainer.Settings.Error;
 
+namespace Trainer.Application
+{
     public static class DependenciesBootstrapper
     {
         public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)

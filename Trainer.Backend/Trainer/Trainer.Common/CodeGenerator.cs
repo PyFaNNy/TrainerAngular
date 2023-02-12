@@ -1,7 +1,5 @@
 ﻿namespace Trainer.Common
 {
-    using System;
-
     public static class CodeGenerator
     {
         public static string GenerateCode()

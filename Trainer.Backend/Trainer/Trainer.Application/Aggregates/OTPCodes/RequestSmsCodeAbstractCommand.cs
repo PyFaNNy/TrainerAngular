@@ -1,8 +1,8 @@
-﻿namespace Trainer.Application.Aggregates.OTPCodes
-{
-    using Newtonsoft.Json;
-    using Trainer.Enums;
+﻿using Newtonsoft.Json;
+using Trainer.Enums;
 
+namespace Trainer.Application.Aggregates.OTPCodes
+{
     public abstract class RequestSmsCodeAbstractCommand
     {
         public string Email

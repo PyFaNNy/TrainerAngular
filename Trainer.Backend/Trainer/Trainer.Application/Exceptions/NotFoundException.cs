@@ -1,11 +1,8 @@
 ﻿namespace Trainer.Application.Exceptions
 {
-    using System;
-
     public class NotFoundException : Exception
     {
         public NotFoundException()
-            : base()
         {
         }
 

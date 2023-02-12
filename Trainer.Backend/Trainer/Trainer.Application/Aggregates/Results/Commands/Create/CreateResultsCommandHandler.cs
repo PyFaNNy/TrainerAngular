@@ -2,6 +2,7 @@
 using MediatR;
 using Trainer.Application.Abstractions;
 using Trainer.Application.Interfaces;
+using Trainer.Domain.Entities.Result;
 
 namespace Trainer.Application.Aggregates.Results.Commands.Create
 {
@@ -17,7 +18,7 @@ namespace Trainer.Application.Aggregates.Results.Commands.Create
 
         public async Task<Unit> Handle(CreateResultsCommand request, CancellationToken cancellationToken)
         {
-            var result = Mapper.Map<Domain.Entities.Result.Result>(request);
+            var result = Mapper.Map<Result>(request);
 
             await DbContext.Results.AddAsync(result, cancellationToken);
             await DbContext.SaveChangesAsync(cancellationToken);

@@ -1,9 +1,9 @@
-﻿namespace Trainer.Application.Mappings
-{
-    using AutoMapper;
+﻿using AutoMapper;
 
+namespace Trainer.Application.Mappings
+{
     public interface IMapFrom<T>
     {
-        void Mapping(Profile profile) => profile.CreateMap(typeof(T), this.GetType());
+        void Mapping(Profile profile) => profile.CreateMap(typeof(T), GetType());
     }
 }

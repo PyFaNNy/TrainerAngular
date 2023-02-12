@@ -59,7 +59,6 @@ namespace Trainer.Controllers
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.ExaminationGetModel);
             var result = await Mediator.Send(new GetExaminationQuery {ExaminationId = id});
-            //ViewBag.Id = result.Id;
             return Ok(result);
         }
 
@@ -73,10 +72,7 @@ namespace Trainer.Controllers
         public async Task<IActionResult> AddModel(CreateExaminationCommand command)
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.ExaminationAddModel);
-            // var doctorId = this.HttpContext.User.GetUserId();
-            // command.DoctorId = doctorId.Value;
             await Mediator.Send(command);
-
             return Ok();
         }
 
@@ -90,8 +86,6 @@ namespace Trainer.Controllers
         public async Task<IActionResult> UpdateModel(UpdateExaminationCommand command)
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.ExaminationUpdateModel);
-            // var doctorId = this.HttpContext.User.GetUserId();
-            // command.DoctorId = doctorId.Value;
             await Mediator.Send(command);
             return Ok();
         }

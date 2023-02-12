@@ -1,8 +1,7 @@
-﻿namespace Trainer.Common
-{
-    using System.Linq;
-    using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
+namespace Trainer.Common
+{
     public static class PasswordsHelper
     {
         public static bool IsMeetsRequirements(string password)

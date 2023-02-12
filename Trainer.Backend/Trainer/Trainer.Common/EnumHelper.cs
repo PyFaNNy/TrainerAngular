@@ -1,8 +1,7 @@
-﻿namespace Trainer.Common
-{
-    using System;
-    using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
+namespace Trainer.Common
+{
     public static class EnumHelper
     {
         // This extension method is broken out so you can use a similar pattern with 
@@ -22,7 +21,7 @@
         public static string ToName(this Enum value)
         {
             var attribute = value.GetAttribute<EnumMemberAttribute>();
-            return attribute == null ? value.ToString() : attribute.Value.ToString();
+            return attribute == null ? value.ToString() : attribute.Value;
         }
     }
 }

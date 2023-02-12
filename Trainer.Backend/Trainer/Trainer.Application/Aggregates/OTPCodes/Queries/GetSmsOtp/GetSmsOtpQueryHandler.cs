@@ -1,10 +1,11 @@
-﻿namespace Prixy.Application.Aggregates.OTPCodes.Queries.GetSmsOtp;
-using AutoMapper;
+﻿using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Trainer.Application.Abstractions;
 using Trainer.Application.Interfaces;
 using Trainer.Domain.Entities;
+
+namespace Prixy.Application.Aggregates.OTPCodes.Queries.GetSmsOtp;
 
 public class GetSmsOtpQueryHandler : AbstractRequestHandler, IRequestHandler<GetSmsOtpQuery, OTP>
 {
@@ -17,7 +18,7 @@ public class GetSmsOtpQueryHandler : AbstractRequestHandler, IRequestHandler<Get
 
     public async Task<OTP> Handle(GetSmsOtpQuery request, CancellationToken cancellationToken)
     {
-        return await this.DbContext.OTPs
+        return await DbContext.OTPs
             .Where(x => x.Email == request.Email)
             .Where(x => x.Action == request.Action)
             .Where(x => x.CreatedAt > DateTime.UtcNow.AddHours(-1))

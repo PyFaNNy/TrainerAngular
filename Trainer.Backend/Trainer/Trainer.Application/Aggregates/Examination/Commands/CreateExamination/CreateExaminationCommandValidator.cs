@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using Microsoft.Extensions.Localization;
 
 namespace Trainer.Application.Aggregates.Examination.Commands.CreateExamination
 {

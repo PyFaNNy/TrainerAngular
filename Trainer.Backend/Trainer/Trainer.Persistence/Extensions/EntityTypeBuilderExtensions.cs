@@ -1,9 +1,9 @@
-﻿namespace Trainer.Persistence.Extensions
-{
-    using Domain.Interfaces;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Trainer.Domain.Interfaces;
 
+namespace Trainer.Persistence.Extensions
+{
     public static class EntityTypeBuilderExtensions
     {
         public static EntityTypeBuilder<TEntity> MapTable<TEntity>(this EntityTypeBuilder<TEntity> builder,

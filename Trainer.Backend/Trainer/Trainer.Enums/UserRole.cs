@@ -1,7 +1,7 @@
-﻿namespace Trainer.Enums
-{
-    using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
+namespace Trainer.Enums
+{
     public enum UserRole
     {
         [EnumMember(Value = "admin")]

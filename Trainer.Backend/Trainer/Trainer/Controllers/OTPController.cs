@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Localization;
 using Trainer.Application.Aggregates.BaseUser.Commands.ConfirmEmail;
-using Trainer.Application.Aggregates.BaseUser.Commands.ResetPasswordUser;
 using Trainer.Application.Aggregates.OTPCodes.Commands.RequestPassword;
 using Trainer.Application.Aggregates.OTPCodes.Queries.ValidateSmsCode;
-using Trainer.Application.Exceptions;
 using Trainer.Enums;
 using Trainer.Models;
 
@@ -26,7 +23,7 @@ namespace Trainer.Controllers
         [HttpPost("reset")]
         public async Task<IActionResult> ResetPasswordSendEmail(string email)
         {
-            await Mediator.Send(new RequestPasswordCommand()
+            await Mediator.Send(new RequestPasswordCommand
             {
                 Host = HttpContext.Request.Host.Value,
                 Email = email
@@ -52,15 +49,13 @@ namespace Trainer.Controllers
             {
                 if (code.OTPaction == OTPAction.Registration)
                 {
-                    await Mediator.Send(new ConfirmEmailCommand() {Email = code.Email});
+                    await Mediator.Send(new ConfirmEmailCommand {Email = code.Email});
                 }
 
                 return Ok();
             }
-            else
-            {
-                return BadRequest("Incorrect code");
-            }
+
+            return BadRequest("Incorrect code");
         }
     }
 }

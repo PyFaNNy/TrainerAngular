@@ -1,11 +1,12 @@
-﻿namespace Trainer
-{
-    using Trainer.Application.Interfaces;
-    using Trainer.Common.TableConnect.Common;
-    using Trainer.Domain.Entities.Admin;
-    using Trainer.Domain.Entities.Doctor;
-    using Trainer.Domain.Entities.Manager;
+﻿using Trainer.Application.Interfaces;
+using Trainer.Common.TableConnect.Common;
+using Trainer.Domain.Entities.Admin;
+using Trainer.Domain.Entities.Doctor;
+using Trainer.Domain.Entities.Manager;
+using Trainer.Enums;
 
+namespace Trainer
+{
     public class DefaultInitializer
     {
         public static async Task InitializeAsync(ITrainerDbContext dbContext)
@@ -21,7 +22,7 @@
                     FirstName = "Admin",
                     MiddleName = "Admin",
                     LastName = "Admin",
-                    Role = Enums.UserRole.Admin,
+                    Role = UserRole.Admin,
                 });
                 dbContext.SaveChanges();
             }
@@ -36,7 +37,7 @@
                     FirstName = "Doctor",
                     MiddleName = "Doctor",
                     LastName = "Doctor",
-                    Role = Enums.UserRole.Doctor,
+                    Role = UserRole.Doctor,
                 });
                 dbContext.SaveChanges();
             }
@@ -51,7 +52,7 @@
                     FirstName = "Manager",
                     MiddleName = "Manager",
                     LastName = "Manager",
-                    Role = Enums.UserRole.Manager,
+                    Role = UserRole.Manager,
                 });
                 dbContext.SaveChanges();
             }

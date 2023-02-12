@@ -29,7 +29,7 @@ namespace Trainer.Application.Aggregates.Examination.Commands.DeleteExamination
             {
                 foreach (var id in request.ExaminationsId)
                 {
-                    var examination = await this.DbContext.Examinations
+                    var examination = await DbContext.Examinations
                         .Where(x => x.Id == id)
                         .FirstOrDefaultAsync(cancellationToken);
 
@@ -38,9 +38,9 @@ namespace Trainer.Application.Aggregates.Examination.Commands.DeleteExamination
                         throw new NotFoundException(nameof(Domain.Entities.Examination.Examination), id);
                     }
 
-                    this.DbContext.Examinations.Remove(examination);
+                    DbContext.Examinations.Remove(examination);
                 }
-                await this.DbContext.SaveChangesAsync(cancellationToken);
+                await DbContext.SaveChangesAsync(cancellationToken);
             }
             return Unit.Value;
         }

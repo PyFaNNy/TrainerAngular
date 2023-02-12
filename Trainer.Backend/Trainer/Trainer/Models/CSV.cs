@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-
-namespace Trainer.Models
+﻿namespace Trainer.Models
 {
     public class CSV
     {

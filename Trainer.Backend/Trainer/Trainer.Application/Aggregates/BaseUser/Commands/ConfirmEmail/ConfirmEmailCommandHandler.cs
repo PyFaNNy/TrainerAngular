@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Trainer.Application.Abstractions;
 using Trainer.Application.Exceptions;
 using Trainer.Application.Interfaces;
+using Trainer.Enums;
 
 namespace Trainer.Application.Aggregates.BaseUser.Commands.ConfirmEmail
 {
@@ -29,7 +30,7 @@ namespace Trainer.Application.Aggregates.BaseUser.Commands.ConfirmEmail
             }
 
             user.EmailConfirmed = true;
-            user.Status = Enums.StatusUser.Pending;
+            user.Status = StatusUser.Pending;
 
             await DbContext.SaveChangesAsync(cancellationToken);
 

@@ -36,7 +36,7 @@ namespace Trainer.Application.Aggregates.Examination.Commands.UpdateExamination
             {
                 CountIndicators(request);
 
-                var examination = await this.DbContext.Examinations
+                var examination = await DbContext.Examinations
                 .Where(x => x.Id == request.Id)
                 .FirstOrDefaultAsync(cancellationToken);
 
@@ -45,14 +45,14 @@ namespace Trainer.Application.Aggregates.Examination.Commands.UpdateExamination
                     throw new NotFoundException(nameof(Domain.Entities.Examination.Examination), request.Id);
                 }
 
-                this.Mapper.Map(request, examination);
+                Mapper.Map(request, examination);
 
                 if (examination.Indicators == 0)
                 {
                     throw new ValidationException("Sensors","You must select at least one sensor");
                 }
 
-                await this.DbContext.SaveChangesAsync(cancellationToken);
+                await DbContext.SaveChangesAsync(cancellationToken);
 
                 var patient = await DbContext.Patients
                     .Where(x => x.Id == examination.PatientId)
@@ -68,7 +68,7 @@ namespace Trainer.Application.Aggregates.Examination.Commands.UpdateExamination
 
                     var body = template.Render(new
                     {
-                        patient = patient,
+                        patient,
                         model = request
                     });
 

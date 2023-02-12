@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using System.Reflection;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 using Trainer.Application.Interfaces;
 using Trainer.Domain.Entities;
 using Trainer.Domain.Entities.Admin;
@@ -76,8 +75,8 @@ namespace Trainer.Persistence
 
         public override int SaveChanges()
         {
-            this.SetCreatedAt();
-            this.SetUpdatedAt();
+            SetCreatedAt();
+            SetUpdatedAt();
             var result = base.SaveChanges();
 
             return result;
@@ -85,8 +84,8 @@ namespace Trainer.Persistence
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
-            this.SetCreatedAt();
-            this.SetUpdatedAt();
+            SetCreatedAt();
+            SetUpdatedAt();
 
             var result = await base.SaveChangesAsync(cancellationToken);
 
@@ -95,7 +94,7 @@ namespace Trainer.Persistence
 
         private void SetCreatedAt()
         {
-            foreach (var entry in this.ChangeTracker.Entries()
+            foreach (var entry in ChangeTracker.Entries()
                          .Where(p => p.State == EntityState.Added))
             {
                 if (entry.Entity is ICreatedAt ent)
@@ -107,7 +106,7 @@ namespace Trainer.Persistence
 
         private void SetUpdatedAt()
         {
-            foreach (var entry in this.ChangeTracker.Entries()
+            foreach (var entry in ChangeTracker.Entries()
                          .Where(p => p.State == EntityState.Modified))
             {
                 if (entry.Entity is IUpdatedAt ent)

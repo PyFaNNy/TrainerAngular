@@ -3,6 +3,9 @@ using MediatR;
 using Microsoft.Extensions.Options;
 using Trainer.Application.Abstractions;
 using Trainer.Application.Interfaces;
+using Trainer.Domain.Entities.Doctor;
+using Trainer.Domain.Entities.Manager;
+using Trainer.Enums;
 using Trainer.Settings.Error;
 
 namespace Trainer.Application.Aggregates.BaseUser.Commands.SignIn
@@ -25,21 +28,21 @@ namespace Trainer.Application.Aggregates.BaseUser.Commands.SignIn
         {
             if (BaseUserErrorSettings.SignInEnable)
             {
-                if (request.Role == Enums.UserRole.Doctor)
+                if (request.Role == UserRole.Doctor)
                 {
-                    var doctor = this.Mapper.Map<Domain.Entities.Doctor.Doctor>(request);
+                    var doctor = Mapper.Map<Doctor>(request);
 
-                    await this.DbContext.Doctors.AddAsync(doctor, cancellationToken);
+                    await DbContext.Doctors.AddAsync(doctor, cancellationToken);
                 }
 
-                if (request.Role == Enums.UserRole.Manager)
+                if (request.Role == UserRole.Manager)
                 {
-                    var manager = this.Mapper.Map<Domain.Entities.Manager.Manager>(request);
+                    var manager = Mapper.Map<Manager>(request);
 
-                    await this.DbContext.Managers.AddAsync(manager, cancellationToken);
+                    await DbContext.Managers.AddAsync(manager, cancellationToken);
                 }
 
-                await this.DbContext.SaveChangesAsync(cancellationToken);
+                await DbContext.SaveChangesAsync(cancellationToken);
             }
             return Unit.Value;
         }

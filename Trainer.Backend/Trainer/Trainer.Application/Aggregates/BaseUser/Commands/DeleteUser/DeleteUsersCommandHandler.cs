@@ -35,7 +35,7 @@ namespace Trainer.Application.Aggregates.BaseUser.Commands.DeleteUser
             {
                 foreach (var id in request.UserIds)
                 {
-                    var user = await this.DbContext.BaseUsers
+                    var user = await DbContext.BaseUsers
                         .Where(x => x.Id == id)
                         .FirstOrDefaultAsync(cancellationToken);
 
@@ -56,11 +56,11 @@ namespace Trainer.Application.Aggregates.BaseUser.Commands.DeleteUser
                         {
                             ToEmail = user.Email,
                             Body = body,
-                            Subject = $"Delete your account"
+                            Subject = "Delete your account"
                         });
                     }
                 }
-                await this.DbContext.SaveChangesAsync(cancellationToken);
+                await DbContext.SaveChangesAsync(cancellationToken);
             }
             return Unit.Value;
         }

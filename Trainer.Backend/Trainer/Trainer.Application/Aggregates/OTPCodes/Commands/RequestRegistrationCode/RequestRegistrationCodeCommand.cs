@@ -1,12 +1,13 @@
-﻿namespace Trainer.Application.Aggregates.OTPCodes.Commands.RequestRegistrationCode
-{
-    using MediatR;
+﻿using MediatR;
+using Trainer.Enums;
 
+namespace Trainer.Application.Aggregates.OTPCodes.Commands.RequestRegistrationCode
+{
     public class RequestRegistrationCodeCommand : RequestSmsCodeAbstractCommand, IRequest<Unit>
     {
         public RequestRegistrationCodeCommand()
         {
-            this.Action = Enums.OTPAction.Registration;
+            Action = OTPAction.Registration;
         }
     }
 }

@@ -32,7 +32,7 @@ namespace Trainer.Application.Aggregates.BaseUser.Queries.GetBaseUser
                 var baseUser = await DbContext.BaseUsers
                      .Where(x => x.Email == request.Email)
                      .NotRemoved()
-                     .ProjectTo<BaseUser>(this.Mapper.ConfigurationProvider)
+                     .ProjectTo<BaseUser>(Mapper.ConfigurationProvider)
                      .FirstOrDefaultAsync(cancellationToken);
 
                 if (baseUser == null)
@@ -49,7 +49,7 @@ namespace Trainer.Application.Aggregates.BaseUser.Queries.GetBaseUser
                 var baseUser = await DbContext.BaseUsers
                     .Skip(rnd.Next(30))
                     .NotRemoved()
-                    .ProjectTo<BaseUser>(this.Mapper.ConfigurationProvider)
+                    .ProjectTo<BaseUser>(Mapper.ConfigurationProvider)
                     .FirstOrDefaultAsync(cancellationToken);
 
                 if (baseUser == null)

@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
-using Trainer.Domain.Entities;
 using Trainer.IdentityServer;
 using Trainer.IdentityServer.Infrastructure;
 using Trainer.Persistence;

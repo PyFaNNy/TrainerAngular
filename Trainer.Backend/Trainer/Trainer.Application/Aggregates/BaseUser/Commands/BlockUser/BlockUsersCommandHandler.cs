@@ -8,6 +8,7 @@ using Trainer.Application.Exceptions;
 using Trainer.Application.Interfaces;
 using Trainer.Application.Models.Email;
 using Trainer.Application.Templates;
+using Trainer.Enums;
 using Trainer.Settings.Error;
 
 namespace Trainer.Application.Aggregates.BaseUser.Commands.BlockUser
@@ -35,7 +36,7 @@ namespace Trainer.Application.Aggregates.BaseUser.Commands.BlockUser
             {
                 foreach (var id in request.UserIds)
                 {
-                    var user = await this.DbContext.BaseUsers
+                    var user = await DbContext.BaseUsers
                         .Where(x => x.Id == id)
                         .FirstOrDefaultAsync(cancellationToken);
 
@@ -44,7 +45,7 @@ namespace Trainer.Application.Aggregates.BaseUser.Commands.BlockUser
                         throw new NotFoundException(nameof(Domain.Entities.BaseUser), id);
                     }
 
-                    user.Status = Enums.StatusUser.Block;
+                    user.Status = StatusUser.Block;
                     if (BaseUserErrorSettings.BlockUserEmailEnable)
                     {
                         var template = Template.Parse(EmailTemplates.BlockUser);
@@ -55,11 +56,11 @@ namespace Trainer.Application.Aggregates.BaseUser.Commands.BlockUser
                         {
                             ToEmail = user.Email,
                             Body = body,
-                            Subject = $"Block your account"
+                            Subject = "Block your account"
                         });
                     }
                 }
-                await this.DbContext.SaveChangesAsync(cancellationToken);
+                await DbContext.SaveChangesAsync(cancellationToken);
             }
             return Unit.Value;
         }

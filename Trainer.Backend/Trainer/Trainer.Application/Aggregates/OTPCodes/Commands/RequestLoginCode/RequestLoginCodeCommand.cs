@@ -1,12 +1,13 @@
-﻿namespace Trainer.Application.Aggregates.OTPCodes.Commands.RequestLoginCode
-{
-    using MediatR;
+﻿using MediatR;
+using Trainer.Enums;
 
+namespace Trainer.Application.Aggregates.OTPCodes.Commands.RequestLoginCode
+{
     public class RequestLoginCodeCommand :  RequestSmsCodeAbstractCommand, IRequest<Unit>
     {
         public RequestLoginCodeCommand()
         {
-            this.Action = Enums.OTPAction.Login;
+            Action = OTPAction.Login;
         }
     }
 }

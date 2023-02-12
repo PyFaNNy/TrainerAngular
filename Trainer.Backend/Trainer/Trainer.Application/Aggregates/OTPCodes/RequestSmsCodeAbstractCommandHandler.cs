@@ -1,22 +1,19 @@
-﻿using Microsoft.Extensions.Options;
+﻿using AutoMapper;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Scriban;
+using Trainer.Application.Abstractions;
+using Trainer.Application.Exceptions;
+using Trainer.Application.Interfaces;
+using Trainer.Application.Models.Email;
+using Trainer.Application.Templates;
+using Trainer.Common;
+using Trainer.Domain.Entities;
 using Trainer.Settings.Error;
 
 namespace Trainer.Application.Aggregates.OTPCodes
 {
-    using AutoMapper;
-    using MediatR;
-    using Microsoft.EntityFrameworkCore;
-    using Scriban;
-    using System;
-    using System.Threading.Tasks;
-    using Trainer.Application.Abstractions;
-    using Trainer.Application.Exceptions;
-    using Trainer.Application.Interfaces;
-    using Trainer.Application.Models.Email;
-    using Trainer.Application.Templates;
-    using Trainer.Common;
-    using Trainer.Domain.Entities;
-
     public abstract class RequestSmsCodeAbstractCommandHandler : AbstractRequestHandler
     {
         protected IMailService EmailService
@@ -37,13 +34,13 @@ namespace Trainer.Application.Aggregates.OTPCodes
             IOptions<OTPCodesErrorSettings> otpCodesErrorSettings)
              : base(mediator, dbContext, mapper)
         {
-            this.EmailService = emailService;
+            EmailService = emailService;
             OTPCodesErrorSettings = otpCodesErrorSettings.Value;
         }
 
         protected void LimitsCodeValid(RequestSmsCodeAbstractCommand request)
         {
-            var otp = this.DbContext.OTPs
+            var otp = DbContext.OTPs
                 .Where(x => x.Email.Equals(request.Email))
                 .Where(x => x.Action == request.Action)
                 .Where(x => x.CreatedAt.AddHours(1) > DateTime.UtcNow)
@@ -60,7 +57,7 @@ namespace Trainer.Application.Aggregates.OTPCodes
         {
             var code = CodeGenerator.GenerateCode();
 
-            this.DbContext.OTPs.Add(new OTP
+            DbContext.OTPs.Add(new OTP
             {
                 Action = request.Action,
                 Value = code,
@@ -69,7 +66,7 @@ namespace Trainer.Application.Aggregates.OTPCodes
                 CreatedAt = DateTime.UtcNow
             });
 
-            this.DbContext.SaveChanges();
+            DbContext.SaveChanges();
 
             if (OTPCodesErrorSettings.RequestRandomLoginCodeEnable || OTPCodesErrorSettings.RequestRandomRegistrationCodeEnable || OTPCodesErrorSettings.RequestRandomPasswordEnable)
             {
@@ -80,11 +77,11 @@ namespace Trainer.Application.Aggregates.OTPCodes
 
             var body = template.Render(new
             {
-                code = code,
+                code,
                 link = $"https://{request.Host}/OTP/VerifyCode?otpAction={request.Action}&email={request.Email}"
             }) ;
 
-            await this.EmailService.SendEmailAsync(new MailRequest
+            await EmailService.SendEmailAsync(new MailRequest
             {
                 ToEmail = request.Email,
                 Body = body,
@@ -94,7 +91,7 @@ namespace Trainer.Application.Aggregates.OTPCodes
 
         protected async Task UserMustBeExisted(string email)
         {
-            var isUserExist = await this.DbContext.BaseUsers.AnyAsync(x => x.Email == email);
+            var isUserExist = await DbContext.BaseUsers.AnyAsync(x => x.Email == email);
 
             if (!isUserExist)
             {

@@ -8,6 +8,7 @@ using Trainer.Application.Exceptions;
 using Trainer.Application.Interfaces;
 using Trainer.Application.Models.Email;
 using Trainer.Application.Templates;
+using Trainer.Enums;
 using Trainer.Settings.Error;
 
 namespace Trainer.Application.Aggregates.BaseUser.Commands.UnBlockUser
@@ -35,7 +36,7 @@ namespace Trainer.Application.Aggregates.BaseUser.Commands.UnBlockUser
             {
                 foreach (var id in request.UserIds)
                 {
-                    var user = await this.DbContext.BaseUsers
+                    var user = await DbContext.BaseUsers
                         .Where(x => x.Id == id)
                         .FirstOrDefaultAsync(cancellationToken);
 
@@ -44,7 +45,7 @@ namespace Trainer.Application.Aggregates.BaseUser.Commands.UnBlockUser
                         throw new NotFoundException(nameof(Domain.Entities.BaseUser), id);
                     }
 
-                    user.Status = Enums.StatusUser.Active;
+                    user.Status = StatusUser.Active;
 
                     if (BaseUserErrorSettings.UnBlockUserEnable)
                     {
@@ -56,11 +57,11 @@ namespace Trainer.Application.Aggregates.BaseUser.Commands.UnBlockUser
                         {
                             ToEmail = user.Email,
                             Body = body,
-                            Subject = $"Unblock your account"
+                            Subject = "Unblock your account"
                         });
                     }
                 }
-                await this.DbContext.SaveChangesAsync(cancellationToken);
+                await DbContext.SaveChangesAsync(cancellationToken);
             }
             return Unit.Value;
         }

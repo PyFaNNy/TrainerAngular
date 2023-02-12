@@ -1,7 +1,7 @@
-﻿using CsvHelper;
+﻿using System.Globalization;
+using CsvHelper;
 using CsvHelper.Configuration;
 using Microsoft.AspNetCore.Http;
-using System.Globalization;
 using Trainer.Application.Interfaces;
 using Trainer.CSVParserService.Infrastructure;
 using Trainer.Domain.Entities.Examination;

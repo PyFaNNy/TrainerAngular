@@ -30,7 +30,7 @@ namespace Trainer.Application.Aggregates.Patient.Queries.GetPatient
                 var patient = DbContext.Patients
                     .Where(x => x.Id == request.PatientId)
                     .NotRemoved()
-                    .ProjectTo<Patient>(this.Mapper.ConfigurationProvider)
+                    .ProjectTo<Patient>(Mapper.ConfigurationProvider)
                     .FirstOrDefault();
 
                 return patient;
@@ -42,7 +42,7 @@ namespace Trainer.Application.Aggregates.Patient.Queries.GetPatient
                 var patient = DbContext.Patients
                     .Skip(rnd.Next(30))
                     .NotRemoved()
-                    .ProjectTo<Patient>(this.Mapper.ConfigurationProvider)
+                    .ProjectTo<Patient>(Mapper.ConfigurationProvider)
                     .FirstOrDefault();
 
                 return patient;

@@ -12,12 +12,11 @@ namespace Trainer.Controllers
 
         private IMediator? _mediator;
 
-        protected IMediator Mediator => this._mediator ??= this.HttpContext.RequestServices.GetService<IMediator>();
+        protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
 
         protected BaseController(ILogger logger)
-        : base()
         {
-            this.Logger = logger;
+            Logger = logger;
         }
     }
 }

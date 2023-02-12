@@ -25,10 +25,10 @@ namespace Trainer.Application.Aggregates.Patient.Commands.CreatePatient
         {
             if (PatientErrorSettings.CreatePatientEnable)
             {
-                var patient = this.Mapper.Map<Domain.Entities.Patient.Patient>(request);
+                var patient = Mapper.Map<Domain.Entities.Patient.Patient>(request);
 
-                await this.DbContext.Patients.AddAsync(patient, cancellationToken);
-                await this.DbContext.SaveChangesAsync(cancellationToken);
+                await DbContext.Patients.AddAsync(patient, cancellationToken);
+                await DbContext.SaveChangesAsync(cancellationToken);
             }
             return Unit.Value;
         }

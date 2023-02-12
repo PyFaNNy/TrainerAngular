@@ -8,6 +8,7 @@ using Trainer.Application.Exceptions;
 using Trainer.Application.Interfaces;
 using Trainer.Application.Models.Email;
 using Trainer.Application.Templates;
+using Trainer.Enums;
 using Trainer.Settings.Error;
 
 namespace Trainer.Application.Aggregates.BaseUser.Commands.DeclineUser
@@ -33,7 +34,7 @@ namespace Trainer.Application.Aggregates.BaseUser.Commands.DeclineUser
         {
             if (BaseUserErrorSettings.DeclineUserEnable)
             {
-                var user = await this.DbContext.BaseUsers
+                var user = await DbContext.BaseUsers
                 .Where(x => x.Id == request.UserId)
                 .FirstOrDefaultAsync(cancellationToken);
 
@@ -42,8 +43,8 @@ namespace Trainer.Application.Aggregates.BaseUser.Commands.DeclineUser
                     throw new NotFoundException(nameof(Domain.Entities.BaseUser), request.UserId);
                 }
 
-                user.Status = Enums.StatusUser.Decline;
-                await this.DbContext.SaveChangesAsync(cancellationToken);
+                user.Status = StatusUser.Decline;
+                await DbContext.SaveChangesAsync(cancellationToken);
                 if (BaseUserErrorSettings.DeclineUserEmailEnable)
                 {
                     var template = Template.Parse(EmailTemplates.DeclineUser);
@@ -54,7 +55,7 @@ namespace Trainer.Application.Aggregates.BaseUser.Commands.DeclineUser
                     {
                         ToEmail = user.Email,
                         Body = body,
-                        Subject = $"Decline registration"
+                        Subject = "Decline registration"
                     });
                 }
             }

@@ -1,5 +1,4 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Reflection;
+﻿using System.Reflection;
 using App.Metrics.Formatters.Prometheus;
 using FluentValidation.AspNetCore;
 using IdentityServer4.AccessTokenValidation;
@@ -108,7 +107,7 @@ builder.Services.AddAuthentication(options =>
         };
     });
 
-builder.Services.AddCors((options) =>
+builder.Services.AddCors(options =>
 {
     options.AddPolicy("TrainerClientApp",
         new CorsPolicyBuilder()

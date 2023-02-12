@@ -1,10 +1,8 @@
-﻿namespace Trainer.Application.Interfaces
-{
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Http;
-    using Trainer.Application.Models.Blob;
+﻿using Microsoft.AspNetCore.Http;
+using Trainer.Application.Models.Blob;
 
+namespace Trainer.Application.Interfaces
+{
     public interface IBlobStorageService
     {
         Task<byte[]> GetFile(string containerName, string url);

@@ -25,22 +25,22 @@ namespace Trainer.Chart
 
             if (examination.DiaSis && (sensor1 != 1 || !tonometrOn || statusTonometr != 0))
             {
-                await this.Clients.Caller.SendAsync("error", "Не правильно подключен тонометр");
+                await Clients.Caller.SendAsync("error", "Не правильно подключен тонометр");
                 flag = false;
             }
             if (examination.Tempareture && (sensor2 != 2 || !termometrOn || statusTermometr != 0))
             {
-                await this.Clients.Caller.SendAsync("error", "Не правильно подключен термометр");
+                await Clients.Caller.SendAsync("error", "Не правильно подключен термометр");
                 flag = false;
             }
             if (examination.HeartRate && (sensor3 != 3 || !heartrateOn || statusHeartrate != 0))
             {
-                await this.Clients.Caller.SendAsync("error", "Не правильно подключен пульсометр");
+                await Clients.Caller.SendAsync("error", "Не правильно подключен пульсометр");
                 flag = false;
             }
             if (examination.SpO2 && (sensor4 != 4 || !oximetrOn || statusOximetr != 0))
             {
-                await this.Clients.Caller.SendAsync("error", "Не правильно подключен оксиметр");
+                await Clients.Caller.SendAsync("error", "Не правильно подключен оксиметр");
                 flag = false;
             }
 
@@ -59,24 +59,24 @@ namespace Trainer.Chart
                     {
                         sis -= _rnd.Next(0, 3);
                         dia -= _rnd.Next(0, 2);
-                        await this.Clients.Caller.SendAsync("newTonom", time, dia, sis);
+                        await Clients.Caller.SendAsync("newTonom", time, dia, sis);
                     }
                     if (examination.Tempareture)
                     {
                         temperature += _rnd.Next(0, 20) / 100.0;
-                        await this.Clients.Caller.SendAsync("newTermom", time, temperature);
+                        await Clients.Caller.SendAsync("newTermom", time, temperature);
                     }
                     if (examination.HeartRate)
                     {
                         heartRate = _rnd.Next(90, 160);
                         averageHeartRate += heartRate;
-                        await this.Clients.Caller.SendAsync("newHearRate", time, heartRate);
+                        await Clients.Caller.SendAsync("newHearRate", time, heartRate);
                     }
                     if (examination.SpO2)
                     {
                         sep = _rnd.Next(90, 99);
                         avarageSep += sep;
-                        await this.Clients.Caller.SendAsync("newOximetr", time, sep);
+                        await Clients.Caller.SendAsync("newOximetr", time, sep);
                     }
                     time += 1;
                     Thread.Sleep(500);
@@ -113,7 +113,7 @@ namespace Trainer.Chart
             {
                 status = "занят";
             }
-            await this.Clients.Caller.SendAsync("statusTonometr", status, count);
+            await Clients.Caller.SendAsync("statusTonometr", status, count);
         }
 
         public async Task TestTermometr()
@@ -132,7 +132,7 @@ namespace Trainer.Chart
             {
                 status = "занят";
             }
-            await this.Clients.Caller.SendAsync("statusTermometr", status, count);
+            await Clients.Caller.SendAsync("statusTermometr", status, count);
         }
 
         public async Task TestHeartrate()
@@ -151,7 +151,7 @@ namespace Trainer.Chart
             {
                 status = "занят";
             }
-            await this.Clients.Caller.SendAsync("statusHeartrate", status, count);
+            await Clients.Caller.SendAsync("statusHeartrate", status, count);
         }
 
         public async Task TestOximetr()
@@ -170,7 +170,7 @@ namespace Trainer.Chart
             {
                 status = "занят";
             }
-            await this.Clients.Caller.SendAsync("statusOximetr", status, count);
+            await Clients.Caller.SendAsync("statusOximetr", status, count);
         }
 
         private void CountIndicators(Examination model)

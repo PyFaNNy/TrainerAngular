@@ -1,15 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Trainer.Domain.Entities.Result;
 
 namespace Trainer.Persistence.Configurations.Results
 {
-    public class ResultsConfiguration : IEntityTypeConfiguration<Domain.Entities.Result.Result>
+    public class ResultsConfiguration : IEntityTypeConfiguration<Result>
     {
-        public void Configure(EntityTypeBuilder<Domain.Entities.Result.Result> builder)
+        public void Configure(EntityTypeBuilder<Result> builder)
         {
             builder.HasOne(x => x.Examination)
                 .WithOne(x => x.Result)
-                .HasForeignKey<Domain.Entities.Result.Result>(x => x.ExaminationId)
+                .HasForeignKey<Result>(x => x.ExaminationId)
                 .OnDelete(DeleteBehavior.NoAction)
                 .IsRequired();
 

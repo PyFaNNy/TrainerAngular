@@ -13,11 +13,11 @@ namespace Trainer.Application.Aggregates.BaseUser.Commands.SignIn
 
         public SignInCommandValidator(ITrainerDbContext dbContext)
         {
-            this.DbContext = dbContext;
+            DbContext = dbContext;
 
             RuleFor(x => x.Email)
                 .EmailAddress()
-                .Must(this.IsUniqueEmail);
+                .Must(IsUniqueEmail);
 
             RuleFor(x => x.LastName)
                 .NotNull()
@@ -44,7 +44,7 @@ namespace Trainer.Application.Aggregates.BaseUser.Commands.SignIn
 
         private bool IsUniqueEmail(string email)
         {
-            return !this.DbContext.BaseUsers.Any(x => x.Email.Equals(email));
+            return !DbContext.BaseUsers.Any(x => x.Email.Equals(email));
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Trainer.Application.Aggregates.Patient.Commands.DeletePatient
             {
                 foreach (var id in request.PatientsId)
                 {
-                    var patient = await this.DbContext.Patients
+                    var patient = await DbContext.Patients
                         .Where(x => x.Id == id)
                         .FirstOrDefaultAsync(cancellationToken);
 
@@ -41,7 +41,7 @@ namespace Trainer.Application.Aggregates.Patient.Commands.DeletePatient
                     patient.RemovedAt = DateTime.UtcNow;
                     DbContext.Patients.Update(patient);
                 }
-                await this.DbContext.SaveChangesAsync(cancellationToken);
+                await DbContext.SaveChangesAsync(cancellationToken);
             }
             return Unit.Value;
         }

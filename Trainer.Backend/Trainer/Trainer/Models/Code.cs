@@ -1,6 +1,4 @@
-﻿using Trainer.Enums;
-
-namespace Trainer.Models
+﻿namespace Trainer.Models
 {
     public class Code
     {

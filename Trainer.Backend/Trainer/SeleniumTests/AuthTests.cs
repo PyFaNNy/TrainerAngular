@@ -1,4 +1,3 @@
-using OpenQA.Selenium.Chrome;
 using SeleniumTests.Data;
 using SeleniumTests.PageObjects;
 

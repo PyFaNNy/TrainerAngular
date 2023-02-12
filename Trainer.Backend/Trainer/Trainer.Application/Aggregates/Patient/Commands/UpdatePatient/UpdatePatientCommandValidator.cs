@@ -1,9 +1,4 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Trainer.Application.Interfaces;
 
 namespace Trainer.Application.Aggregates.Patient.Commands.UpdatePatient
@@ -46,7 +41,7 @@ namespace Trainer.Application.Aggregates.Patient.Commands.UpdatePatient
 
         private bool IsUniqueEmail(string email)
         {
-            return !this.DbContext.BaseUsers.Any(x => x.Email.Equals(email));
+            return !DbContext.BaseUsers.Any(x => x.Email.Equals(email));
         }
     }
 }

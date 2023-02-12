@@ -26,9 +26,9 @@ namespace Trainer.Application.Abstractions
             ITrainerDbContext dbContext,
             IMapper mapper)
         {
-            this.Mediator = mediator;
-            this.DbContext = dbContext;
-            this.Mapper = mapper;
+            Mediator = mediator;
+            DbContext = dbContext;
+            Mapper = mapper;
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿namespace Trainer.Application.Models;
+﻿using Microsoft.EntityFrameworkCore;
 
-using Microsoft.EntityFrameworkCore;
+namespace Trainer.Application.Models;
 
 public class PaginatedList<T>
 {
@@ -30,10 +30,10 @@ public class PaginatedList<T>
 
     public PaginatedList(List<T> items, int count, int pageIndex, int pageSize)
     {
-        this.PageIndex = pageIndex;
-        this.TotalPages = (int)Math.Ceiling(count / (double)pageSize);
-        this.TotalCount = count;
-        this.Items = items;
+        PageIndex = pageIndex;
+        TotalPages = (int)Math.Ceiling(count / (double)pageSize);
+        TotalCount = count;
+        Items = items;
     }
 
 

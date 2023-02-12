@@ -1,7 +1,7 @@
-﻿namespace Trainer.Persistence.Extensions
-{
-    using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
+namespace Trainer.Persistence.Extensions
+{
     internal static class PropertyBuilderExtension
     {
         private const int PhoneLength = 16;

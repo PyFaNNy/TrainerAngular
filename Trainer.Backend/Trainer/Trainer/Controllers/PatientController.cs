@@ -44,7 +44,6 @@ public class PatientController : BaseController
         int? pageSize = 10)
     {
         _metrics.Measure.Counter.Increment(BusinessMetrics.PatientGetModels);
-        
         var results = await Mediator.Send(new GetPatientsQuery(pageIndex, pageSize, sortOrder));
         return Ok(results);
     }
@@ -85,7 +84,6 @@ public class PatientController : BaseController
         catch (FluentValidation.ValidationException ex)
         {
             foreach (var modelValue in ModelState.Values) modelValue.Errors.Clear();
-            // foreach (var er in ex.Errors) ModelState.AddModelError(string.Empty, Localizer[er.ErrorMessage]);
         }
 
         return Ok(command);
@@ -113,7 +111,6 @@ public class PatientController : BaseController
         catch (FluentValidation.ValidationException ex)
         {
             foreach (var modelValue in ModelState.Values) modelValue.Errors.Clear();
-            // foreach (var er in ex.Errors) ModelState.AddModelError(string.Empty, Localizer[er.ErrorMessage]);
         }
         return BadRequest();
     }

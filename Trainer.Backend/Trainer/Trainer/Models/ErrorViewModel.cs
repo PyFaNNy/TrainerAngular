@@ -1,5 +1,3 @@
-using System;
-
 namespace Trainer.Models
 {
     public class ErrorViewModel
