@@ -11,6 +11,11 @@ namespace Trainer.Controllers
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         [HttpPost("register")]
         public async Task<IActionResult> Register(SignInCommand command)
         {

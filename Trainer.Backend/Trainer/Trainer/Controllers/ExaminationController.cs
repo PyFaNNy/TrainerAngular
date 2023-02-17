@@ -8,10 +8,12 @@ using Trainer.Application.Aggregates.Examination.Commands.DeleteExamination;
 using Trainer.Application.Aggregates.Examination.Commands.UpdateExamination;
 using Trainer.Application.Aggregates.Examination.Queries.GetExamination;
 using Trainer.Application.Aggregates.Examination.Queries.GetExaminations;
+using Trainer.Application.Models;
 using Trainer.Common;
 using Trainer.Enums;
 using Trainer.Metrics;
 using Trainer.Models;
+using Examination = Trainer.Application.Aggregates.Examination.Queries.GetExaminations.Examination;
 
 namespace Trainer.Controllers
 {
@@ -37,7 +39,7 @@ namespace Trainer.Controllers
         /// <returns></returns>
         [HttpGet]
         [Authorize(Roles = "admin, doctor, manager")]
-        public async Task<IActionResult> GetModels(
+        public async Task<ActionResult<PaginatedList<Examination>>> GetModels(
             SortState sortOrder = SortState.FirstNameSortAsc,
             int? pageIndex = 1,
             int? pageSize = 10)
@@ -55,7 +57,7 @@ namespace Trainer.Controllers
         /// <returns></returns>
         [HttpGet("{id}")]
         [Authorize(Roles = "admin, doctor, manager")]
-        public async Task<IActionResult> GetModel(Guid id)
+        public async Task<ActionResult<Application.Aggregates.Examination.Queries.GetExamination.Examination>> GetModel(Guid id)
         {
             _metrics.Measure.Counter.Increment(BusinessMetrics.ExaminationGetModel);
             var result = await Mediator.Send(new GetExaminationQuery {ExaminationId = id});

@@ -8,6 +8,7 @@ using Trainer.Application.Aggregates.BaseUser.Commands.DeleteUser;
 using Trainer.Application.Aggregates.BaseUser.Commands.ResetPasswordUser;
 using Trainer.Application.Aggregates.BaseUser.Commands.UnBlockUser;
 using Trainer.Application.Aggregates.BaseUser.Queries.GetBaseUsers;
+using Trainer.Application.Models;
 using Trainer.Enums;
 using Trainer.Metrics;
 
@@ -34,7 +35,7 @@ namespace Trainer.Controllers
         /// <returns></returns>
         [Authorize(Roles = "admin")]
         [HttpGet]
-        public async Task<IActionResult> GetModels(
+        public async Task<ActionResult<PaginatedList<BaseUser>>> GetModels(
             SortState sortOrder = SortState.FirstNameSortAsc,
             int? pageIndex = 1,
             int? pageSize = 10)

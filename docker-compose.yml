@@ -27,7 +27,8 @@ services:
     - 7001:443
     - 7000:80
     environment: 
-      - IDENTITY_URL=http://localhost:5000
+      - FRONTEND_URL=http://localhost:4200
+      - IDENTITY_URL=http://localhost:5000/connect/token
       - MSSQL_URL=database
     networks:
       - trainer

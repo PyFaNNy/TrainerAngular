@@ -9,10 +9,12 @@ using Trainer.Application.Aggregates.Patient.Commands.UpdatePatient;
 using Trainer.Application.Aggregates.Patient.Queries.GetPatient;
 using Trainer.Application.Aggregates.Patient.Queries.GetPatients;
 using Trainer.Application.Exceptions;
+using Trainer.Application.Models;
 using Trainer.Common;
 using Trainer.Enums;
 using Trainer.Metrics;
 using Trainer.Models;
+using Patient = Trainer.Application.Aggregates.Patient.Queries.GetPatients.Patient;
 
 namespace Trainer.Controllers;
 
@@ -38,7 +40,7 @@ public class PatientController : BaseController
     /// <returns></returns>
     [HttpGet]
     [Authorize(Roles = "admin, doctor, manager")]
-    public async Task<IActionResult> GetModels(
+    public async Task<ActionResult<PaginatedList<Patient>>> GetModels(
         SortState sortOrder = SortState.FirstNameSortAsc,
         int? pageIndex = 1,
         int? pageSize = 10)
@@ -55,7 +57,7 @@ public class PatientController : BaseController
     /// <returns></returns>
     [HttpGet("{id}")]
     [Authorize(Roles = "admin, doctor, manager")]
-    public async Task<IActionResult> GetModel(Guid id)
+    public async Task<ActionResult<Application.Aggregates.Patient.Queries.GetPatient.Patient>> GetModel(Guid id)
     {
         _metrics.Measure.Counter.Increment(BusinessMetrics.PatientGetModel);
         var patient = await Mediator.Send(new GetPatientQuery {PatientId = id});
@@ -86,7 +88,7 @@ public class PatientController : BaseController
             foreach (var modelValue in ModelState.Values) modelValue.Errors.Clear();
         }
 
-        return Ok(command);
+        return Ok();
     }
     
     /// <summary>

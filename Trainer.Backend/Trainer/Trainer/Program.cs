@@ -97,7 +97,8 @@ builder.Services.AddAuthentication(options =>
     })
     .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
     {
-        options.RequireHttpsMetadata = true;
+        options.RequireHttpsMetadata = false;
+        Console.WriteLine("++++++++++++++++++++++++++++++++ " + builder.Configuration.GetValue<string>("IDENTITY_URL"));
         options.Authority = builder.Configuration.GetValue<string>("IDENTITY_URL");
 
         options.TokenValidationParameters = new TokenValidationParameters
@@ -110,9 +111,10 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("TrainerClientApp",
         new CorsPolicyBuilder()
-            .AllowAnyOrigin()
+            .WithOrigins(builder.Configuration.GetValue<string>("FRONTEND_URL"))
             .AllowAnyHeader()
             .AllowAnyMethod()
+            .AllowCredentials()
             .Build());
 });
 
@@ -135,6 +137,7 @@ if (dbContext.Database.IsSqlServer())
 {
     dbContext.Database.Migrate();
 }
+
 await DefaultInitializer.InitializeAsync(dbContext);
 
 app.UseSwagger();
@@ -160,7 +163,6 @@ app.UseSwaggerUI(c =>
 app.UseJdenticon();
 
 app.UseRouting();
-
 app.UseAuthentication();
 app.UseAuthorization();
 
