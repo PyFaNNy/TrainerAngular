@@ -28,12 +28,13 @@ services:
     - 7000:80
     environment: 
       - FRONTEND_URL=http://localhost:4200
-      - IDENTITY_URL=http://localhost:5000/connect/token
+      - IDENTITY_URL=http://identityServer
       - MSSQL_URL=database
     networks:
       - trainer
     depends_on:
       - database
+      - identityServer
   identityServer:
     image: trainer-identity-server
     container_name: identityserver
@@ -45,13 +46,12 @@ services:
     - 5000:80
     environment: 
       - FRONTEND_URL=http://localhost:4200
-      - BACKEND_URL=http://localhost:7000
+      - BACKEND_URL=http://backend
       - MSSQL_URL=database
     networks:
       - trainer
     depends_on:
       - database
-      - backend
   database:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: database

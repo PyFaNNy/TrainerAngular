@@ -98,11 +98,11 @@ builder.Services.AddAuthentication(options =>
     .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
     {
         options.RequireHttpsMetadata = false;
-        Console.WriteLine("++++++++++++++++++++++++++++++++ " + builder.Configuration.GetValue<string>("IDENTITY_URL"));
         options.Authority = builder.Configuration.GetValue<string>("IDENTITY_URL");
 
         options.TokenValidationParameters = new TokenValidationParameters
         {
+            ValidateIssuer = false,
             ValidateAudience = false
         };
     });
