@@ -13,7 +13,6 @@ using Trainer.Common;
 using Trainer.Enums;
 using Trainer.Metrics;
 using Trainer.Models;
-using Examination = Trainer.Application.Aggregates.Examination.Queries.GetExaminations.Examination;
 
 namespace Trainer.Controllers
 {
@@ -39,7 +38,7 @@ namespace Trainer.Controllers
         /// <returns></returns>
         [HttpGet]
         [Authorize(Roles = "admin, doctor, manager")]
-        public async Task<ActionResult<PaginatedList<Examination>>> GetModels(
+        public async Task<ActionResult> GetModels(
             SortState sortOrder = SortState.FirstNameSortAsc,
             int? pageIndex = 1,
             int? pageSize = 10)
