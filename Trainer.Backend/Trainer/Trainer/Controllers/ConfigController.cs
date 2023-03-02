@@ -69,8 +69,8 @@ public class ConfigController : BaseController
     /// 
     /// </summary>
     /// <returns></returns>
-    [HttpGet("examination")]
-    public async Task<ActionResult<ExaminationErrorSettings>> GetPatientErrorSettings()
+    [HttpGet("patient")]
+    public async Task<ActionResult<PatientErrorSettings>> GetPatientErrorSettings()
     {
         return Ok(_examinationErrorSettings.Value);
     }
@@ -80,7 +80,7 @@ public class ConfigController : BaseController
     /// </summary>
     /// <param name="model"></param>
     /// <returns></returns>
-    [HttpPut("examination")]
+    [HttpPut("patient")]
     public async Task<ActionResult<PatientErrorSettings>> SetPatientErrorSettings(PatientErrorSettings model)
     {
         _patientErrorSettings.Update(t =>
@@ -92,6 +92,30 @@ public class ConfigController : BaseController
             t.GetRandomPatientEnable = model.GetRandomPatientEnable;
             t.GetRandomPatientsEnable = model.GetRandomPatientsEnable;
             t.UpdatePatientEnable = model.UpdatePatientEnable;
+        });
+        return Ok(model);
+    }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("result")]
+    public async Task<ActionResult<ResultsErrorSettings>> GetResultsErrorSettings()
+    {
+        return Ok(_examinationErrorSettings.Value);
+    }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="model"></param>
+    /// <returns></returns>
+    [HttpPut("result")]
+    public async Task<ActionResult<ResultsErrorSettings>> SetResultsErrorSettings(ResultsErrorSettings model)
+    {
+        _resultsErrorSettings.Update(t =>
+        {
         });
         return Ok(model);
     }
