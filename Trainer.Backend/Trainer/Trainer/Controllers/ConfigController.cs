@@ -119,4 +119,103 @@ public class ConfigController : BaseController
         });
         return Ok(model);
     }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("otp")]
+    public async Task<ActionResult<OTPCodesErrorSettings>> GetOTPCodesErrorSettings()
+    {
+        return Ok(_examinationErrorSettings.Value);
+    }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="model"></param>
+    /// <returns></returns>
+    [HttpPut("otp")]
+    public async Task<ActionResult<OTPCodesErrorSettings>> SetOTPCodesErrorSettings(OTPCodesErrorSettings model)
+    {
+        _OTPCodesErrorSettings.Update(t =>
+        {
+            t.RequestLoginCodeEnable = model.RequestLoginCodeEnable;
+            t.RequestRandomLoginCodeEnable = model.RequestRandomLoginCodeEnable;
+            t.RequestPasswordEnable = model.RequestPasswordEnable;
+            t.RequestRandomPasswordEnable = model.RequestRandomPasswordEnable;
+            t.RequestRegistrationCodeEnable = model.RequestRegistrationCodeEnable;
+            t.RequestRandomRegistrationCodeEnable = model.RequestRandomRegistrationCodeEnable;
+            t.IsUniversalVerificationCodeEnabled = model.IsUniversalVerificationCodeEnabled;
+            t.UniversalVerificationCode = model.UniversalVerificationCode;
+        });
+        return Ok(model);
+    }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("csv")]
+    public async Task<ActionResult<CSVErrorSettings>> GetCSVErrorSettings()
+    {
+        return Ok(_examinationErrorSettings.Value);
+    }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="model"></param>
+    /// <returns></returns>
+    [HttpPut("csv")]
+    public async Task<ActionResult<CSVErrorSettings>> SetCSVErrorSettings(CSVErrorSettings model)
+    {
+        _CSVErrorSettings.Update(t =>
+        {
+            t.CSVToExaminationsEnable = model.CSVToExaminationsEnable;
+            t.CSVToPatientsEnable = model.CSVToPatientsEnable;
+        });
+        return Ok(model);
+    }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("users")]
+    public async Task<ActionResult<BaseUserErrorSettings>> GetBaseUserErrorSettings()
+    {
+        return Ok(_examinationErrorSettings.Value);
+    }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="model"></param>
+    /// <returns></returns>
+    [HttpPut("users")]
+    public async Task<ActionResult<BaseUserErrorSettings>> SetBaseUserErrorSettings(BaseUserErrorSettings model)
+    {
+        _baseUserErrorSettings.Update(t =>
+        {
+            t.ApproveUserEnable = model.ApproveUserEnable;
+            t.ApproveUserEmailEnable = model.ApproveUserEmailEnable;
+            t.BlockUserEnable = model.BlockUserEnable;
+            t.BlockUserEmailEnable = model.BlockUserEmailEnable;
+            t.ChangeRoleEnable = model.ChangeRoleEnable;
+            t.DeclineUserEnable = model.DeclineUserEnable;
+            t.DeclineUserEmailEnable = model.DeclineUserEmailEnable;
+            t.DeleteUserEnable = model.DeleteUserEnable;
+            t.DeleteUserEmailEnable = model.DeleteUserEmailEnable;
+            t.UnBlockUserEnable = model.UnBlockUserEnable;
+            t.UnBlockUserEmailEnable = model.UnBlockUserEmailEnable;
+            t.ResetPasswordUserEnable = model.ResetPasswordUserEnable;
+            t.GetBaseUserEnable = model.GetBaseUserEnable;
+            t.GetRandomBaseUserEnable = model.GetRandomBaseUserEnable;
+            t.GetBaseUsersEnable = model.GetBaseUsersEnable;
+            t.GetRandomBaseUsersEnable = model.GetRandomBaseUsersEnable;
+            t.SignInEnable = model.SignInEnable;
+        });
+        return Ok(model);
+    }
 }
