@@ -3,7 +3,6 @@ export class UsersError {
   approveUserEmailEnable:boolean;
   blockUserEnable:boolean;
   blockUserEmailEnable:boolean;
-  changeRoleEnable:boolean;
   declineUserEnable:boolean;
   declineUserEmailEnable:boolean;
   deleteUserEnable:boolean;

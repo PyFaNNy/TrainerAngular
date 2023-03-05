@@ -3,55 +3,55 @@
     <div class="card">
       <div class="card-body">
         <h3 class="card-title">User Errors Settings</h3>
-        <form>
+        <form [formGroup]="usersErrorsForm" (ngSubmit)="submitUsers()">
           <div class="row">
             <div class="col">
               <ul class="list-group list-group-flush">
                 <li>
-                  <mat-checkbox color="primary">Approve User Enable</mat-checkbox>
+                  <mat-checkbox formControlName="approveUserEnable" color="primary">Approve User Enable</mat-checkbox>
                 </li>
                 <li>
-                  <mat-checkbox color="primary">Approve User Send Email Enable</mat-checkbox>
+                  <mat-checkbox formControlName="approveUserEmailEnable" color="primary">Approve User Send Email Enable</mat-checkbox>
                 </li>
                 <li>
-                  <mat-checkbox color="primary">Block User Enable</mat-checkbox>
+                  <mat-checkbox formControlName="blockUserEnable" color="primary">Block User Enable</mat-checkbox>
                 </li>
                 <li>
-                  <mat-checkbox color="primary">Block User Email Enable</mat-checkbox>
+                  <mat-checkbox formControlName="blockUserEmailEnable" color="primary">Block User Email Enable</mat-checkbox>
                 </li>
                 <li>
-                  <mat-checkbox color="primary">Decline User Enable</mat-checkbox>
+                  <mat-checkbox formControlName="declineUserEnable" color="primary">Decline User Enable</mat-checkbox>
                 </li>
                 <li>
-                  <mat-checkbox color="primary">Get Random BaseUsers Enable</mat-checkbox>
+                  <mat-checkbox formControlName="getRandomBaseUserEnable" color="primary">Get Random Users Enable</mat-checkbox>
                 </li>
                 <li>
-                  <mat-checkbox color="primary">SignIn Enable</mat-checkbox>
+                  <mat-checkbox formControlName="signInEnable" color="primary">SignIn Enable</mat-checkbox>
                 </li>
               </ul>
             </div>
             <div class="col">
               <ul class="list-group list-group-flush">
                 <li>
-                  <mat-checkbox color="primary">Decline User Email Enable</mat-checkbox>
+                  <mat-checkbox formControlName="declineUserEmailEnable" color="primary">Decline User Email Enable</mat-checkbox>
                 </li>
                 <li>
-                  <mat-checkbox color="primary">UnBlock User Enable</mat-checkbox>
+                  <mat-checkbox formControlName="unBlockUserEnable" color="primary">UnBlock User Enable</mat-checkbox>
                 </li>
                 <li>
-                  <mat-checkbox color="primary">UnBlock User Email Enable</mat-checkbox>
+                  <mat-checkbox formControlName="unBlockUserEmailEnable" color="primary">UnBlock User Email Enable</mat-checkbox>
                 </li>
                 <li>
-                  <mat-checkbox color="primary">Reset Password User Enable</mat-checkbox>
+                  <mat-checkbox formControlName="resetPasswordUserEnable" color="primary">Reset Password User Enable</mat-checkbox>
                 </li>
                 <li>
-                  <mat-checkbox color="primary">Get BaseUser Enable</mat-checkbox>
+                  <mat-checkbox formControlName="deleteUserEmailEnable" color="primary">Delete User Email Enable</mat-checkbox>
                 </li>
                 <li>
-                  <mat-checkbox color="primary">Get Random BaseUser Enable</mat-checkbox>
+                  <mat-checkbox formControlName="deleteUserEnable" color="primary">Delete User Enable</mat-checkbox>
                 </li>
                 <li>
-                  <mat-checkbox color="primary">Get BaseUsers Enable</mat-checkbox>
+                  <mat-checkbox formControlName="getBaseUserEnable" color="primary">Get Users Enable</mat-checkbox>
                 </li>
               </ul>
             </div>
@@ -68,13 +68,13 @@
     <div class="card">
       <div class="card-body">
         <h3 class="card-title">CSV Errors Settings</h3>
-        <form>
+        <form [formGroup]="csvErrorsForm" (ngSubmit)="submitCSV()">
           <div class="row">
             <div class="col">
-              <mat-checkbox color="primary">CSV To Examinations Enable</mat-checkbox>
+              <mat-checkbox formControlName="csvToExaminationsEnable" color="primary">CSV To Examinations Enable</mat-checkbox>
             </div>
             <div class="col">
-              <mat-checkbox color="primary">CSV To Patients Enable</mat-checkbox>
+              <mat-checkbox formControlName="csvToPatientsEnable" color="primary">CSV To Patients Enable</mat-checkbox>
             </div>
           </div>
           <div>
@@ -89,44 +89,44 @@
     <div class="card">
       <div class="card-body">
         <h3 class="card-title">OTP Errors Settings</h3>
-        <div class="row">
-          <div class="col">
-            <ul class="list-group list-group-flush">
-              <li>
-                <mat-checkbox color="primary">Request LoginCodeEnable</mat-checkbox>
-              </li>
-              <li>
-                <mat-checkbox color="primary">Request Random LoginCodeEnable</mat-checkbox>
-              </li>
-              <li>
-                <mat-checkbox color="primary">Request Password Enable</mat-checkbox>
-              </li>
-              <li>
-                <mat-checkbox color="primary">Request Random Password Enable</mat-checkbox>
-              </li>
-            </ul>
+        <form [formGroup]="otpErrorsForm" (ngSubmit)="submitOTP()">
+          <div class="row">
+            <div class="col">
+              <ul class="list-group list-group-flush">
+                <li>
+                  <mat-checkbox formControlName="requestLoginCodeEnable" color="primary">Request LoginCodeEnable</mat-checkbox>
+                </li>
+                <li>
+                  <mat-checkbox formControlName="requestRandomLoginCodeEnable" color="primary">Request Random LoginCodeEnable</mat-checkbox>
+                </li>
+                <li>
+                  <mat-checkbox formControlName="requestPasswordEnable" color="primary">Request Password Enable</mat-checkbox>
+                </li>
+                <li>
+                  <mat-checkbox formControlName="requestRandomPasswordEnable" color="primary">Request Random Password Enable</mat-checkbox>
+                </li>
+              </ul>
+            </div>
+            <div class="col">
+              <ul class="list-group list-group-flush">
+                <li>
+                  <mat-checkbox formControlName="requestRegistrationCodeEnable" color="primary">Request Registration Code Enable</mat-checkbox>
+                </li>
+                <li>
+                  <mat-checkbox formControlName="requestRandomRegistrationCodeEnable" color="primary">Request Random Registration Code Enable</mat-checkbox>
+                </li>
+                <li>
+                  <mat-checkbox formControlName="isUniversalVerificationCodeEnabled" color="primary">Is Universal Verification Code Enabled</mat-checkbox>
+                </li>
+                <li>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Universal Verification Code</mat-label>
+                    <input formControlName="universalVerificationCode" matInput/>
+                  </mat-form-field>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div class="col">
-            <ul class="list-group list-group-flush">
-              <li>
-                <mat-checkbox color="primary">Request Registration Code Enable</mat-checkbox>
-              </li>
-              <li>
-                <mat-checkbox color="primary">Request Random Registration Code Enable</mat-checkbox>
-              </li>
-              <li>
-                <mat-checkbox color="primary">Is Universal Verification Code Enabled</mat-checkbox>
-              </li>
-              <li>
-                <mat-form-field appearance="outline" class="w-100">
-                  <mat-label>Universal Verification Code</mat-label>
-                  <input matInput/>
-                </mat-form-field>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <form>
           <div>
             <button mat-raised-button color="primary" type="submit">Save Settings</button>
           </div>
@@ -139,47 +139,47 @@
     <div class="card">
       <div class="card-body">
         <h3 class="card-title">Examination Errors Settings</h3>
-        <div class="row">
-          <div class="col">
-            <ul class="list-group list-group-flush">
-              <li>
-                <mat-checkbox color="primary">Create Examination Enable</mat-checkbox>
-              </li>
-              <li>
-                <mat-checkbox color="primary">Create Email Examination Enable</mat-checkbox>
-              </li>
-              <li>
-                <mat-checkbox color="primary">Delete Examination Enable</mat-checkbox>
-              </li>
-              <li>
-                <mat-checkbox color="primary">Finish Examination Enable</mat-checkbox>
-              </li>
-              <li>
-                <mat-checkbox color="primary">Update Examination Enable</mat-checkbox>
-              </li>
-            </ul>
+        <form [formGroup]="examinationsErrorsForm" (ngSubmit)="submitExaminations()">
+          <div class="row">
+            <div class="col">
+              <ul class="list-group list-group-flush">
+                <li>
+                  <mat-checkbox formControlName="createExaminationEnable" color="primary">Create Examination Enable</mat-checkbox>
+                </li>
+                <li>
+                  <mat-checkbox formControlName="createEmailExaminationEnable" color="primary">Create Email Examination Enable</mat-checkbox>
+                </li>
+                <li>
+                  <mat-checkbox formControlName="deleteExaminationEnable" color="primary">Delete Examination Enable</mat-checkbox>
+                </li>
+                <li>
+                  <mat-checkbox formControlName="finishExaminationEnable" color="primary">Finish Examination Enable</mat-checkbox>
+                </li>
+                <li>
+                  <mat-checkbox formControlName="updateExaminationEnable" color="primary">Update Examination Enable</mat-checkbox>
+                </li>
+              </ul>
+            </div>
+            <div class="col">
+              <ul class="list-group list-group-flush">
+                <li>
+                  <mat-checkbox formControlName="updateEmailExaminationEnable" color="primary">Update Email Examination Enable</mat-checkbox>
+                </li>
+                <li>
+                  <mat-checkbox formControlName="getExaminationEnable" color="primary">Get Examination Enable</mat-checkbox>
+                </li>
+                <li>
+                  <mat-checkbox formControlName="getRandomExaminationEnable" color="primary">Get Random Examination Enable</mat-checkbox>
+                </li>
+                <li>
+                  <mat-checkbox formControlName="getExaminationsEnable" color="primary">Get Examinations Enable</mat-checkbox>
+                </li>
+                <li>
+                  <mat-checkbox formControlName="getRandomExaminationsEnable" color="primary">Get Random Examinations Enable</mat-checkbox>
+                </li>
+              </ul>
+            </div>
           </div>
-          <div class="col">
-            <ul class="list-group list-group-flush">
-              <li>
-                <mat-checkbox color="primary">Update Email Examination Enable</mat-checkbox>
-              </li>
-              <li>
-                <mat-checkbox color="primary">Get Examination Enable</mat-checkbox>
-              </li>
-              <li>
-                <mat-checkbox color="primary">Get Random Examination Enable</mat-checkbox>
-              </li>
-              <li>
-                <mat-checkbox color="primary">Get Examinations Enable</mat-checkbox>
-              </li>
-              <li>
-                <mat-checkbox color="primary">Get Random Examinations Enable</mat-checkbox>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <form>
           <div>
             <button mat-raised-button color="primary" type="submit">Save Settings</button>
           </div>
@@ -192,34 +192,34 @@
     <div class="card">
       <div class="card-body">
         <h3 class="card-title">Patient Errors Settings</h3>
-        <form>
+        <form [formGroup]="patientsErrorsForm" (ngSubmit)="submitPatients()">
           <div class="row">
             <div class="col">
               <ul class="list-group list-group-flush">
                 <li>
-                  <mat-checkbox color="primary">Create Patient Enable</mat-checkbox>
+                  <mat-checkbox formControlName="createPatientEnable" color="primary">Create Patient Enable</mat-checkbox>
                 </li>
                 <li>
-                  <mat-checkbox color="primary">Delete Patient Enable</mat-checkbox>
+                  <mat-checkbox formControlName="deletePatientEnable" color="primary">Delete Patient Enable</mat-checkbox>
                 </li>
                 <li>
-                  <mat-checkbox color="primary">Update Patient Enable</mat-checkbox>
+                  <mat-checkbox formControlName="updatePatientEnable" color="primary">Update Patient Enable</mat-checkbox>
                 </li>
                 <li>
-                  <mat-checkbox color="primary">Get Patient Enable</mat-checkbox>
+                  <mat-checkbox formControlName="getPatientEnable" color="primary">Get Patient Enable</mat-checkbox>
                 </li>
               </ul>
             </div>
             <div class="col">
               <ul class="list-group list-group-flush">
                 <li>
-                  <mat-checkbox color="primary">Get Random Patient Enable</mat-checkbox>
+                  <mat-checkbox formControlName="getRandomPatientEnable" color="primary">Get Random Patient Enable</mat-checkbox>
                 </li>
                 <li>
-                  <mat-checkbox color="primary">Get Patients Enable</mat-checkbox>
+                  <mat-checkbox formControlName="getPatientsEnable" color="primary">Get Patients Enable</mat-checkbox>
                 </li>
                 <li>
-                  <mat-checkbox color="primary">Get Random Patients Enable</mat-checkbox>
+                  <mat-checkbox formControlName="getRandomPatientsEnable" color="primary">Get Random Patients Enable</mat-checkbox>
                 </li>
               </ul>
             </div>
@@ -236,6 +236,11 @@
     <div class="card">
       <div class="card-body">
         <h3 class="card-title">Results Errors Settings</h3>
+        <form [formGroup]="patientsErrorsForm" (ngSubmit)="submitResult()">
+          <div>
+            <button mat-raised-button color="primary" type="submit">Save Settings</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
