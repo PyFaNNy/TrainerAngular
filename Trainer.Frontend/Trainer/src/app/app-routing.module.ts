@@ -19,6 +19,7 @@ import {VerifyCodeComponent} from "./components/VerifyCode/verify-code.component
 import {AuthGuard} from "./guard/auth.guard";
 import {RoleGuard} from "./guard/role.guard";
 import {GetPatientComponent} from "./components/Patients/GetPatient/getPatient.component";
+import {SettingsComponent} from "./components/Settings/settings.component";
 
 const appRoute: Routes  = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -63,6 +64,7 @@ const appRoute: Routes  = [
       role: 'admin'
     }},
   {path: 'login', component: LoginComponent},
+  {path: 'settings', component: SettingsComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'verifycode/:email/:action', component: VerifyCodeComponent},
   {path: 'resetPassowrd/:email', component: VerifyCodeComponent},

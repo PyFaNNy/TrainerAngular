@@ -1,0 +1,9 @@
+.scroller {
+  height: calc(100vh - 200px);
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+}
+
+.scroller-card {
+  scroll-snap-align: start;
+}

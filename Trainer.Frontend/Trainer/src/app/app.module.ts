@@ -34,6 +34,7 @@ import {
   ExaminationDialogComponent
 } from "./components/Examinations/GetExamination/ExaminationDialog/examination-dialog.component.";
 import {SpinnerComponent} from "./components/Spinner/spinner.component";
+import {SettingsComponent} from "./components/Settings/settings.component";
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import {SpinnerComponent} from "./components/Spinner/spinner.component";
     GetExaminationComponent,
     VerifyCodeComponent,
     ExaminationDialogComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    SettingsComponent
   ],
     imports: [
         BrowserModule,

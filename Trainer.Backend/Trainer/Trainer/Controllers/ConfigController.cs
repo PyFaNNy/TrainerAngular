@@ -5,7 +5,7 @@ using Trainer.Settings.Error;
 namespace Trainer.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("config")]
 public class ConfigController : BaseController
 {
     private readonly IWritableOptions<ExaminationErrorSettings> _examinationErrorSettings;
