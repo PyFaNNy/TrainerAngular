@@ -72,7 +72,7 @@ public class ConfigController : BaseController
     [HttpGet("patient")]
     public async Task<ActionResult<PatientErrorSettings>> GetPatientErrorSettings()
     {
-        return Ok(_examinationErrorSettings.Value);
+        return Ok(_patientErrorSettings.Value);
     }
     
     /// <summary>
@@ -103,7 +103,7 @@ public class ConfigController : BaseController
     [HttpGet("result")]
     public async Task<ActionResult<ResultsErrorSettings>> GetResultsErrorSettings()
     {
-        return Ok(_examinationErrorSettings.Value);
+        return Ok(_resultsErrorSettings.Value);
     }
     
     /// <summary>
@@ -127,7 +127,7 @@ public class ConfigController : BaseController
     [HttpGet("otp")]
     public async Task<ActionResult<OTPCodesErrorSettings>> GetOTPCodesErrorSettings()
     {
-        return Ok(_examinationErrorSettings.Value);
+        return Ok(_OTPCodesErrorSettings.Value);
     }
     
     /// <summary>
@@ -159,7 +159,7 @@ public class ConfigController : BaseController
     [HttpGet("csv")]
     public async Task<ActionResult<CSVErrorSettings>> GetCSVErrorSettings()
     {
-        return Ok(_examinationErrorSettings.Value);
+        return Ok(_CSVErrorSettings.Value);
     }
     
     /// <summary>
@@ -185,7 +185,7 @@ public class ConfigController : BaseController
     [HttpGet("users")]
     public async Task<ActionResult<BaseUserErrorSettings>> GetBaseUserErrorSettings()
     {
-        return Ok(_examinationErrorSettings.Value);
+        return Ok(_baseUserErrorSettings.Value);
     }
     
     /// <summary>
