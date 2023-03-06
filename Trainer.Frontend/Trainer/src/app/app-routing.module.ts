@@ -64,7 +64,10 @@ const appRoute: Routes  = [
       role: 'admin'
     }},
   {path: 'login', component: LoginComponent},
-  {path: 'settings', component: SettingsComponent},
+  {path: 'settings', component: SettingsComponent, canActivate: [ RoleGuard ],
+    data: {
+      role: 'admin'
+    }},
   {path: 'register', component: RegisterComponent},
   {path: 'verifycode/:email/:action', component: VerifyCodeComponent},
   {path: 'resetPassowrd/:email', component: VerifyCodeComponent},

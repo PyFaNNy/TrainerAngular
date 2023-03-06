@@ -31,7 +31,7 @@
           <li *ngIf="role == 'admin'" class="nav-item">
             <a id="adminBtn" routerLink="admin" class="nav-link text-success">Admin</a>
           </li>
-          <li class="nav-item">
+          <li *ngIf="role == 'superAdmin'" class="nav-item">
             <a id="settingsBtn" routerLink="settings" class="nav-link text-success">Settings</a>
           </li>
         </ul>
