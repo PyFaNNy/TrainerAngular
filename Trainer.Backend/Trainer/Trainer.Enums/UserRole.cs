@@ -14,6 +14,9 @@ namespace Trainer.Enums
         Manager =2,
 
         [EnumMember(Value = "patient")]
-        Patient = 3
+        Patient = 3,
+        
+        [EnumMember(Value = "superAdmin")]
+        SuperAdmin = 4
     }
 }

@@ -2,6 +2,7 @@ using IdentityServer4.Services;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Trainer.IdentityServer;
 using Trainer.IdentityServer.Infrastructure;
+using Trainer.IdentityServer.Models;
 using Trainer.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,6 +31,8 @@ builder.Services.AddIdentityServer()
     .AddResourceOwnerValidator<UserValidator>()
     .AddProfileService<ProfileService>()
     .AddDeveloperSigningCredential();
+
+builder.Services.Configure<SuperAdmin>(builder.Configuration.GetSection("SuperAdmin"));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
